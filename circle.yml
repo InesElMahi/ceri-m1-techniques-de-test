@@ -1,0 +1,23 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:8.0 
+    steps:
+      - checkout
+      - run: 
+          name: Install Maven Dependencies
+          command: mvn dependency:resolve
+      - run: 
+          name: Run Maven Tests
+          command: mvn test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
