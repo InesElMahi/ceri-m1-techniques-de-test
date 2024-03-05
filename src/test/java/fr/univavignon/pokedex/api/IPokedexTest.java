@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 import java.util.Comparator;
+import java.util.Arrays;
 
 public class IPokedexTest {
 
@@ -14,7 +15,6 @@ public class IPokedexTest {
 
     @BeforeEach
     public void setup() {
-    	
         // Mock de l'interface IPokedex
         pokedex = mock(IPokedex.class);
 
@@ -22,7 +22,6 @@ public class IPokedexTest {
         pikachu = new Pokemon(0, "Pikachu", 55, 40, 90, 260, 35, 500, 50, 0.6);
         bulbasaur = new Pokemon(1, "Bulbasaur", 45, 49, 45, 230, 30, 500, 50, 0.5);
 
-        
         try {
             when(pokedex.size()).thenReturn(2);
             when(pokedex.addPokemon(any(Pokemon.class))).thenAnswer(i -> {
@@ -30,8 +29,8 @@ public class IPokedexTest {
                 return p.getIndex(); 
             });
             when(pokedex.getPokemon(0)).thenReturn(pikachu);
-            when(pokedex.getPokemons()).thenReturn(List.of(pikachu, bulbasaur));
-            when(pokedex.getPokemons(any(Comparator.class))).thenReturn(List.of(bulbasaur, pikachu));
+            when(pokedex.getPokemons()).thenReturn(Arrays.asList(pikachu, bulbasaur)); // Using Arrays.asList()
+            when(pokedex.getPokemons(any(Comparator.class))).thenReturn(Arrays.asList(bulbasaur, pikachu)); // Using Arrays.asList()
             //lance une exception PokedexException
             doThrow(new PokedexException("Invalid index")).when(pokedex).getPokemon(-1);
         } catch (PokedexException e) {
