@@ -29,8 +29,8 @@ public class IPokedexTest {
                 return p.getIndex(); 
             });
             when(pokedex.getPokemon(0)).thenReturn(pikachu);
-            when(pokedex.getPokemons()).thenReturn(Arrays.asList(pikachu, bulbasaur)); // Using Arrays.asList()
-            when(pokedex.getPokemons(any(Comparator.class))).thenReturn(Arrays.asList(bulbasaur, pikachu)); // Using Arrays.asList()
+            when(pokedex.getPokemons()).thenReturn(Arrays.asList(pikachu, bulbasaur)); 
+            when(pokedex.getPokemons(any(Comparator.class))).thenReturn(Arrays.asList(bulbasaur, pikachu)); 
             //lance une exception PokedexException
             doThrow(new PokedexException("Invalid index")).when(pokedex).getPokemon(-1);
         } catch (PokedexException e) {
