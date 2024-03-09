@@ -11,7 +11,7 @@ jobs:
           command: mvn dependency:resolve
       - run:
           name: Run Maven Tests
-          command: mvn test
+          command: mvn test -Dnet.bytebuddy.experimental=true
 
 workflows:
   version: 2
