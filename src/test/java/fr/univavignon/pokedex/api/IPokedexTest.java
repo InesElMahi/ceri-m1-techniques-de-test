@@ -1,9 +1,8 @@
 package fr.univavignon.pokedex.api;
-
 import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 import java.util.Comparator;
 import java.util.Arrays;
@@ -15,7 +14,7 @@ public class IPokedexTest {
     private Pokemon bulbasaur;
 
     @BeforeEach
-    public void setup() throws PokedexException {
+    public void setup() {
         // Mock de l'interface IPokedex
         pokedex = mock(IPokedex.class);
 
@@ -23,20 +22,25 @@ public class IPokedexTest {
         pikachu = new Pokemon(0, "Pikachu", 55, 40, 90, 260, 35, 500, 50, 0.6);
         bulbasaur = new Pokemon(1, "Bulbasaur", 45, 49, 45, 230, 30, 500, 50, 0.5);
 
-        when(pokedex.size()).thenReturn(2);
-        when(pokedex.addPokemon(any(Pokemon.class))).thenAnswer(i -> {
-            Pokemon p = i.getArgument(0);
-            return p.getIndex();
-        });
-        when(pokedex.getPokemon(0)).thenReturn(pikachu);
-        when(pokedex.getPokemons()).thenReturn(Arrays.asList(pikachu, bulbasaur));
-        when(pokedex.getPokemons(any(Comparator.class))).thenReturn(Arrays.asList(bulbasaur, pikachu));
-        //lance une exception PokedexException
-        doThrow(new PokedexException("Invalid index")).when(pokedex).getPokemon(-1);
+        try {
+            when(pokedex.size()).thenReturn(2);
+            when(pokedex.addPokemon(any(Pokemon.class))).thenAnswer(i -> {
+                Pokemon p = i.getArgument(0);
+                return p.getIndex();
+            });
+            when(pokedex.getPokemon(0)).thenReturn(pikachu);
+            when(pokedex.getPokemons()).thenReturn(Arrays.asList(pikachu, bulbasaur));
+            when(pokedex.getPokemons(any(Comparator.class))).thenReturn(Arrays.asList(bulbasaur, pikachu));
+            //lance une exception PokedexException
+            doThrow(new PokedexException("Invalid index")).when(pokedex).getPokemon(-1);
+        } catch (PokedexException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void testAddPokemon() {
+
         // On test l'ajout du Pokémon
         int indexPikachu = pokedex.addPokemon(pikachu);
         assertEquals(0, indexPikachu);
@@ -76,4 +80,7 @@ public class IPokedexTest {
         assertEquals("Bulbasaur", pokemons.get(0).getName());
         assertEquals("Pikachu", pokemons.get(1).getName());
     }
+
+
+
 }
