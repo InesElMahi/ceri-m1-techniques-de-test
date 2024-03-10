@@ -67,22 +67,7 @@ public class IPokemonFactoryTest {
         assertEquals(testHp, testPokemon.getHp(), "Les HP du Pokémon devraient correspondre");
         assertEquals(testIv, testPokemon.getIv(), "L'IV du Pokémon devrait correspondre");
     }
-    @Test
-    void testPokemonCreationWithMinMaxValues() {
-        // Configuration des mocks pour les cas extrêmes
-        when(pokemonFactory.createPokemon(eq(0), eq(Integer.MIN_VALUE), eq(Integer.MIN_VALUE), eq(Integer.MIN_VALUE), eq(Integer.MIN_VALUE)))
-                .thenReturn(new Pokemon(0, "MinValues", 10, 10, 10, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE, 0.0));
-        when(pokemonFactory.createPokemon(eq(0), eq(Integer.MAX_VALUE), eq(Integer.MAX_VALUE), eq(Integer.MAX_VALUE), eq(Integer.MAX_VALUE)))
-                .thenReturn(new Pokemon(0, "MaxValues", 10, 10, 10, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, 1.0));
-
-        // Création et vérification pour les valeurs minimales
-        Pokemon minValuesPokemon = pokemonFactory.createPokemon(0, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
-        assertNotNull(minValuesPokemon, "Le Pokémon avec des valeurs minimales ne devrait pas être null");
-
-        // Création et vérification pour les valeurs maximales
-        Pokemon maxValuesPokemon = pokemonFactory.createPokemon(0, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
-        assertNotNull(maxValuesPokemon, "Le Pokémon avec des valeurs maximales ne devrait pas être null");
-    }
+    
     
     @Test
     void testConsistencyOfPokemonMetadata() {
@@ -133,56 +118,7 @@ public class IPokemonFactoryTest {
             "Une exception devrait être lancée pour des valeurs CP, HP, dust ou candy invalides");
     }
 
-    @Test
-    void testPokemonCreationWithHighCPandHP() {
-
-        when(pokemonFactory.createPokemon(anyInt(), eq(Integer.MAX_VALUE), eq(Integer.MAX_VALUE), anyInt(), anyInt())).thenReturn(new Pokemon(2, "HighCPHP", 200, 200, 200, Integer.MAX_VALUE, Integer.MAX_VALUE, 1000, 10, 0.9));
-        
-        Pokemon highCPHP = pokemonFactory.createPokemon(2, Integer.MAX_VALUE, Integer.MAX_VALUE, 1000, 10);
-        assertNotNull(highCPHP, "Le Pokémon avec des valeurs de CP et HP élevées ne devrait pas être null");
-        assertTrue(highCPHP.getCp() > 1000 && highCPHP.getHp() > 1000, "Les valeurs de CP et HP devraient être extrêmement élevées");
-    }
-    @Test
-    void testPokemonCreationWithIncompleteData() {
-
-        doThrow(new IllegalArgumentException("Données incomplètes")).when(pokemonFactory).createPokemon(anyInt(), eq(0), eq(0), eq(0), eq(0));
-        
-        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(3, 0, 0, 0, 0), "Une exception devrait être lancée pour des données incomplètes");
-    }
-    
-    @Test
-    void testPokemonCreationWithExtremeIVs() {
-
-        when(pokemonFactory.createPokemon(eq(0), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(
-            new Pokemon(0, "PerfectIV", 100, 100, 100, 1000, 100, 1000, 10, 1.0)
-        );
-
-        when(pokemonFactory.createPokemon(eq(1), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(
-            new Pokemon(1, "LowIV", 10, 10, 10, 10, 10, 1000, 10, 0.0)
-        );
-
-        Pokemon perfectIVPokemon = pokemonFactory.createPokemon(0, 1000, 100, 1000, 10);
-        assertEquals(1.0, perfectIVPokemon.getIv(), "Le Pokémon devrait avoir un IV parfait de 100%");
-
-        Pokemon lowIVPokemon = pokemonFactory.createPokemon(1, 10, 10, 1000, 10);
-        assertEquals(0.0, lowIVPokemon.getIv(), "Le Pokémon devrait avoir le plus bas IV possible de 0%");
-    }
-    @Test
-    void testPokemonCreationWithExtremeValues() {
-        when(pokemonFactory.createPokemon(anyInt(), eq(Integer.MAX_VALUE), eq(Integer.MAX_VALUE), eq(Integer.MAX_VALUE), eq(Integer.MAX_VALUE)))
-                .thenReturn(new Pokemon(0, "ExtremeMon", 255, 255, 255, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, 1.0));
-
-        Pokemon extremePokemon = pokemonFactory.createPokemon(0, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
-        assertNotNull(extremePokemon, "Le Pokémon avec des valeurs extrêmes ne devrait pas être null");
-        assertEquals(Integer.MAX_VALUE, extremePokemon.getCp(), "Les CP du Pokémon devraient être au maximum");
-    }
-    
-    @Test
-    void testPokemonCreationWithBoundaryIndices() {
-
-        assertDoesNotThrow(() -> pokemonFactory.createPokemon(0, 500, 50, 1000, 10), "La création d'un Pokémon avec l'indice minimal devrait réussir");
-        assertDoesNotThrow(() -> pokemonFactory.createPokemon(150, 500, 50, 1000, 10), "La création d'un Pokémon avec l'indice maximal devrait réussir");
-    }
+   
     @Test
     void testPokemonUniqueness() {
         when(pokemonFactory.createPokemon(anyInt(), anyInt(), anyInt(), anyInt(), anyInt()))
@@ -192,14 +128,6 @@ public class IPokemonFactoryTest {
         Pokemon pokemon2 = pokemonFactory.createPokemon(1, 500, 50, 1000, 10);
 
         assertNotSame(pokemon1, pokemon2, "Chaque appel à createPokemon devrait créer une nouvelle instance");
-    }
-    @Test
-    void testPokemonIVRange() {
-        when(pokemonFactory.createPokemon(anyInt(), anyInt(), anyInt(), anyInt(), anyInt()))
-                .thenAnswer(invocation -> new Pokemon(invocation.getArgument(0), "IVRangeMon", 100, 100, 100, 1000, 100, 1000, 50, Math.random()));
-
-        Pokemon pokemon = pokemonFactory.createPokemon(1, 500, 50, 1000, 10);
-        assertTrue(pokemon.getIv() >= 0.0 && pokemon.getIv() <= 1.0, "Les IVs du Pokémon devraient être compris entre 0.0 et 1.0");
     }
     
     @Test

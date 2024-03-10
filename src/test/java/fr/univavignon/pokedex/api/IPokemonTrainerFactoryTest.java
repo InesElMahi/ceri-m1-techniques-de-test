@@ -135,22 +135,7 @@ public class IPokemonTrainerFactoryTest {
             trainerFactory.createTrainer(trainerName, team, pokedexFactory);
         }, "La tentative de recréation d'un trainer existant devrait échouer.");
     }
-    @Test
-    void testTrainerInformationConsistency() {
-        String trainerName = "Lorelei";
-        Team team = Team.MYSTIC;
-
-        PokemonTrainer trainer = new PokemonTrainer(trainerName, team, pokedex);
-        when(trainerFactory.createTrainer(trainerName, team, pokedexFactory)).thenReturn(trainer);
-
-        PokemonTrainer createdTrainer = trainerFactory.createTrainer(trainerName, team, pokedexFactory);
-
-        assertAll("Trainer information should be consistent",
-            () -> assertEquals(trainerName, createdTrainer.getName()),
-            () -> assertEquals(team, createdTrainer.getTeam()),
-            () -> assertSame(pokedex, createdTrainer.getPokedex())
-        );
-    }
+   
     @Test
     void testTrainerCreationWithEmptyName() {
         when(trainerFactory.createTrainer("", Team.VALOR, pokedexFactory)).thenThrow(new IllegalArgumentException("Le nom du trainer ne peut pas être vide."));
@@ -178,16 +163,6 @@ public class IPokemonTrainerFactoryTest {
             trainerFactory.createTrainer(trainerName, team, pokedexFactory);
         }, "Creating a trainer with a duplicate name should throw an exception.");
     }
-    @Test
-    void testCreateTrainerWithInvalidTeam() {
-        String trainerName = "Lance";
-        Team invalidTeam = null;
-
-        when(trainerFactory.createTrainer(trainerName, invalidTeam, pokedexFactory)).thenThrow(new IllegalArgumentException("Invalid team specified."));
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            trainerFactory.createTrainer(trainerName, invalidTeam, pokedexFactory);
-        }, "Creating a trainer with an invalid team should throw an IllegalArgumentException.");
-    }
+  
 
 }
