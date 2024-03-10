@@ -82,5 +82,18 @@ public class IPokedexTest {
     }
 
 
+    @Test
+    public void testAddingPokemonFailsWhenPokedexIsAtCapacity() {
+
+        when(pokedex.size()).thenReturn(151);
+
+        when(pokedex.addPokemon(any(Pokemon.class))).thenReturn(-1);
+
+        // Tentative d'ajouter un nouveau Pokémon à un Pokédex à capacité maximale
+        Pokemon eevee = new Pokemon(133, "Eevee", 55, 50, 45, 325, 65, 6000, 3, 0.8);
+        int indexEevee = pokedex.addPokemon(eevee);
+        assertEquals(-1, indexEevee, "Aucun Pokémon ne devrait être ajouté si le Pokédex est à sa capacité maximale.");
+    }
+
 
 }
