@@ -41,12 +41,9 @@ public class IPokedexTest {
     @Test
     public void testAddPokemon() {
 
-        // On test l'ajout du Pokémon
         int indexPikachu = pokedex.addPokemon(pikachu);
-        assertEquals(0, indexPikachu);
-
         int indexBulbasaur = pokedex.addPokemon(bulbasaur);
-        assertEquals(0, indexBulbasaur);
+        assertNotEquals(indexPikachu, indexBulbasaur, "chaque Pokemon doit avoir un unique index.");
     }
 
     @Test
@@ -56,11 +53,11 @@ public class IPokedexTest {
     }
 
     @Test
-    public void testGetPokemon() throws PokedexException {
-        // Test pour récupérer un Pokémon par son index
-        assertEquals(pikachu, pokedex.getPokemon(0));
-        assertEquals(bulbasaur, pokedex.getPokemon(0));
+    public void testGetPokemonValidIndex() throws PokedexException {
+        assertEquals(pikachu, pokedex.getPokemon(0), "Pikachu.");
+        assertEquals(bulbasaur, pokedex.getPokemon(1), "Bulbasaur.");
     }
+
 
     @Test
     public void testGetPokemons() {

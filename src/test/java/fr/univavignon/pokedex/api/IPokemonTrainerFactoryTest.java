@@ -85,5 +85,17 @@ public class IPokemonTrainerFactoryTest {
                 () -> assertSame(pokedex, createdTrainer.getPokedex(), "Trainer's Pokedex doivet matcher.")
         );
     }
+    @Test
+    public void testCreateTrainerReturnsExpectedTrainer() {
+        when(trainerFactory.createTrainer(anyString(), any(Team.class), any(IPokedexFactory.class))).thenReturn(expectedTrainer);
+        PokemonTrainer trainer = trainerFactory.createTrainer("Ash", Team.MYSTIC, pokedexFactory);
+        assertSame(expectedTrainer, trainer, "Created trainer should match the expected trainer.");
+    }
+
+    @Test
+    public void testCreateTrainerWithExistingNameThrowsException() {
+        when(trainerFactory.createTrainer("Misty", Team.VALOR, pokedexFactory)).thenThrow(new IllegalStateException("Trainer already exists."));
+        assertThrows(IllegalStateException.class, () -> trainerFactory.createTrainer("Misty", Team.VALOR, pokedexFactory), "Should throw exception when creating a trainer with an existing name.");
+    }
 
 }
