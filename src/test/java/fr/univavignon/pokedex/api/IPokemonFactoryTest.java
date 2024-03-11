@@ -20,13 +20,12 @@ public class IPokemonFactoryTest {
 
     @BeforeEach
     void setUp() {
-        bulbizarre = new Pokemon(1, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 0.56);
+
+        bulbizarre = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 0.56);
         aquali = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 1.0);
 
         when(pokemonFactory.createPokemon(eq(0), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(bulbizarre);
         when(pokemonFactory.createPokemon(eq(133), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(aquali);
-        // Utiliser lenient pour éviter les exceptions de stubbing inutiles
-        lenient().when(pokemonFactory.createPokemon(eq(-1), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(null);
     }
 
 
@@ -34,7 +33,7 @@ public class IPokemonFactoryTest {
     void testCreationPokemon() {
        
         when(pokemonFactory.createPokemon(eq(0), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(
-            new Pokemon(0, "Bulbasaur", 126, 126, 90, 600, 100, 5000, 50, 0.56)
+            new Pokemon(0, "Bulbasaur", 126, 126, 90, 600, 100, 4000, 50, 0.56)
         );
         when(pokemonFactory.createPokemon(eq(133), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(
             new Pokemon(133, "Eevee", 186, 168, 260, 2729, 202, 5000, 4, 1.0)
@@ -48,7 +47,7 @@ public class IPokemonFactoryTest {
         assertEquals(600, bulbasaur.getCp(), "Les CP de Bulbizarre devraient correspondre");
         assertEquals(100, bulbasaur.getHp(), "Les HP de Bulbizarre devraient correspondre");
         assertEquals(0.56, bulbasaur.getIv(), "L'IV de Bulbizarre devrait correspondre");
-        assertEquals(bulbizarre.getDust(), bulbasaur.getDust(), "La poussière du pokemon est incorrect");
+        assertEquals(4000, bulbasaur.getDust(), "La poussière du Pokémon devrait être de 4000");
         assertEquals(bulbizarre.getCandy(),bulbasaur.getCandy(), "Le candy du pokemon est incorrect");
 
 
@@ -60,7 +59,7 @@ public class IPokemonFactoryTest {
         assertEquals(2729, eevee.getCp(), "Les CP d'Eevee devraient correspondre");
         assertEquals(202, eevee.getHp(), "Les HP d'Eevee devraient correspondre");
         assertEquals(1.0, eevee.getIv(), "L'IV d'Eevee devrait être parfait");
-        assertEquals(aquali.getDust(), eevee.getDust(), "La poussière du pokemon est incorrect");
+        assertEquals(5000, eevee.getDust(), "La poussière du Pokémon devrait être de 5000");
         assertEquals(aquali.getCandy(), eevee.getCandy(), "Le candy du pokemon est incorrect");
 
     }
