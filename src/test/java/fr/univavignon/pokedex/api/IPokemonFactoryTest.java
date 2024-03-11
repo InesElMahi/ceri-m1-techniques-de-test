@@ -20,13 +20,12 @@ public class IPokemonFactoryTest {
 
     @BeforeEach
     void setUp() {
-        bulbizarre = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 0.56);
-        aquali = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 1.0);
-
-        lenient().when(pokemonFactory.createPokemon(eq(0), eq(613), eq(64), eq(4000), eq(4))).thenReturn(bulbizarre);
-        lenient().when(pokemonFactory.createPokemon(eq(133), eq(2729), eq(202), eq(5000), eq(4))).thenReturn(aquali);
-        lenient().when(pokemonFactory.createPokemon(eq(-1), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(null);
+        when(pokemonFactory.createPokemon(eq(0), anyInt(), anyInt(), anyInt(), anyInt()))
+                .thenReturn(new Pokemon(0, "Bulbasaur", 126, 126, 90, 600, 100, 4000, 50, 0.56));
+        when(pokemonFactory.createPokemon(eq(133), anyInt(), anyInt(), anyInt(), anyInt()))
+                .thenReturn(new Pokemon(133, "Eevee", 186, 168, 260, 2729, 202, 5000, 4, 1.0));
     }
+
 
     @Test
     void testCreationPokemon() {
