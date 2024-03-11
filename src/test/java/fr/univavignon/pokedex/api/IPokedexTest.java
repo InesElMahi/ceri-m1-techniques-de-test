@@ -44,6 +44,9 @@ public class IPokedexTest {
         // On test l'ajout du Pokémon
         int indexPikachu = pokedex.addPokemon(pikachu);
         assertEquals(0, indexPikachu);
+
+        int indexBulbasaur = pokedex.addPokemon(bulbasaur);
+        assertEquals(0, indexBulbasaur);
     }
 
     @Test
@@ -56,6 +59,7 @@ public class IPokedexTest {
     public void testGetPokemon() throws PokedexException {
         // Test pour récupérer un Pokémon par son index
         assertEquals(pikachu, pokedex.getPokemon(0));
+        assertEquals(bulbasaur, pokedex.getPokemon(0));
     }
 
     @Test
