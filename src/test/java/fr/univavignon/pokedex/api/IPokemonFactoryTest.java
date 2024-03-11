@@ -20,10 +20,13 @@ public class IPokemonFactoryTest {
 
     @BeforeEach
     void setUp() {
-        when(pokemonFactory.createPokemon(eq(0), anyInt(), anyInt(), anyInt(), anyInt()))
-                .thenReturn(new Pokemon(0, "Bulbasaur", 126, 126, 90, 600, 100, 4000, 50, 0.56));
-        when(pokemonFactory.createPokemon(eq(133), anyInt(), anyInt(), anyInt(), anyInt()))
-                .thenReturn(new Pokemon(133, "Eevee", 186, 168, 260, 2729, 202, 5000, 4, 1.0));
+        bulbizarre = new Pokemon(1, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 0.56);
+        aquali = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 1.0);
+
+        when(pokemonFactory.createPokemon(eq(0), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(bulbizarre);
+        when(pokemonFactory.createPokemon(eq(133), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(aquali);
+        // Utiliser lenient pour éviter les exceptions de stubbing inutiles
+        lenient().when(pokemonFactory.createPokemon(eq(-1), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(null);
     }
 
 
