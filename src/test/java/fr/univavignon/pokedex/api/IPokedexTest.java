@@ -15,10 +15,7 @@ public class IPokedexTest {
 
     @BeforeEach
     public void setup() {
-        // Mock de l'interface IPokedex
         pokedex = mock(IPokedex.class);
-
-        // Création de Pokémon
         pikachu = new Pokemon(0, "Pikachu", 55, 40, 90, 260, 35, 500, 50, 0.6);
         bulbasaur = new Pokemon(1, "Bulbasaur", 45, 49, 45, 230, 30, 500, 50, 0.5);
 
@@ -29,11 +26,13 @@ public class IPokedexTest {
                 return p.getIndex();
             });
             when(pokedex.getPokemon(0)).thenReturn(pikachu);
+            when(pokedex.getPokemon(1)).thenReturn(bulbasaur);
             when(pokedex.getPokemons()).thenReturn(Arrays.asList(pikachu, bulbasaur));
             when(pokedex.getPokemons(any(Comparator.class))).thenReturn(Arrays.asList(bulbasaur, pikachu));
-            //lance une exception PokedexException
+
             doThrow(new PokedexException("Invalid index")).when(pokedex).getPokemon(-1);
         } catch (PokedexException e) {
+          
             e.printStackTrace();
         }
     }
@@ -53,9 +52,16 @@ public class IPokedexTest {
     }
 
     @Test
-    public void testGetPokemonValidIndex() throws PokedexException {
-        assertEquals(pikachu, pokedex.getPokemon(0), "Pikachu.");
-        assertEquals(bulbasaur, pokedex.getPokemon(1), "Bulbasaur.");
+    public void testGetPokemonValidIndex() {
+       
+        try {
+            Pokemon resultPikachu = pokedex.getPokemon(0);
+            Pokemon resultBulbasaur = pokedex.getPokemon(1);
+            assertEquals(pikachu, resultPikachu, "Should return Pikachu.");
+            assertEquals(bulbasaur, resultBulbasaur, "Should return Bulbasaur.");
+        } catch (PokedexException e) {
+            fail("PokedexException should not be thrown for valid indexes.");
+        }
     }
 
 
