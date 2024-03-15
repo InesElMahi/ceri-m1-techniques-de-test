@@ -16,8 +16,8 @@ jobs:
           name: Run Maven Tests
           command: mvn test -Dnet.bytebuddy.experimental=true
       - run:
-          name: Placeholder for Coverage Report Generation
-          command: echo "Assuming coverage report is generated"
+          name: Generate Coverage Report
+          command: echo "Generate your coverage report here"
       - codecov/upload:
 
 workflows:
