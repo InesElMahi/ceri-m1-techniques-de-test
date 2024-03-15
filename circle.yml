@@ -27,6 +27,6 @@ workflows:
 
   upload-to-codecov:
     jobs:
-      - codecov/codecov:
+      - codecov/upload:
           requires:
             - build
