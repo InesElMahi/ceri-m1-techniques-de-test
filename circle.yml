@@ -1,29 +1,33 @@
 version: 2.1
 
-orbs:
-  codecov: codecov/codecov@4.0.1
-
 jobs:
-  build_and_upload:
+  build:
     docker:
-      - image: cimg/openjdk:19.0
+      - image: maven:3.8.4-jdk-8
+
+    working_directory: ~/project
+
     steps:
       - checkout
+
       - run:
-          name: Install Maven Dependencies
-          command: mvn dependency:resolve
+          name: Run Unit Tests
+          command: mvn test
       - run:
-          name: Run Maven Tests
-          command: mvn test -Dnet.bytebuddy.experimental=true
-      # Here, ensure you have a step that generates the coverage report, if it's not part of `mvn test`.
-      - codecov/upload:
-        # If needed, specify additional parameters for the codecov upload, like `file` or `flags`
+          name: Generate JaCoCo Coverage Report
+          command: mvn jacoco:report
+
+      - run:
+          name: Upload Coverage to Codecov
+          command: |
+            bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
 
 workflows:
   version: 2
-  build_and_test:
+  build:
     jobs:
-      - build_and_upload:
+      - build:
           filters:
             branches:
-              only: master
+              only:
+                - master
