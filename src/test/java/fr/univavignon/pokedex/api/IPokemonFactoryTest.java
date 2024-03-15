@@ -97,5 +97,12 @@ public class IPokemonFactoryTest {
         assertNotNull(aqualiTest, "aqualiTest ne devrait pas être null");
         assertEquals(aquali.getHp(), aqualiTest.getHp(), "Le HP doit correspondre à celui de Vaporeon");
     }
+    @Test
+    void testPokemonCandyGetter() {
+        assertEquals(4, bulbizarre.getCandy(), "Le nombre de candies de Bulbasaur devrait être correct");
+        assertEquals(4, aquali.getCandy(), "Le nombre de candies de Vaporeon devrait être correct");
+    }
+
+
 }
 
