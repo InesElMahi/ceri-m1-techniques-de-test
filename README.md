@@ -1,5 +1,19 @@
 # UCE Génie Logiciel Avancé : Techniques de tests
 
+
+Inès El Mahi
+M1 ia classique
+
+# CircleCI
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/InesElMahi/ceri-m1-techniques-de-test/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/InesElMahi/ceri-m1-techniques-de-test/tree/master)
+
+# CodeCov
+[![codecov](https://codecov.io/gh/InesElMahi/ceri-m1-techniques-de-test/graph/badge.svg?token=EPOYW3G6KB)](https://codecov.io/gh/InesElMahi/ceri-m1-techniques-de-test)
+
+# Couverture
+
+![Couverture Eclipse](https://github.com/InesElMahi/ceri-m1-techniques-de-test/blob/master/coverage.png?raw=true)
+
 ## Introduction
 
 Vous allez à travers ces projet mettre en application une partie des aspects évoqués en cours vis à vis des techniques de tests.  
