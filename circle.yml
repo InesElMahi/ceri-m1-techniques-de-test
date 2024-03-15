@@ -13,6 +13,9 @@ jobs:
           name: Run Maven Tests
           command: mvn test -Dnet.bytebuddy.experimental=true
 
+orbs:
+  codecov: codecov/codecov@4.0.1
+
 workflows:
   version: 2
   build_and_test:
@@ -22,11 +25,7 @@ workflows:
             branches:
               only: master
 
-orbs:
-  codecov: codecov/codecov@4.0.1
-
-workflows:
   upload-to-codecov:
     jobs:
-      - checkout 
+      - checkout
       - codecov/upload
