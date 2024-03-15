@@ -10,9 +10,6 @@ M1 ia classique
 # CodeCov
 [![codecov](https://codecov.io/gh/InesElMahi/ceri-m1-techniques-de-test/graph/badge.svg?token=EPOYW3G6KB)](https://codecov.io/gh/InesElMahi/ceri-m1-techniques-de-test)
 
-# Couverture
-
-![Couverture Eclipse](https://github.com/InesElMahi/ceri-m1-techniques-de-test/blob/master/coverage.png?raw=true)
 
 ## Introduction
 
