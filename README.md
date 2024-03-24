@@ -1,8 +1,8 @@
 # UCE Génie Logiciel Avancé : Techniques de tests
 
 
-Inès El Mahi
-M1 ia classique
+# Inès El Mahi
+# M1 ia classique
 
 # CircleCI
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/InesElMahi/ceri-m1-techniques-de-test/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/InesElMahi/ceri-m1-techniques-de-test/tree/master)
