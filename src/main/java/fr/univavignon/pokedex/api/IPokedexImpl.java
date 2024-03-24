@@ -12,9 +12,9 @@ import java.util.List;
  *
  * Il est construit autour d'un fournisseur de métadonnées Pokémon et
  * d'une fabrique de Pokémon, permettant la récupération des informations des Pokémon.
- * @Inès El Mahi
+ * @author Inès El Mahi
  */
-public class PokedexImpl implements IPokedex {
+public class IPokedexImpl implements IPokedex {
 
     private List<Pokemon> pokemons = new ArrayList<>();
     private final IPokemonMetadataProvider metadataProvider;
@@ -26,7 +26,7 @@ public class PokedexImpl implements IPokedex {
      * @param metadataProvider Fournisseur des métadonnées des Pokémon.
      * @param pokemonFactory Fabrique pour la création des instances de Pokémon.
      */
-    public PokedexImpl(IPokemonMetadataProvider metadataProvider, IPokemonFactory pokemonFactory) {
+    public IPokedexImpl(IPokemonMetadataProvider metadataProvider, IPokemonFactory pokemonFactory) {
         this.metadataProvider = metadataProvider;
         this.pokemonFactory = pokemonFactory;
     }
