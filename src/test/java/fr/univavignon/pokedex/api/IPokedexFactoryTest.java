@@ -78,4 +78,18 @@ public class IPokedexFactoryTest {
         assertEquals(2, createdPokedex.size(), "Taille du Pokedex doit être 2 après ajout de deux Pokémons.");
     }
 
+    @Test
+    void testCreatePokedexWithImpl() {
+
+        IPokedexImpl pokedexImpl = new IPokedexImpl(metadataProvider, pokemonFactory);
+        IPokedex createdPokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
+        assertTrue(createdPokedex instanceof IPokedexImpl, "Le pokedex créé doit être une instance de IPokedexImpl.");
+        assertEquals(pokedexImpl.size(), createdPokedex.size(), "Les deux instances de pokedex doivent avoir la même taille.");
+
+        List<Pokemon> pokemonsFromImpl = pokedexImpl.getPokemons();
+        List<Pokemon> pokemonsFromCreatedPokedex = createdPokedex.getPokemons();
+        assertTrue(pokemonsFromImpl.containsAll(pokemonsFromCreatedPokedex) && pokemonsFromCreatedPokedex.containsAll(pokemonsFromImpl),
+                "Les deux instances de pokedex doivent contenir les mêmes pokemons.");
+    }
+
 }
