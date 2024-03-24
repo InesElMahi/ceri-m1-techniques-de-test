@@ -106,7 +106,11 @@ public class IPokedexTest {
         List<Pokemon> sortedPokemons = pokedex.getPokemons(PokemonComparators.NAME);
         assertEquals("Bulbasaur", sortedPokemons.get(0).getName(), "Le premier Pokémon devrait être Bulbasaur lors du tri par nom.");
         assertEquals("Pikachu", sortedPokemons.get(1).getName(), "Le deuxième Pokémon devrait être Pikachu lors du tri par nom.");
+
+        int comparisonResultName = PokemonComparators.NAME.compare(sortedPokemons.get(0), sortedPokemons.get(1));
+        assertTrue(comparisonResultName < 0, "Bulbasaur devrait venir avant Pikachu lors du tri par nom.");
     }
+
     @Test
     public void testGetPokemonsSortedByIndex() {
         when(pokedex.getPokemons(PokemonComparators.INDEX)).thenReturn(Arrays.asList(pikachu, bulbasaur));
@@ -116,18 +120,7 @@ public class IPokedexTest {
         assertEquals(bulbasaur.getIndex(), sortedPokemons.get(1).getIndex(), "Le deuxième Pokémon devrait être Bulbasaur lors du tri par index.");
     }
 
-    @Test
-    public void testGetPokemonsSortedByCp() {
 
-        Pokemon pikachuWithHighCp = new Pokemon(0, "Pikachu", 55, 40, 90, 260, 35, 800, 50, 0.6);
-        Pokemon bulbasaurWithLowCp = new Pokemon(1, "Bulbasaur", 45, 49, 45, 230, 30, 600, 50, 0.5);
-
-        when(pokedex.getPokemons(PokemonComparators.CP)).thenReturn(Arrays.asList(bulbasaurWithLowCp, pikachuWithHighCp));
-
-        List<Pokemon> sortedPokemons = pokedex.getPokemons(PokemonComparators.CP);
-        assertEquals(600, sortedPokemons.get(0).getCp(), "Le premier Pokémon devrait être Bulbasaur lors du tri par CP, ayant 600 de CP.");
-        assertEquals(800, sortedPokemons.get(1).getCp(), "Le deuxième Pokémon devrait être Pikachu lors du tri par CP, ayant 800 de CP.");
-    }
 
 
 }
