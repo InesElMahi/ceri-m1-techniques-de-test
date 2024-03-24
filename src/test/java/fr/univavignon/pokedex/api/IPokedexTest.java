@@ -116,5 +116,18 @@ public class IPokedexTest {
         assertEquals(bulbasaur.getIndex(), sortedPokemons.get(1).getIndex(), "Le deuxième Pokémon devrait être Bulbasaur lors du tri par index.");
     }
 
+    @Test
+    public void testGetPokemonsSortedByCp() {
+
+        Pokemon pikachuWithHighCp = new Pokemon(0, "Pikachu", 55, 40, 90, 260, 35, 800, 50, 0.6);
+        Pokemon bulbasaurWithLowCp = new Pokemon(1, "Bulbasaur", 45, 49, 45, 230, 30, 600, 50, 0.5);
+
+        when(pokedex.getPokemons(PokemonComparators.CP)).thenReturn(Arrays.asList(bulbasaurWithLowCp, pikachuWithHighCp));
+
+        List<Pokemon> sortedPokemons = pokedex.getPokemons(PokemonComparators.CP);
+        assertEquals(600, sortedPokemons.get(0).getCp(), "Le premier Pokémon devrait être Bulbasaur lors du tri par CP, ayant 600 de CP.");
+        assertEquals(800, sortedPokemons.get(1).getCp(), "Le deuxième Pokémon devrait être Pikachu lors du tri par CP, ayant 800 de CP.");
+    }
+
 
 }
