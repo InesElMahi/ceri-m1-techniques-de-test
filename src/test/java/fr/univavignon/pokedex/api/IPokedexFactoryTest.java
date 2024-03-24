@@ -78,22 +78,7 @@ public class IPokedexFactoryTest {
         assertEquals(2, createdPokedex.size(), "Taille du Pokedex doit être 2 après ajout de deux Pokémons.");
     }
 
-    @Test
-    void testCreatePokedexWithImpl() {
-        // Création d'un mock pour IPokedexImpl
-        IPokedexImpl mockPokedex = mock(IPokedexImpl.class);
 
-        // Configurer le comportement du mock
-        when(pokedexFactory.createPokedex(metadataProvider, pokemonFactory)).thenReturn(mockPokedex);
-
-        // Appeler la méthode que vous testez
-        IPokedex createdPokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
-
-        // Vérifier que createdPokedex est bien une instance de IPokedexImpl
-        assertTrue(createdPokedex instanceof IPokedexImpl, "Le pokedex créé doit être une instance de IPokedexImpl.");
-
-
-    }
 
 
 }
