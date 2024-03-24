@@ -102,6 +102,12 @@ public class IPokedexTest {
         assertEquals(-1, indexEevee, "Aucun Pokémon ne devrait être ajouté si le Pokédex est à sa capacité maximale.");
     }
     @Test
+    public void testGetPokemonsSortedByName() {
+        List<Pokemon> sortedPokemons = pokedex.getPokemons(PokemonComparators.NAME);
+        assertEquals("Bulbasaur", sortedPokemons.get(0).getName(), "Le premier Pokémon devrait être Bulbasaur lors du tri par nom.");
+        assertEquals("Pikachu", sortedPokemons.get(1).getName(), "Le deuxième Pokémon devrait être Pikachu lors du tri par nom.");
+    }
+    @Test
     public void testGetPokemonsSortedByIndex() {
         when(pokedex.getPokemons(PokemonComparators.INDEX)).thenReturn(Arrays.asList(pikachu, bulbasaur));
 
@@ -109,8 +115,6 @@ public class IPokedexTest {
         assertEquals(pikachu.getIndex(), sortedPokemons.get(0).getIndex(), "Le premier Pokémon devrait être Pikachu lors du tri par index.");
         assertEquals(bulbasaur.getIndex(), sortedPokemons.get(1).getIndex(), "Le deuxième Pokémon devrait être Bulbasaur lors du tri par index.");
     }
-
-
 
 
 }
