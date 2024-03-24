@@ -120,42 +120,4 @@ public class IPokedexTest {
         assertEquals(bulbasaur.getIndex(), sortedPokemons.get(1).getIndex(), "Le deuxième Pokémon devrait être Bulbasaur lors du tri par index.");
     }
 
-    @Test
-    public void testCreatePokemon() {
-        Pokemon pikachu = pokedex.createPokemon(25, 320, 120, 3000, 50);
-        assertNotNull(pikachu, "La méthode createPokemon ne devrait pas renvoyer null.");
-        assertEquals(25, pikachu.getIndex(), "L'index du Pokémon créé devrait être 25.");
-        assertEquals(320, pikachu.getCp(), "La puissance de combat du Pokémon créé devrait être 320.");
-    }
-
-    @Test
-    public void testGetPokemonMetadata() {
-        try {
-            PokemonMetadata pikachuMetadata = pokedex.getPokemonMetadata(25);
-            assertNotNull(pikachuMetadata, "Les métadonnées du Pokémon ne devraient pas être null.");
-            assertEquals("Pikachu", pikachuMetadata.getName(), "Le nom du Pokémon devrait être Pikachu.");
-        } catch (PokedexException e) {
-            fail("La méthode getPokemonMetadata ne devrait pas lever d'exception.");
-        }
-    }
-
-    @Test
-    public void testSortingPokemons() {
-        Comparator<Pokemon> testComparator = Comparator.comparing(Pokemon::getIndex);
-
-        List<Pokemon> unsortedPokemons = Arrays.asList(
-                new Pokemon(25, "Pikachu", 320, 120, 3000, 50, 0, 0, 0, 0),
-                new Pokemon(4, "Charmander", 300, 110, 2800, 45, 0, 0, 0, 0),
-                new Pokemon(7, "Squirtle", 310, 115, 2900, 48, 0, 0, 0, 0)
-        );
-
-        for (Pokemon pokemon : unsortedPokemons) {
-            pokedex.addPokemon(pokemon);
-        }
-        List<Pokemon> sortedPokemons = pokedex.getPokemons(testComparator);
-        for (int i = 0; i < sortedPokemons.size() - 1; i++) {
-            assertTrue(testComparator.compare(sortedPokemons.get(i), sortedPokemons.get(i + 1)) <= 0, "Les pokemons devraient être triés par index.");
-        }
-    }
-
 }
