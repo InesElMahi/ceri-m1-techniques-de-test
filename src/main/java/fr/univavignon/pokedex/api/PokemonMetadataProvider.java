@@ -5,52 +5,43 @@ import java.util.Map;
 
 /**
  * Implémentation de IPokemonMetadataProvider.
- * Cette classe fournit les métadonnées des Pokémon en fonction de leur index.
- * Elle utilise une HashMap pour stocker les métadonnées de manière efficace.
- * Les métadonnées spécifiques à certains Pokémon sont pré-initialisées,
- * tandis que de nouvelles métadonnées peuvent être ajoutées dynamiquement pour de nouveaux Pokémon.
+ * Fournit les métadonnées des Pokémon en fonction de leur index.
+ * Utilise une HashMap pour stocker efficacement les métadonnées.
+ * Les métadonnées sont initialisées à la demande plutôt qu'à la création.
  * @author Inès El Mahi
  */
 public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 
     private final Map<Integer, PokemonMetadata> metadataMap;
 
-    /**
-     * Construit un nouveau PokemonMetadataProvider avec une carte de métadonnées vide.
-     */
     public PokemonMetadataProvider() {
         this.metadataMap = new HashMap<>();
-        initialiserMetadonnees();
+        // Initialisation spécifique n'est plus nécessaire dans le constructeur
     }
 
-    /**
-     * Initialise les métadonnées pour les Pokémon spécifiques et d'autres Pokémon avec des valeurs par défaut.
-     */
-    private void initialiserMetadonnees() {
-        // Initialise les métadonnées pour certains Pokémon spécifiques
-        metadataMap.put(1, new PokemonMetadata(1, "Bulbizarre", 45, 49, 49));
-        metadataMap.put(2, new PokemonMetadata(2, "Herbizarre", 60, 62, 63));
-        metadataMap.put(3, new PokemonMetadata(3, "Florizarre", 80, 82, 83));
-        metadataMap.put(133, new PokemonMetadata(133, "Aquali", 186, 168, 260));
-
-        for (int i = 4; i <= 150; i++) {
-            metadataMap.put(i, new PokemonMetadata(i, "Non Capturé", 0, 0, 0));
-        }
-    }
-
-    /**
-     * Récupère et retourne les métadonnées du Pokémon désigné par l'index donné.
-     *
-     * @param index Index du Pokémon pour lequel récupérer les métadonnées.
-     * @return Métadonnées du Pokémon.
-     * @throws PokedexException Si l'index donné n'est pas valide.
-     */
     @Override
     public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
-        PokemonMetadata metadata = metadataMap.get(index);
-        if (metadata == null) {
+        if (index <= 0 || index > 150) { // Assurer que l'index est valide
             throw new PokedexException("Index invalide : " + index);
         }
+
+        PokemonMetadata metadata = metadataMap.get(index);
+        if (metadata == null) {
+            // Pour l'exemple, on retourne des valeurs par défaut ou on lance une exception
+            // Dans une application réelle, vous pourriez chercher ces données depuis une base de données ou un fichier
+            throw new PokedexException("Métadonnées non trouvées pour l'index : " + index);
+        }
         return metadata;
+    }
+
+    /**
+     * Méthode pour ajouter ou mettre à jour les métadonnées d'un Pokémon.
+     * Cette méthode peut être utilisée pour peupler la map des métadonnées au fur et à mesure des besoins.
+     */
+    public void addOrUpdateMetadata(int index, String name, int attack, int defense, int stamina) {
+        if (index <= 0 || index > 150) { // Vérifier que l'index est dans le bon intervalle
+            throw new IllegalArgumentException("Index invalide : " + index);
+        }
+        metadataMap.put(index, new PokemonMetadata(index, name, attack, defense, stamina));
     }
 }
