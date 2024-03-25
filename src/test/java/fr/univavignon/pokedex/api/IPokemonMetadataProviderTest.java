@@ -65,14 +65,15 @@ public class IPokemonMetadataProviderTest {
                 "Une PokedexException doit être lancée si aucune métadonnée n'est trouvée pour l'index donné.");
     }
     @Test
-    public void testAddMetadata_IndexTooHigh() {
-        assertThrows(IllegalArgumentException.class, () -> metadataProvider.addOrUpdateMetadata(151, "TestTooHigh", 10, 10, 10),
-                "L'ajout de métadonnées avec un index trop élevé devrait lancer une IllegalArgumentException.");
+    public void getPokemonMetadata_IndexTooLow() {
+        assertThrows(PokedexException.class, () -> metadataProvider.getPokemonMetadata(-1),
+                "Accès à un index invalide (-1) devrait lancer une PokedexException.");
     }
+
     @Test
-    public void testAddMetadata_ValidIndex() {
-        assertDoesNotThrow(() -> metadataProvider.addOrUpdateMetadata(150, "TestValid", 10, 10, 10),
-                "L'ajout de métadonnées avec un index valide ne devrait pas lancer d'exception.");
+    public void getPokemonMetadata_IndexTooHigh() {
+        assertThrows(PokedexException.class, () -> metadataProvider.getPokemonMetadata(151),
+                "Accès à un index invalide (151) devrait lancer une PokedexException.");
     }
 
 }
