@@ -149,5 +149,25 @@ public class IPokedexTest {
     }
 
 
+    @Test
+    public void testAddPokemonAndInvalidIndexWithMocks() throws PokedexException {
+        IPokemonMetadataProvider metadataProviderMock = mock(IPokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactoryMock = mock(IPokemonFactory.class);
+        Pokedex pokedexMock = new Pokedex(metadataProviderMock, pokemonFactoryMock);
 
+        when(pokedexMock.addPokemon(any(Pokemon.class))).thenReturn(0);
+        when(pokedexMock.size()).thenReturn(1);
+
+        int index = pokedexMock.addPokemon(pikachu);
+        assertEquals(0, index, "L'index du Pokémon ajouté devrait être 0.");
+        assertEquals(1, pokedexMock.size(), "La taille du Pokedex devrait être 1 après l'ajout d'un Pokémon.");
+
+        when(pokedexMock.getPokemon(0)).thenReturn(pikachu);
+        Pokemon retrievedPokemon = pokedexMock.getPokemon(0);
+        assertEquals(pikachu, retrievedPokemon, "Le Pokémon récupéré devrait être Pikachu.");
+
+        doThrow(new PokedexException("Invalid index")).when(pokedexMock).getPokemon(-1);
+        assertThrows(PokedexException.class, () -> pokedexMock.getPokemon(-1), "L'accès à un index invalide devrait lancer une PokedexException.");
+
+    }
 }
