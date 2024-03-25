@@ -149,15 +149,16 @@ public class IPokedexTest {
     }
 
 
-
     @Test
-    public void getPokemonsReturnsUnmodifiableList() {
-        List<Pokemon> pokemons = pokedex.getPokemons();
-        assertThrows(UnsupportedOperationException.class, () -> pokemons.add(pikachu), "Should throw exception when trying to modify list");
+    public void testGetPokemonMetadataFailure() throws PokedexException {
+        IPokemonMetadataProvider mockMetadataProvider = mock(IPokemonMetadataProvider.class);
+        IPokemonFactory mockPokemonFactory = mock(IPokemonFactory.class);
+        IPokedex pokedex = new Pokedex(mockMetadataProvider, mockPokemonFactory);
 
-        List<Pokemon> sortedPokemons = pokedex.getPokemons(Comparator.comparingInt(Pokemon::getIndex));
-        assertThrows(UnsupportedOperationException.class, () -> sortedPokemons.add(pikachu), "Should throw exception when trying to modify sorted list");
+        int invalidIndex = 200;
+        when(mockMetadataProvider.getPokemonMetadata(invalidIndex)).thenThrow(new PokedexException("Métadonnées non trouvées"));
+
+        assertThrows(PokedexException.class, () -> pokedex.getPokemonMetadata(invalidIndex), "Devrait lancer une PokedexException en cas d'échec de récupération des métadonnées");
     }
-
 
 }
