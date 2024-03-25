@@ -178,26 +178,41 @@ public class IPokedexTest {
 
     @Test
     public void testGetPokemonsReturnsUnmodifiableList() throws PokedexException {
-        // Mock des dépendances
+
         IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
         IPokemonFactory pokemonFactory = mock(IPokemonFactory.class);
 
-        // Création de l'instance réelle de Pokedex avec les mocks comme dépendances
         Pokedex realPokedex = new Pokedex(metadataProvider, pokemonFactory);
 
-        // Ajout de Pokémon pour assurer que la liste n'est pas vide
         Pokemon testPokemon = new Pokemon(0, "Test Pokemon", 100, 100, 100, 1000, 100, 10, 1, 0.5);
         when(pokemonFactory.createPokemon(anyInt(), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(testPokemon);
         realPokedex.addPokemon(testPokemon);
 
-        // Récupération de la liste des Pokémon
         List<Pokemon> pokemons = realPokedex.getPokemons();
-
-        // Tentative de modification de la liste, ce qui devrait échouer
         Exception exception = assertThrows(UnsupportedOperationException.class, () -> pokemons.add(testPokemon),
                 "La modification de la liste des Pokémon devrait lancer une UnsupportedOperationException.");
 
         assertNotNull(exception, "Une exception devrait être levée lors de la tentative de modification de la liste.");
     }
+
+    @Test
+    public void testGetPokemonsSortedAndUnmodifiable() throws PokedexException {
+
+        Pokedex realPokedex = new Pokedex(mock(IPokemonMetadataProvider.class), mock(IPokemonFactory.class));
+
+        realPokedex.addPokemon(new Pokemon(0, "Bulbasaur", 45, 49, 45, 230, 30, 500, 50, 0.5));
+        realPokedex.addPokemon(new Pokemon(1, "Charmander", 39, 52, 43, 220, 25, 500, 50, 0.6));
+        realPokedex.addPokemon(new Pokemon(2, "Squirtle", 44, 48, 65, 225, 28, 500, 50, 0.7));
+
+        Comparator<Pokemon> byName = Comparator.comparing(Pokemon::getName);
+
+        List<Pokemon> sortedPokemons = realPokedex.getPokemons(byName);
+
+        assertEquals("Bulbasaur", sortedPokemons.get(0).getName());
+        assertEquals("Charmander", sortedPokemons.get(1).getName());
+        assertEquals("Squirtle", sortedPokemons.get(2).getName());
+        assertThrows(UnsupportedOperationException.class, () -> sortedPokemons.add(new Pokemon(3, "Pikachu", 55, 40, 90, 260, 35, 500, 50, 0.8)));
+    }
+
 
 }
