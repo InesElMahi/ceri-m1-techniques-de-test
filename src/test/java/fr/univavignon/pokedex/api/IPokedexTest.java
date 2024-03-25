@@ -149,26 +149,26 @@ public class IPokedexTest {
     }
 
     @Test
-    public void getPokemon_ValidIndex_ReturnsPokemon() throws PokedexException {
-        when(pokedex.getPokemon(0)).thenReturn(pikachu);
-        Pokemon result = pokedex.getPokemon(0);
-        assertNotNull(result, "Doit retourner un Pokémon pour un index valide.");
-        assertEquals(pikachu, result, "Le Pokémon retourné doit être Pikachu.");
+    public void testGetPokemonWithInvalidIdThrowsException() {
+
+        when(pokedex.size()).thenReturn(100);
+        int tooHighId = 100;
+        assertThrows(PokedexException.class, () -> pokedex.getPokemon(tooHighId), "Devrait lancer PokedexException pour ID trop grand");
+        int negativeId = -1;
+        assertThrows(PokedexException.class, () -> pokedex.getPokemon(negativeId), "Devrait lancer PokedexException pour ID négatif");
     }
 
     @Test
-    public void getPokemons_ReturnsUnmodifiableList() {
-        when(pokedex.getPokemons()).thenReturn(Arrays.asList(pikachu, bulbasaur));
-        List<Pokemon> pokemons = pokedex.getPokemons();
-        assertThrows(UnsupportedOperationException.class, () -> pokemons.add(pikachu),
-                "La liste retournée doit être non modifiable.");
+    public void testGetPokemonMetadataFailure() throws PokedexException {
+        IPokemonMetadataProvider mockMetadataProvider = mock(IPokemonMetadataProvider.class);
+        IPokemonFactory mockPokemonFactory = mock(IPokemonFactory.class);
+        IPokedex pokedex = new Pokedex(mockMetadataProvider, mockPokemonFactory);
+
+        int invalidIndex = 200;
+        when(mockMetadataProvider.getPokemonMetadata(invalidIndex)).thenThrow(new PokedexException("Métadonnées non trouvées"));
+
+        assertThrows(PokedexException.class, () -> pokedex.getPokemonMetadata(invalidIndex), "Devrait lancer une PokedexException en cas d'échec de récupération des métadonnées");
     }
 
-    @Test
-    public void addPokemon_AddsPokemonSuccessfully() {
-        when(pokedex.addPokemon(any(Pokemon.class))).thenAnswer(i -> 0);
-        int index = pokedex.addPokemon(pikachu);
-        assertEquals(0, index, "L'ajout d'un Pokémon doit retourner son index.");
-    }
 
 }
