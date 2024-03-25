@@ -149,25 +149,17 @@ public class IPokedexTest {
     }
 
     @Test
-    public void testGetPokemonWithInvalidIdThrowsException() {
-
-        when(pokedex.size()).thenReturn(100);
-        int tooHighId = 100;
-        assertThrows(PokedexException.class, () -> pokedex.getPokemon(tooHighId), "Devrait lancer PokedexException pour ID trop grand");
-        int negativeId = -1;
-        assertThrows(PokedexException.class, () -> pokedex.getPokemon(negativeId), "Devrait lancer PokedexException pour ID négatif");
+    public void getPokemonWithInvalidIdThrowsException() {
+        assertThrows(PokedexException.class, () -> pokedex.getPokemon(1000), "Should throw exception for ID too high");
+        assertThrows(PokedexException.class, () -> pokedex.getPokemon(-1), "Should throw exception for negative ID");
     }
-
     @Test
-    public void testGetPokemonMetadataFailure() throws PokedexException {
-        IPokemonMetadataProvider mockMetadataProvider = mock(IPokemonMetadataProvider.class);
-        IPokemonFactory mockPokemonFactory = mock(IPokemonFactory.class);
-        IPokedex pokedex = new Pokedex(mockMetadataProvider, mockPokemonFactory);
+    public void getPokemonsReturnsUnmodifiableList() {
+        List<Pokemon> pokemons = pokedex.getPokemons();
+        assertThrows(UnsupportedOperationException.class, () -> pokemons.add(pikachu), "Should throw exception when trying to modify list");
 
-        int invalidIndex = 200;
-        when(mockMetadataProvider.getPokemonMetadata(invalidIndex)).thenThrow(new PokedexException("Métadonnées non trouvées"));
-
-        assertThrows(PokedexException.class, () -> pokedex.getPokemonMetadata(invalidIndex), "Devrait lancer une PokedexException en cas d'échec de récupération des métadonnées");
+        List<Pokemon> sortedPokemons = pokedex.getPokemons(Comparator.comparingInt(Pokemon::getIndex));
+        assertThrows(UnsupportedOperationException.class, () -> sortedPokemons.add(pikachu), "Should throw exception when trying to modify sorted list");
     }
 
 
