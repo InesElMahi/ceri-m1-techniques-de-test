@@ -162,9 +162,7 @@ public class IPokedexTest {
     @Test
     public void testGetPokemonById() {
         // Create a Pokemon
-        // Créer une instance de Pokemon avec des attributs spécifiques
         Pokemon pokemon = new Pokemon(25, "Pikachu", 90, 35, 50, 200, 0, 0, 0, 0);
-
 
         // Add the Pokemon to the Pokedex
         int index = pokedex.addPokemon(pokemon);
@@ -180,6 +178,7 @@ public class IPokedexTest {
             fail("An exception occurred while retrieving the Pokemon: " + e.getMessage());
         }
     }
+
 
 
 }
