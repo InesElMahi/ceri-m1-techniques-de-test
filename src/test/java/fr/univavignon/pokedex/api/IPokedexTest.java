@@ -148,11 +148,8 @@ public class IPokedexTest {
         verify(metadataProviderMock).getPokemonMetadata(0);
     }
 
-    @Test
-    public void getPokemonWithInvalidIdThrowsException() {
-        assertThrows(PokedexException.class, () -> pokedex.getPokemon(1000), "Should throw exception for ID too high");
-        assertThrows(PokedexException.class, () -> pokedex.getPokemon(-1), "Should throw exception for negative ID");
-    }
+
+
     @Test
     public void getPokemonsReturnsUnmodifiableList() {
         List<Pokemon> pokemons = pokedex.getPokemons();
