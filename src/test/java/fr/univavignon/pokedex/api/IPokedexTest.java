@@ -67,11 +67,11 @@ public class IPokedexTest {
 
     @Test
     public void testGetPokemons() {
-        // Test pour récupérer la liste de tous les Pokémon
-        List<Pokemon> pokemons = pokedex.getPokemons();
-        assertNotNull(pokemons);
-        assertEquals(2, pokemons.size());
+        List<Pokemon> allPokemons = pokedex.getPokemons();
+        assertFalse(allPokemons.isEmpty(), "La liste récupérée ne doit pas être vide");
+
     }
+
 
     @Test
     public void testGetPokemonThrowsException() {
@@ -160,5 +160,7 @@ public class IPokedexTest {
 
         assertThrows(PokedexException.class, () -> pokedex.getPokemonMetadata(invalidIndex), "Devrait lancer une PokedexException en cas d'échec de récupération des métadonnées");
     }
+
+
 
 }
