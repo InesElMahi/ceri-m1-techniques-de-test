@@ -98,4 +98,5 @@ public class IPokemonTrainerFactoryTest {
         assertThrows(IllegalStateException.class, () -> trainerFactory.createTrainer("Misty", Team.VALOR, pokedexFactory), "Should throw exception when creating a trainer with an existing name.");
     }
 
+
 }
