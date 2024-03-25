@@ -159,13 +159,18 @@ public class IPokedexTest {
 
         assertThrows(PokedexException.class, () -> pokedex.getPokemonMetadata(invalidIndex), "Devrait lancer une PokedexException en cas d'échec de récupération des métadonnées");
     }
-
     @Test
-    public void testGetPokemonThrowsExceptionForInvalidIndex() throws PokedexException {
+    public void testGetPokemonById() throws PokedexException {
+        Pokemon testPokemon = new Pokemon(10, "TestPokemon", 100, 100, 100, 100, 100, 100, 100, 1.0);
+        int index = pokedex.addPokemon(testPokemon);
 
-        int invalidIndex = -1;
-        doThrow(new PokedexException("Invalid index")).when(pokedex).getPokemon(invalidIndex);
-        assertThrows(PokedexException.class, () -> pokedex.getPokemon(invalidIndex));
+        try {
+
+            Pokemon retrievedPokemon = pokedex.getPokemon(index);
+            assertEquals(testPokemon, retrievedPokemon, "Le Pokémon récupéré devrait être le même que celui ajouté");
+        } catch (PokedexException e) {
+            fail("Une exception ne devrait pas être lancée pour un index valide");
+        }
     }
 
 
