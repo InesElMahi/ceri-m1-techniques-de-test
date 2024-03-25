@@ -22,7 +22,7 @@ public class IPokedexFactoryTest {
     private IPokemonFactory pokemonFactory;
 
     @Mock
-    private IPokedexFactory pokedexFactory;
+    private PokedexFactory pokedexFactory;
 
     private IPokedex pokedex;
     private Pokemon pikachu;
@@ -30,12 +30,12 @@ public class IPokedexFactoryTest {
 
     @BeforeEach
     void setUp() {
+        pokedexFactory = new PokedexFactory();
         // Préparation des mocks
     	pokedex = mock(IPokedex.class, withSettings().lenient());
         pikachu = new Pokemon(0, "Pikachu", 55, 40, 90, 260, 35, 500, 50, 0.6);
         bulbasaur = new Pokemon(1, "Bulbasaur", 45, 49, 45, 230, 30, 500, 50, 0.5);
 
-        when(pokedexFactory.createPokedex(metadataProvider, pokemonFactory)).thenReturn(pokedex);
         try {
             when(pokedex.addPokemon(any(Pokemon.class))).thenAnswer(i -> {
                 Pokemon p = i.getArgument(0);
@@ -48,16 +48,14 @@ public class IPokedexFactoryTest {
         } catch (PokedexException e) {
             e.printStackTrace();
         }
-        pokedexFactory = new PokedexFactory();
+
     }
 
     @Test
     void testCreatePokedex() {
-
         IPokedex createdPokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
         assertNotNull(createdPokedex, "Le pokedex créé ne doit pas être null");
-        assertSame(pokedex, createdPokedex, "Le pokedex créé doit être le même que le mock retourné par createPokedex");
-        verify(pokedexFactory).createPokedex(metadataProvider, pokemonFactory);
+
     }
 
     @Test
