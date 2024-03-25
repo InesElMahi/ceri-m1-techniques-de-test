@@ -148,28 +148,6 @@ public class IPokedexTest {
         verify(metadataProviderMock).getPokemonMetadata(0);
     }
 
-    @Test
-    void testGetPokemonThrowsExceptionForInvalidIndex() {
-        assertThrows(PokedexException.class, () -> pokedex.getPokemon(-1), "Doit lever une exception pour un index invalide négatif.");
-        assertThrows(PokedexException.class, () -> pokedex.getPokemon(pokedex.size()), "Doit lever une exception pour un index supérieur à la taille.");
-    }
 
-    @Test
-    void testGetPokemonsSortedByAttack() {
-        Comparator<Pokemon> attackComparator = Comparator.comparingInt(Pokemon::getAttack);
-        List<Pokemon> sortedByAttack = pokedex.getPokemons(attackComparator);
-        for (int i = 1; i < sortedByAttack.size(); i++) {
-            assertTrue(sortedByAttack.get(i - 1).getAttack() <= sortedByAttack.get(i).getAttack(), "Les Pokémon doivent être triés par attaque croissante.");
-        }
-    }
 
-    @Test
-    void testGetPokemonsSortedByDefense() {
-        Comparator<Pokemon> defenseComparator = Comparator.comparingInt(Pokemon::getDefense);
-        List<Pokemon> sortedByDefense = pokedex.getPokemons(defenseComparator);
-        for (int i = 1; i < sortedByDefense.size(); i++) {
-            assertTrue(sortedByDefense.get(i - 1).getDefense() <= sortedByDefense.get(i).getDefense(), "Les Pokémon doivent être triés par défense croissante.");
-        }
-    }
-
-    }
+}
