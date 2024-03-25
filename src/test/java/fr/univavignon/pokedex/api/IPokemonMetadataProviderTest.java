@@ -6,12 +6,20 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.BeforeEach;
 
-@ExtendWith(MockitoExtension.class)
+
 public class IPokemonMetadataProviderTest {
 
     @Mock
     private IPokemonMetadataProvider metadataProvider;
+
+    @BeforeEach
+    public void setUp() {
+
+        metadataProvider = new PokemonMetadataProvider();
+
+    }
 
     @Test
     public void getPokemonMetadata_validIndexAquali() throws PokedexException {
@@ -52,5 +60,6 @@ public class IPokemonMetadataProviderTest {
             metadataProvider.getPokemonMetadata(invalidIndex);
         }, "si l'indice invalide est lancer par PodexException");
     }
+
 
 }
