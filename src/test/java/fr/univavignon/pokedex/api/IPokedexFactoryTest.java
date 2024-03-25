@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 public class IPokedexFactoryTest {
@@ -31,7 +30,7 @@ public class IPokedexFactoryTest {
     @BeforeEach
     void setUp() {
         pokedexFactory = new PokedexFactory();
-        // Préparation des mocks
+
     	pokedex = mock(IPokedex.class, withSettings().lenient());
         pikachu = new Pokemon(0, "Pikachu", 55, 40, 90, 260, 35, 500, 50, 0.6);
         bulbasaur = new Pokemon(1, "Bulbasaur", 45, 49, 45, 230, 30, 500, 50, 0.5);
