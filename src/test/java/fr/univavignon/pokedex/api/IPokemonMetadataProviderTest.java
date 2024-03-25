@@ -16,11 +16,10 @@ public class IPokemonMetadataProviderTest {
 
     @BeforeEach
     public void setUp() {
-
-        metadataProviderMock = mock(IPokemonMetadataProvider.class);
-
         metadataProvider = new PokemonMetadataProvider();
+        metadataProvider.addOrUpdateMetadata(133, "Aquali", 186, 168, 260);
     }
+
 
     @Test
     public void getPokemonMetadata_validIndexAquali() throws PokedexException {
