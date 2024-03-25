@@ -80,7 +80,6 @@ public class IPokedexTest {
 
     @Test
     public void testGetPokemonsWithOrder() {
-        // Test pour récupérer la liste de tous les Pokémon
         List<Pokemon> pokemons = pokedex.getPokemons(Comparator.comparing(Pokemon::getName));
         assertNotNull(pokemons);
         assertEquals("Bulbasaur", pokemons.get(0).getName());
