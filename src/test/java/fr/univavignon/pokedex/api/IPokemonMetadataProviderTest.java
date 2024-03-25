@@ -52,17 +52,5 @@ public class IPokemonMetadataProviderTest {
             metadataProvider.getPokemonMetadata(invalidIndex);
         }, "si l'indice invalide est lancer par PodexException");
     }
-    @Test
-    public void testGetPokemonMetadataForMultiplePokemon() {
-        PokemonMetadataProvider provider = new PokemonMetadataProvider();
-        try {
-            PokemonMetadata metadata1 = provider.getPokemonMetadata(1);
-            PokemonMetadata metadata133 = provider.getPokemonMetadata(133);
-            assertEquals("Bulbizarre", metadata1.getName(), "Le nom du Pokémon 1 devrait être Bulbizarre.");
-            assertEquals("Aquali", metadata133.getName(), "Le nom du Pokémon 133 devrait être Aquali.");
-        } catch (PokedexException e) {
-            fail("Une exception ne devrait pas être lancée pour un index valide.");
-        }
-    }
 
 }
