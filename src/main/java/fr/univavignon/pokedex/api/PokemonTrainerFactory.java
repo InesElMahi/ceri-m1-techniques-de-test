@@ -4,7 +4,7 @@ package fr.univavignon.pokedex.api;
  * Implémentation de l'interface IPokemonTrainerFactory.
  * Cette implémentation crée des instances de PokemonTrainer.
  *
- * @author VotreNom
+ * @author Inès El Mahi
  */
 public class PokemonTrainerFactory implements IPokemonTrainerFactory {
 
