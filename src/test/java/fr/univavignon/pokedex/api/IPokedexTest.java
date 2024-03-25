@@ -136,20 +136,16 @@ public class IPokedexTest {
     }
 
     @Test
-    public void testPokemonCreationWithMetadataProviderException() {
+    public void testCreatePokemonHandlesPokedexException() throws PokedexException {
+
         IPokemonMetadataProvider metadataProviderMock = mock(IPokemonMetadataProvider.class);
+        when(metadataProviderMock.getPokemonMetadata(anyInt())).thenThrow(new PokedexException("Erreur de récupération des métadonnées"));
         IPokemonFactory pokemonFactory = new PokemonFactory(metadataProviderMock);
-        IPokedex pokedex = new Pokedex(metadataProviderMock, pokemonFactory);
 
-        try {
-            when(metadataProviderMock.getPokemonMetadata(anyInt())).thenThrow(new PokedexException("Erreur lors de la récupération des métadonnées"));
+        Pokemon result = pokemonFactory.createPokemon(0, 100, 100, 1000, 10);
+        assertNull(result, "La méthode createPokemon devrait retourner null en cas d'échec de récupération des métadonnées.");
 
-            Pokemon pokemon = pokedex.createPokemon(1, 600, 100, 5000, 4);
-            assertNull(pokemon, "La création d'un Pokémon devrait retourner null en cas d'exception de métadonnées");
-
-        } catch (PokedexException e) {
-            fail("La création d'un Pokémon n'a pas géré correctement PokedexException");
-        }
+        verify(metadataProviderMock).getPokemonMetadata(0);
     }
 
 
