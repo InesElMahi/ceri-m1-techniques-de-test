@@ -52,9 +52,6 @@ public class IPokedexFactoryTest {
 
     @Test
     void testCreatePokedex() {
-        IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
-        IPokemonFactory pokemonFactory = mock(IPokemonFactory.class);
-        PokedexFactory pokedexFactory = new PokedexFactory();
 
         IPokedex createdPokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
         assertNotNull(createdPokedex, "Le pokedex créé ne doit pas être null");
