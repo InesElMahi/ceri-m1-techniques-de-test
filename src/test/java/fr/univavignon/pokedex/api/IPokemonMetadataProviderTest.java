@@ -64,5 +64,15 @@ public class IPokemonMetadataProviderTest {
         assertThrows(PokedexException.class, () -> metadataProvider.getPokemonMetadata(nonExistentIndex),
                 "Une PokedexException doit être lancée si aucune métadonnée n'est trouvée pour l'index donné.");
     }
+    @Test
+    public void testAddMetadata_IndexTooHigh() {
+        assertThrows(IllegalArgumentException.class, () -> metadataProvider.addOrUpdateMetadata(151, "TestTooHigh", 10, 10, 10),
+                "L'ajout de métadonnées avec un index trop élevé devrait lancer une IllegalArgumentException.");
+    }
+    @Test
+    public void testAddMetadata_ValidIndex() {
+        assertDoesNotThrow(() -> metadataProvider.addOrUpdateMetadata(150, "TestValid", 10, 10, 10),
+                "L'ajout de métadonnées avec un index valide ne devrait pas lancer d'exception.");
+    }
 
 }
