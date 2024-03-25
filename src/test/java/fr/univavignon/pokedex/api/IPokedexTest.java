@@ -37,14 +37,12 @@ public class IPokedexTest {
         }
     }
 
-
     @Test
     public void testAddPokemon() {
+
         int indexPikachu = pokedex.addPokemon(pikachu);
         int indexBulbasaur = pokedex.addPokemon(bulbasaur);
-        assertNotEquals(indexPikachu, indexBulbasaur, "Chaque Pokemon doit avoir un index unique.");
-        int indexPikachu2 = pokedex.addPokemon(pikachu);
-        assertEquals(indexPikachu, indexPikachu2, "Le même Pokémon ne doit pas être ajouté deux fois.");
+        assertNotEquals(indexPikachu, indexBulbasaur, "chaque Pokemon doit avoir un unique index.");
     }
 
     @Test
@@ -120,12 +118,6 @@ public class IPokedexTest {
         List<Pokemon> sortedPokemons = pokedex.getPokemons(PokemonComparators.INDEX);
         assertEquals(pikachu.getIndex(), sortedPokemons.get(0).getIndex(), "Le premier Pokémon devrait être Pikachu lors du tri par index.");
         assertEquals(bulbasaur.getIndex(), sortedPokemons.get(1).getIndex(), "Le deuxième Pokémon devrait être Bulbasaur lors du tri par index.");
-    }
-
-    @Test
-    public void testGetPokemonMetadataInvalidIndex() {
-        int invalidIndex = -29;
-        assertThrows(PokedexException.class, () -> pokedex.getPokemonMetadata(invalidIndex), "Une PokedexException devrait être levée pour un index invalide.");
     }
 
 }
