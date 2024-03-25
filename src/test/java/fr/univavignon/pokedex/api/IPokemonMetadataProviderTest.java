@@ -8,17 +8,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 
-
+@ExtendWith(MockitoExtension.class)
 public class IPokemonMetadataProviderTest {
 
-    @Mock
-    private IPokemonMetadataProvider metadataProvider;
+    private IPokemonMetadataProvider metadataProviderMock;
+    private PokemonMetadataProvider metadataProvider;
 
     @BeforeEach
     public void setUp() {
 
-        metadataProvider = new PokemonMetadataProvider();
+        metadataProviderMock = mock(IPokemonMetadataProvider.class);
 
+        metadataProvider = new PokemonMetadataProvider();
     }
 
     @Test
@@ -60,6 +61,22 @@ public class IPokemonMetadataProviderTest {
             metadataProvider.getPokemonMetadata(invalidIndex);
         }, "si l'indice invalide est lancer par PodexException");
     }
+    @Test
+    public void testAddMetadata_validIndex() {
+        assertDoesNotThrow(() -> metadataProvider.addOrUpdateMetadata(25, "Pikachu", 55, 40, 35));
+        try {
+            PokemonMetadata metadata = metadataProvider.getPokemonMetadata(25);
+            assertNotNull(metadata, "Les métadonnées pour Pikachu ne devraient pas être nulles");
+            assertEquals("Pikachu", metadata.getName(), "Le nom devrait être Pikachu");
+        } catch (PokedexException e) {
+            fail("PokedexException should not be thrown for a valid index.");
+        }
+    }
 
+    @Test
+    public void testAddMetadata_invalidIndex() {
+        assertThrows(IllegalArgumentException.class, () -> metadataProvider.addOrUpdateMetadata(151, "Test", 10, 10, 10),
+                "L'ajout de métadonnées avec un index invalide devrait lancer une exception.");
+    }
 
 }
