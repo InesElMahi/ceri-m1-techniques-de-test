@@ -213,6 +213,20 @@ public class IPokedexTest {
         assertEquals("Squirtle", sortedPokemons.get(2).getName());
         assertThrows(UnsupportedOperationException.class, () -> sortedPokemons.add(new Pokemon(3, "Pikachu", 55, 40, 90, 260, 35, 500, 50, 0.8)));
     }
+    @Test
+    public void testGetPokemonMetadata() throws PokedexException {
+        IPokemonMetadataProvider mockMetadataProvider = mock(IPokemonMetadataProvider.class);
+        IPokemonFactory mockPokemonFactory = mock(IPokemonFactory.class);
+
+        Pokedex pokedex = new Pokedex(mockMetadataProvider, mockPokemonFactory);
+        int testIndex = 25;
+        PokemonMetadata expectedMetadata = new PokemonMetadata(testIndex, "Pikachu", 55, 40, 35);
+        when(mockMetadataProvider.getPokemonMetadata(testIndex)).thenReturn(expectedMetadata);
+
+        PokemonMetadata resultMetadata = pokedex.getPokemonMetadata(testIndex);
+        assertEquals(expectedMetadata, resultMetadata, "Les métadonnées retournées devraient correspondre à celles attendues.");
+        verify(mockMetadataProvider).getPokemonMetadata(testIndex);
+    }
 
 
 }
