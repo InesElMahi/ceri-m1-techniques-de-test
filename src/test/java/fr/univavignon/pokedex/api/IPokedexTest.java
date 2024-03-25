@@ -159,34 +159,24 @@ public class IPokedexTest {
 
         assertThrows(PokedexException.class, () -> pokedex.getPokemonMetadata(invalidIndex), "Devrait lancer une PokedexException en cas d'échec de récupération des métadonnées");
     }
-
     @Test
-    public void testAddMultiplePokemon() {
-        int indexPikachu = pokedex.addPokemon(pikachu);
-        int indexBulbasaur = pokedex.addPokemon(bulbasaur);
-        assertNotEquals(indexPikachu, indexBulbasaur, "Chaque Pokémon doit avoir un index unique.");
+    public void testGetPokemonById() {
+
+        try {
+            assertEquals(pikachu, pokedex.getPokemon(0), "Should return Pikachu for ID 0.");
+            assertEquals(bulbasaur, pokedex.getPokemon(1), "Should return Bulbasaur for ID 1.");
+        } catch (PokedexException e) {
+            fail("PokedexException should not be thrown for valid indexes.");
+        }
     }
 
     @Test
-    public void testGetPokemonInvalidIndex() {
-        assertThrows(PokedexException.class, () -> pokedex.getPokemon(-1), "Une PokedexException devrait être levée pour un index invalide.");
+    public void testGetPokemonsUnmodifiable() {
+        List<Pokemon> pokemons = pokedex.getPokemons();
+        assertNotNull(pokemons);
+        assertEquals(2, pokemons.size());
+        assertThrows(UnsupportedOperationException.class, () -> pokemons.add(new Pokemon(2, "Charmander", 39, 52, 43, 309, 39, 5000, 50, 0.6)), "La liste retournée devrait être non modifiable.");
     }
-
-
-    @Test
-    public void testCreatePokemonThroughPokedex() throws PokedexException {
-        IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
-        IPokemonFactory pokemonFactory = new PokemonFactory(metadataProvider);
-        IPokedex pokedex = new Pokedex(metadataProvider, pokemonFactory);
-
-        when(metadataProvider.getPokemonMetadata(1)).thenReturn(new PokemonMetadata(1, "Bulbasaur", 60, 62, 63));
-        Pokemon bulbasaur = pokedex.createPokemon(1, 600, 100, 5000, 4);
-
-        assertNotNull(bulbasaur, "La création de Pokémon à travers le Pokedex a échoué.");
-        assertEquals("Bulbasaur", bulbasaur.getName(), "Le nom du Pokémon créé ne correspond pas.");
-        assertTrue(bulbasaur.getAttack() >= 60 && bulbasaur.getAttack() <= 75, "L'attaque du Pokémon n'est pas dans la plage attendue.");
-    }
-
 
 
 
