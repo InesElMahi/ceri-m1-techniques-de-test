@@ -80,6 +80,7 @@ public class IPokedexTest {
 
     @Test
     public void testGetPokemonsWithOrder() {
+        // Test pour récupérer la liste de tous les Pokémon
         List<Pokemon> pokemons = pokedex.getPokemons(Comparator.comparing(Pokemon::getName));
         assertNotNull(pokemons);
         assertEquals("Bulbasaur", pokemons.get(0).getName());
@@ -159,6 +160,11 @@ public class IPokedexTest {
         assertThrows(PokedexException.class, () -> pokedex.getPokemonMetadata(invalidIndex), "Devrait lancer une PokedexException en cas d'échec de récupération des métadonnées");
     }
 
+    @Test
+    public void testGetPokemonThrowsExceptionForInvalidIndex() {
+        int invalidIndex = -1;
+        assertThrows(PokedexException.class, () -> pokedex.getPokemon(invalidIndex));
+    }
 
 
 }
