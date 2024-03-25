@@ -162,9 +162,11 @@ public class IPokedexTest {
 
     @Test
     public void testGetPokemonThrowsExceptionForInvalidIndex() throws PokedexException {
-        when(pokedex.getPokemon(-1)).thenThrow(new PokedexException("Invalid index"));
 
-        assertThrows(PokedexException.class, () -> pokedex.getPokemon(-1));
+        int invalidIndex = -1;
+        doThrow(new PokedexException("Invalid index")).when(pokedex).getPokemon(invalidIndex);
+        assertThrows(PokedexException.class, () -> pokedex.getPokemon(invalidIndex));
     }
+
 
 }
