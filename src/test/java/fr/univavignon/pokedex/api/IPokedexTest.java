@@ -67,11 +67,10 @@ public class IPokedexTest {
 
     @Test
     public void testGetPokemons() {
-        List<Pokemon> allPokemons = pokedex.getPokemons();
-        assertFalse(allPokemons.isEmpty(), "La liste récupérée ne doit pas être vide");
-
+        List<Pokemon> pokemons = pokedex.getPokemons();
+        assertNotNull(pokemons);
+        assertEquals(2, pokemons.size());
     }
-
 
     @Test
     public void testGetPokemonThrowsException() {
