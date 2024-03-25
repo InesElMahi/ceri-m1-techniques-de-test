@@ -19,7 +19,7 @@ public class IPokemonFactoryTest {
 
     @BeforeEach
     void setUp() {
-       
+
         bulbizarre = new Pokemon(1, "Bulbasaur", 126, 100, 90, 600, 100, 4000, 4, 0.56);
         aquali = new Pokemon(133, "Vaporeon", 186, 168, 260, 2729, 202, 5000, 4, 1.0);
     }
@@ -27,7 +27,7 @@ public class IPokemonFactoryTest {
 
     @Test
     void testCreationPokemon() {
-        
+
         when(pokemonFactory.createPokemon(eq(1), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(bulbizarre);
         when(pokemonFactory.createPokemon(eq(133), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(aquali);
 
@@ -40,7 +40,7 @@ public class IPokemonFactoryTest {
         assertEquals(0.56, bulbasaur.getIv(), "L'IV de Bulbasaur devrait correspondre");
         assertEquals(4000, bulbasaur.getDust(), "La poussière du Pokémon devrait être de 4000");
 
-    
+
         Pokemon vaporeon = pokemonFactory.createPokemon(133, 2729, 202, 5000, 4);
         assertNotNull(vaporeon, "Vaporeon ne devrait pas être null");
         assertEquals(133, vaporeon.getIndex(), "L'index de Vaporeon devrait correspondre");
@@ -68,7 +68,7 @@ public class IPokemonFactoryTest {
 
     @Test
     void testPokemonCreationWithInvalidValues() {
-      
+
         when(pokemonFactory.createPokemon(anyInt(), anyInt(), anyInt(), anyInt(), anyInt())).thenThrow(IllegalArgumentException.class);
 
         assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(1, -1, -1, -1, -1),
@@ -77,14 +77,14 @@ public class IPokemonFactoryTest {
 
     @Test
     void testCreationDePokemonRenvoieNull() {
-     
+
         when(pokemonFactory.createPokemon(eq(-2), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(null);
         assertNull(pokemonFactory.createPokemon(-2, 10000, 10000, 10000, 10000), "La création d'un Pokemon avec des paramètres invalides devrait renvoyer null");
     }
 
     @Test
     void testLeHpDuPokemonCorrectementDefini() {
-       
+
         when(pokemonFactory.createPokemon(eq(1), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(bulbizarre);
         when(pokemonFactory.createPokemon(eq(133), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(aquali);
 
@@ -92,11 +92,12 @@ public class IPokemonFactoryTest {
         assertNotNull(bulbasaurTest, "bulbasaurTest ne devrait pas être null");
         assertEquals(bulbizarre.getHp(), bulbasaurTest.getHp(), "Le HP doit correspondre à celui de Bulbasaur");
 
-      
+
         Pokemon aqualiTest = pokemonFactory.createPokemon(133, 2500, 200, 5000, 5);
         assertNotNull(aqualiTest, "aqualiTest ne devrait pas être null");
         assertEquals(aquali.getHp(), aqualiTest.getHp(), "Le HP doit correspondre à celui de Vaporeon");
     }
+
     @Test
     void testPokemonCandyGetter() {
         assertEquals(4, bulbizarre.getCandy(), "Le nombre de candies de Bulbasaur devrait être correct");
@@ -104,5 +105,6 @@ public class IPokemonFactoryTest {
     }
 
 
-}
+
+    }
 
