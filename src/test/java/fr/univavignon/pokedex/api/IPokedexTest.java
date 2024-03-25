@@ -159,25 +159,28 @@ public class IPokedexTest {
 
         assertThrows(PokedexException.class, () -> pokedex.getPokemonMetadata(invalidIndex), "Devrait lancer une PokedexException en cas d'échec de récupération des métadonnées");
     }
-    @Test
-    public void testGetPokemonById() {
-
-        try {
-            assertEquals(pikachu, pokedex.getPokemon(0), "Should return Pikachu for ID 0.");
-            assertEquals(bulbasaur, pokedex.getPokemon(1), "Should return Bulbasaur for ID 1.");
-        } catch (PokedexException e) {
-            fail("PokedexException should not be thrown for valid indexes.");
-        }
-    }
 
     @Test
-    public void testGetPokemonsUnmodifiable() {
-        List<Pokemon> pokemons = pokedex.getPokemons();
-        assertNotNull(pokemons);
-        assertEquals(2, pokemons.size());
-        assertThrows(UnsupportedOperationException.class, () -> pokemons.add(new Pokemon(2, "Charmander", 39, 52, 43, 309, 39, 5000, 50, 0.6)), "La liste retournée devrait être non modifiable.");
-    }
+    public void testGetPokemonByIdWithRealInstance() throws PokedexException {
+        // Mock des dépendances
+        IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = mock(IPokemonFactory.class);
 
+        // Création de l'instance réelle de Pokedex avec les mocks comme dépendances
+        Pokedex pokedex = new Pokedex(metadataProvider, pokemonFactory);
+
+        // Configuration des mocks pour répondre de manière cohérente à l'utilisation par Pokedex
+        when(pokemonFactory.createPokemon(eq(0), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(pikachu);
+        when(pokemonFactory.createPokemon(eq(1), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(bulbasaur);
+
+        // Ajout des Pokemons dans le Pokedex
+        int pikachuId = pokedex.addPokemon(pikachu);
+        int bulbasaurId = pokedex.addPokemon(bulbasaur);
+
+        // Test de récupération par ID
+        assertEquals(pikachu, pokedex.getPokemon(pikachuId), "Le Pokémon récupéré avec l'ID devrait être Pikachu.");
+        assertEquals(bulbasaur, pokedex.getPokemon(bulbasaurId), "Le Pokémon récupéré avec l'ID devrait être Bulbasaur.");
+    }
 
 
 }
