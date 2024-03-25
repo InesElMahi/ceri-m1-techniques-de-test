@@ -240,4 +240,19 @@ public class IPokedexTest {
                 "Demander un Pokémon avec un ID négatif devrait lever une PokedexException.");
     }
 
+    @Test
+    public void testGetPokemonWithIdBeyondSizeThrowsException() throws PokedexException {
+        IPokemonMetadataProvider mockMetadataProvider = mock(IPokemonMetadataProvider.class);
+        IPokemonFactory mockPokemonFactory = mock(IPokemonFactory.class);
+        Pokedex pokedex = new Pokedex(mockMetadataProvider, mockPokemonFactory);
+
+        Pokemon pikachu = new Pokemon(25, "Pikachu", 55, 40, 90, 260, 35, 500, 50, 0.6);
+        pokedex.addPokemon(pikachu);
+
+        int idBeyondSize = pokedex.size();
+        assertThrows(PokedexException.class, () -> pokedex.getPokemon(idBeyondSize),
+                "Demander un Pokémon avec un ID supérieur ou égal à la taille de la liste devrait lever une PokedexException.");
+    }
+
+
 }
