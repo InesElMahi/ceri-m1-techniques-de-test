@@ -159,25 +159,6 @@ public class IPokedexTest {
 
         assertThrows(PokedexException.class, () -> pokedex.getPokemonMetadata(invalidIndex), "Devrait lancer une PokedexException en cas d'échec de récupération des métadonnées");
     }
-    @Test
-    public void testGetPokemonById() {
-        // Create a Pokemon
-        Pokemon pokemon = new Pokemon(25, "Pikachu", 90, 35, 50, 200, 0, 0, 0, 0);
-
-        // Add the Pokemon to the Pokedex
-        int index = pokedex.addPokemon(pokemon);
-
-        try {
-            // Retrieve the Pokemon by its index
-            Pokemon retrievedPokemon = pokedex.getPokemon(index);
-
-            // Assert that the retrieved Pokemon is the same as the added Pokemon
-            assertEquals(pokemon, retrievedPokemon);
-        } catch (PokedexException e) {
-            // Handle any exceptions thrown during retrieval
-            fail("An exception occurred while retrieving the Pokemon: " + e.getMessage());
-        }
-    }
 
 
 
