@@ -48,6 +48,7 @@ public class IPokedexFactoryTest {
         } catch (PokedexException e) {
             e.printStackTrace();
         }
+        pokedexFactory = new PokedexFactory();
     }
 
     @Test
