@@ -7,7 +7,7 @@ package fr.univavignon.pokedex.api;
  * et IPokemonFactory pour la création des instances de Pokémon.
  * @author Inès El Mahi
  */
-public class IPokedexFactoryImpl implements IPokedexFactory {
+public class PokedexFactory implements IPokedexFactory {
 
     /**
      * Crée et retourne une nouvelle instance de IPokedex.
@@ -19,7 +19,7 @@ public class IPokedexFactoryImpl implements IPokedexFactory {
      */
     @Override
     public IPokedex createPokedex(IPokemonMetadataProvider metadataProvider, IPokemonFactory pokemonFactory) {
-        return new IPokedexImpl(metadataProvider, pokemonFactory);
+        return new Pokedex(metadataProvider, pokemonFactory);
     }
 }
 
