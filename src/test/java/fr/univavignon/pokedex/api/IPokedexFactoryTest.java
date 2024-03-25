@@ -51,13 +51,16 @@ public class IPokedexFactoryTest {
     }
 
     @Test
-    void testCreatePokedex() {
-        IPokedex createdPokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
-        assertNotNull(createdPokedex, "Le pokedex créé ne doit pas être null");
-        assertSame(pokedex, createdPokedex, "Le pokedex créé doit être le même que le mock retourné par createPokedex");
-        verify(pokedexFactory).createPokedex(metadataProvider, pokemonFactory);
-    }
+    public void testCreatePokedex() {
+        IPokemonMetadataProvider mockMetadataProvider = mock(IPokemonMetadataProvider.class);
+        IPokemonFactory mockPokemonFactory = mock(IPokemonFactory.class);
 
+        PokedexFactory pokedexFactory = new PokedexFactory();
+
+        IPokedex pokedex = pokedexFactory.createPokedex(mockMetadataProvider, mockPokemonFactory);
+
+        assertNotNull(pokedex, "createPokedex devrait retourner une instance non null de IPokedex.");
+    }
     @Test
     void testGetPokemonInvalidIndexException() throws PokedexException {
         doThrow(new PokedexException("Invalid index")).when(pokedex).getPokemon(-1);

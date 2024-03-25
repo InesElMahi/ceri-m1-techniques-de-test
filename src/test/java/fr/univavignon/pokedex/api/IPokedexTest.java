@@ -120,4 +120,5 @@ public class IPokedexTest {
         assertEquals(bulbasaur.getIndex(), sortedPokemons.get(1).getIndex(), "Le deuxième Pokémon devrait être Bulbasaur lors du tri par index.");
     }
 
+
 }
