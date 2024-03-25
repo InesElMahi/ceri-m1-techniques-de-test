@@ -66,14 +66,15 @@ public class IPokemonMetadataProviderTest {
     }
     @Test
     public void getPokemonMetadata_IndexTooLow() {
-        assertThrows(PokedexException.class, () -> metadataProvider.getPokemonMetadata(-1),
-                "Accès à un index invalide (-1) devrait lancer une PokedexException.");
+        assertThrows(PokedexException.class, () -> metadataProvider.getPokemonMetadata(0),
+                "Accès à un index 0 devrait lancer une PokedexException.");
     }
 
     @Test
     public void getPokemonMetadata_IndexTooHigh() {
         assertThrows(PokedexException.class, () -> metadataProvider.getPokemonMetadata(151),
-                "Accès à un index invalide (151) devrait lancer une PokedexException.");
+                "Accès à un index 151 devrait lancer une PokedexException.");
     }
+
 
 }
