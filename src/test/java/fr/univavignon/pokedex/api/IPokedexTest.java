@@ -162,25 +162,42 @@ public class IPokedexTest {
 
     @Test
     public void testGetPokemonByIdWithRealInstance() throws PokedexException {
+        IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = mock(IPokemonFactory.class);
+
+        Pokedex pokedex = new Pokedex(metadataProvider, pokemonFactory);
+        when(pokemonFactory.createPokemon(eq(0), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(pikachu);
+        when(pokemonFactory.createPokemon(eq(1), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(bulbasaur);
+
+        int pikachuId = pokedex.addPokemon(pikachu);
+        int bulbasaurId = pokedex.addPokemon(bulbasaur);
+
+        assertEquals(pikachu, pokedex.getPokemon(pikachuId), "Le Pokémon récupéré avec l'ID devrait être Pikachu.");
+        assertEquals(bulbasaur, pokedex.getPokemon(bulbasaurId), "Le Pokémon récupéré avec l'ID devrait être Bulbasaur.");
+    }
+
+    @Test
+    public void testGetPokemonsReturnsUnmodifiableList() throws PokedexException {
         // Mock des dépendances
         IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
         IPokemonFactory pokemonFactory = mock(IPokemonFactory.class);
 
         // Création de l'instance réelle de Pokedex avec les mocks comme dépendances
-        Pokedex pokedex = new Pokedex(metadataProvider, pokemonFactory);
+        Pokedex realPokedex = new Pokedex(metadataProvider, pokemonFactory);
 
-        // Configuration des mocks pour répondre de manière cohérente à l'utilisation par Pokedex
-        when(pokemonFactory.createPokemon(eq(0), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(pikachu);
-        when(pokemonFactory.createPokemon(eq(1), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(bulbasaur);
+        // Ajout de Pokémon pour assurer que la liste n'est pas vide
+        Pokemon testPokemon = new Pokemon(0, "Test Pokemon", 100, 100, 100, 1000, 100, 10, 1, 0.5);
+        when(pokemonFactory.createPokemon(anyInt(), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(testPokemon);
+        realPokedex.addPokemon(testPokemon);
 
-        // Ajout des Pokemons dans le Pokedex
-        int pikachuId = pokedex.addPokemon(pikachu);
-        int bulbasaurId = pokedex.addPokemon(bulbasaur);
+        // Récupération de la liste des Pokémon
+        List<Pokemon> pokemons = realPokedex.getPokemons();
 
-        // Test de récupération par ID
-        assertEquals(pikachu, pokedex.getPokemon(pikachuId), "Le Pokémon récupéré avec l'ID devrait être Pikachu.");
-        assertEquals(bulbasaur, pokedex.getPokemon(bulbasaurId), "Le Pokémon récupéré avec l'ID devrait être Bulbasaur.");
+        // Tentative de modification de la liste, ce qui devrait échouer
+        Exception exception = assertThrows(UnsupportedOperationException.class, () -> pokemons.add(testPokemon),
+                "La modification de la liste des Pokémon devrait lancer une UnsupportedOperationException.");
+
+        assertNotNull(exception, "Une exception devrait être levée lors de la tentative de modification de la liste.");
     }
-
 
 }
