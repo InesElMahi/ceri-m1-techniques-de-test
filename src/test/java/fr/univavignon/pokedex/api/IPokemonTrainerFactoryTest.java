@@ -100,25 +100,18 @@ public class IPokemonTrainerFactoryTest {
 
     @Test
     public void testCreateTrainer() {
-        // Mock des dépendances
+
         IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
         IPokemonFactory pokemonFactory = mock(IPokemonFactory.class);
         IPokedexFactory pokedexFactory = mock(IPokedexFactory.class);
 
-        // Création d'un PokemonTrainerFactory
         PokemonTrainerFactory trainerFactory = new PokemonTrainerFactory(metadataProvider, pokemonFactory);
-
-        // Définition du nom, de l'équipe et du pokedexFactory
         String name = "Red";
         Team team = Team.MYSTIC;
 
-        // Appel de la méthode createPokedex du pokedexFactory
         when(pokedexFactory.createPokedex(metadataProvider, pokemonFactory)).thenReturn(mock(IPokedex.class));
-
-        // Appel de la méthode createTrainer de la PokemonTrainerFactory
         PokemonTrainer trainer = trainerFactory.createTrainer(name, team, pokedexFactory);
 
-        // Vérification que le trainer est créé correctement avec le bon nom et l'équipe
         assertNotNull(trainer);
         assertEquals(name, trainer.getName());
         assertEquals(team, trainer.getTeam());
