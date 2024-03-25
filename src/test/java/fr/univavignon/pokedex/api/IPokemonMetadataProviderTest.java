@@ -76,5 +76,18 @@ public class IPokemonMetadataProviderTest {
                 "Accès à un index 151 devrait lancer une PokedexException.");
     }
 
+    @Test
+    public void addOrUpdateMetadata_IndexTooLow() {
+        assertThrows(IllegalArgumentException.class,
+                () -> metadataProvider.addOrUpdateMetadata(0, "TestLow", 10, 10, 10),
+                "L'ajout de métadonnées avec un index 0 devrait lancer une IllegalArgumentException.");
+    }
+
+    @Test
+    public void addOrUpdateMetadata_IndexTooHigh() {
+        assertThrows(IllegalArgumentException.class,
+                () -> metadataProvider.addOrUpdateMetadata(151, "TestHigh", 10, 10, 10),
+                "L'ajout de métadonnées avec un index 151 devrait lancer une IllegalArgumentException.");
+    }
 
 }
