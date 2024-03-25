@@ -97,6 +97,13 @@ public class IPokemonTrainerFactoryTest {
         when(trainerFactory.createTrainer("Misty", Team.VALOR, pokedexFactory)).thenThrow(new IllegalStateException("Trainer already exists."));
         assertThrows(IllegalStateException.class, () -> trainerFactory.createTrainer("Misty", Team.VALOR, pokedexFactory), "Should throw exception when creating a trainer with an existing name.");
     }
+    @Test
+    void testCreateTrainerWithNullParameters() {
+        when(trainerFactory.createTrainer(null, null, null)).thenThrow(new IllegalArgumentException());
 
+        assertThrows(IllegalArgumentException.class, () -> {
+            trainerFactory.createTrainer(null, null, null);
+        }, "Creating a trainer with null parameters should throw an IllegalArgumentException.");
+    }
 
 }
