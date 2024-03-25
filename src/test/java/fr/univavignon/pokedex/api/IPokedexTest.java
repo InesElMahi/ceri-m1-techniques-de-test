@@ -135,5 +135,22 @@ public class IPokedexTest {
 
     }
 
+    @Test
+    public void testPokemonCreationWithMetadataProviderException() {
+        IPokemonMetadataProvider metadataProviderMock = mock(IPokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = new PokemonFactory(metadataProviderMock);
+        IPokedex pokedex = new Pokedex(metadataProviderMock, pokemonFactory);
+
+        try {
+            when(metadataProviderMock.getPokemonMetadata(anyInt())).thenThrow(new PokedexException("Erreur lors de la récupération des métadonnées"));
+
+            Pokemon pokemon = pokedex.createPokemon(1, 600, 100, 5000, 4);
+            assertNull(pokemon, "La création d'un Pokémon devrait retourner null en cas d'exception de métadonnées");
+
+        } catch (PokedexException e) {
+            fail("La création d'un Pokémon n'a pas géré correctement PokedexException");
+        }
+    }
+
 
 }
