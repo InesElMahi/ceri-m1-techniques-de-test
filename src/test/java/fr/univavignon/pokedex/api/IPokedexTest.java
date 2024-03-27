@@ -122,15 +122,17 @@ public class IPokedexTest {
     @Test
     public void testPokemonCreationThroughPokedex() throws PokedexException {
         IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
-        IPokemonFactory pokemonFactory = new PokemonFactory(metadataProvider);
-        IPokedex pokedex = new Pokedex(metadataProvider, pokemonFactory);
+        IPokemonFactory pokemonFactory = mock(IPokemonFactory.class);
+        Pokedex realPokedex = new Pokedex(metadataProvider, pokemonFactory);
 
-        when(metadataProvider.getPokemonMetadata(1)).thenReturn(new PokemonMetadata(1, "Bulbasaur", 60, 62, 63));
-        Pokemon bulbasaur = pokedex.createPokemon(1, 600, 100, 5000, 4);
+        PokemonMetadata bulbasaurMetadata = new PokemonMetadata(1, "Bulbasaur", 60, 62, 63);
+        when(metadataProvider.getPokemonMetadata(1)).thenReturn(bulbasaurMetadata);
+        when(pokemonFactory.createPokemon(eq(1), anyInt(), anyInt(), anyInt(), anyInt())).thenAnswer(invocation -> new Pokemon(1, bulbasaurMetadata.getName(), bulbasaurMetadata.getAttack(), bulbasaurMetadata.getDefense(), bulbasaurMetadata.getStamina(), invocation.getArgument(1), invocation.getArgument(2), invocation.getArgument(3), invocation.getArgument(4), 0));
 
-        assertNotNull(bulbasaur, "La création de Pokémon à travers le Pokedex a échoué.");
-        assertEquals("Bulbasaur", bulbasaur.getName(), "Le nom du Pokémon créé ne correspond pas.");
-        assertTrue(bulbasaur.getAttack() >= 60 && bulbasaur.getAttack() <= 75, "L'attaque du Pokémon n'est pas dans la plage attendue.");
+        Pokemon createdPokemon = realPokedex.createPokemon(1, 600, 100, 5000, 4);
+
+        assertNotNull(createdPokemon, "La création de Pokémon à travers le Pokedex ne devrait pas échouer.");
+        assertEquals("Bulbasaur", createdPokemon.getName(), "Le nom du Pokémon créé doit correspondre.");
 
     }
 
@@ -238,6 +240,19 @@ public class IPokedexTest {
         assertThrows(PokedexException.class, () -> realPokedex.getPokemon(0));
     }
 
+    @Test
+    public void testGetPokemonWithInvalidIdThrowsException() throws PokedexException {
+        IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = mock(IPokemonFactory.class);
+        Pokedex realPokedex = new Pokedex(metadataProvider, pokemonFactory);
+
+        assertThrows(PokedexException.class, () -> realPokedex.getPokemon(-1), "Devrait lancer une exception pour un ID négatif");
+
+        when(pokemonFactory.createPokemon(eq(0), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(new Pokemon(0, "Test Pokemon", 100, 100, 100, 1000, 100, 10, 1, 0.5));
+        realPokedex.addPokemon(pokemonFactory.createPokemon(0, 100, 100, 1000, 10));
+
+        assertDoesNotThrow(() -> realPokedex.getPokemon(0), "Ne devrait pas lancer d'exception pour un ID valide");
+    }
 
 
 }

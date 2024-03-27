@@ -79,7 +79,6 @@ public class IPokedexFactoryTest {
 
     @Test
     void testAddPokemonToPokedex() throws PokedexException {
-        // Stubbing removed from here.
 
         IPokedex createdPokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
         createdPokedex.addPokemon(pikachu);
