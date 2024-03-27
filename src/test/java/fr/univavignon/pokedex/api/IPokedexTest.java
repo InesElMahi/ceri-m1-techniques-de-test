@@ -244,7 +244,6 @@ public class IPokedexTest {
         IPokemonFactory mockPokemonFactory = mock(IPokemonFactory.class);
         Pokedex pokedex = new Pokedex(mockMetadataProvider, mockPokemonFactory);
 
-        // Configurez le mock pour lancer une PokedexException lors de la récupération des métadonnées
         try {
             when(mockMetadataProvider.getPokemonMetadata(anyInt())).thenThrow(new PokedexException("Erreur de récupération des métadonnées"));
         } catch (PokedexException e) {
