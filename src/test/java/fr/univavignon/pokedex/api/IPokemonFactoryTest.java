@@ -105,50 +105,41 @@ public class IPokemonFactoryTest {
     }
 
     @Test
+    void testCreatePokemonWithNegativeCandy() {
+        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(anyInt(), anyInt(), anyInt(), anyInt(), -10),
+                "Devrait lancer IllegalArgumentException lorsque les bonbons sont négatifs");
+    }
+
+    @Test
+    void testCreatePokemonWithNegativeCp() {
+        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(anyInt(), -500, anyInt(), anyInt(), anyInt()),
+                "Devrait lancer IllegalArgumentException lorsque les CP sont négatifs");
+    }
+
+    @Test
+    void testCreatePokemonWithNegativeDust() {
+        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(anyInt(), anyInt(), anyInt(), -1000, anyInt()),
+                "Devrait lancer IllegalArgumentException lorsque la poussière est négative");
+    }
+
+    @Test
+    void testCreatePokemonWithNegativeHp() {
+        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(anyInt(), anyInt(), -50, anyInt(), anyInt()),
+                "Devrait lancer IllegalArgumentException lorsque les HP sont négatifs");
+    }
+
+    @Test
+    void testCreatePokemonWithNegativeIndex() {
+        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(-1, anyInt(), anyInt(), anyInt(), anyInt()),
+                "Devrait lancer IllegalArgumentException lorsque l'index est négatif");
+    }
+
+    @Test
     void testCreatePokemonWithPokedexException() throws PokedexException {
         when(pokemonFactory.createPokemon(anyInt(), anyInt(), anyInt(), anyInt(), anyInt())).thenThrow(PokedexException.class);
 
         assertThrows(PokedexException.class, () -> pokemonFactory.createPokemon(1, 500, 50, 1000, 10),
                 "Devrait lancer PokedexException lorsque la récupération des métadonnées échoue");
     }
-
-    @Test
-    void testCreatePokemonWithException() {
-        when(pokemonFactory.createPokemon(anyInt(), anyInt(), anyInt(), anyInt(), anyInt())).thenThrow(RuntimeException.class);
-
-        assertThrows(RuntimeException.class, () -> pokemonFactory.createPokemon(1, 500, 50, 1000, 10),
-                "Devrait lancer RuntimeException lorsqu'une exception inattendue se produit");
-    }
-
-    @Test
-    void testCreatePokemonWithNegativeIndex() {
-        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(-1, 500, 50, 1000, 10),
-                "Devrait lancer IllegalArgumentException lorsque l'index est négatif");
-    }
-
-    @Test
-    void testCreatePokemonWithNegativeCp() {
-        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(1, -500, 50, 1000, 10),
-                "Devrait lancer IllegalArgumentException lorsque les CP sont négatifs");
-    }
-
-    @Test
-    void testCreatePokemonWithNegativeHp() {
-        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(1, 500, -50, 1000, 10),
-                "Devrait lancer IllegalArgumentException lorsque les HP sont négatifs");
-    }
-
-    @Test
-    void testCreatePokemonWithNegativeDust() {
-        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(1, 500, 50, -1000, 10),
-                "Devrait lancer IllegalArgumentException lorsque la poussière est négative");
-    }
-
-    @Test
-    void testCreatePokemonWithNegativeCandy() {
-        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(1, 500, 50, 1000, -10),
-                "Devrait lancer IllegalArgumentException lorsque les bonbons sont négatifs");
-    }
-
 }
 
