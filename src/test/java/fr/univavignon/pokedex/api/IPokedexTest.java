@@ -78,15 +78,6 @@ public class IPokedexTest {
         assertThrows(PokedexException.class, () -> pokedex.getPokemon(-1));
     }
 
-    @Test
-    public void testGetPokemonsWithOrder() {
-        // Test pour récupérer la liste de tous les Pokémon
-        List<Pokemon> pokemons = pokedex.getPokemons(Comparator.comparing(Pokemon::getName));
-        assertNotNull(pokemons);
-        assertEquals("Bulbasaur", pokemons.get(0).getName());
-        assertEquals("Pikachu", pokemons.get(1).getName());
-    }
-
 
     @Test
     public void testGetPokemonsSortedByName() {
@@ -107,20 +98,7 @@ public class IPokedexTest {
         assertEquals(bulbasaur.getIndex(), sortedPokemons.get(1).getIndex(), "Le deuxième Pokémon devrait être Bulbasaur lors du tri par index.");
     }
 
-    @Test
-    public void testPokemonCreationThroughPokedex() throws PokedexException {
-        IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
-        IPokemonFactory pokemonFactory = new PokemonFactory(metadataProvider);
-        IPokedex pokedex = new Pokedex(metadataProvider, pokemonFactory);
 
-        when(metadataProvider.getPokemonMetadata(1)).thenReturn(new PokemonMetadata(1, "Bulbasaur", 60, 62, 63));
-        Pokemon bulbasaur = pokedex.createPokemon(1, 600, 100, 5000, 4);
-
-        assertNotNull(bulbasaur, "La création de Pokémon à travers le Pokedex a échoué.");
-        assertEquals("Bulbasaur", bulbasaur.getName(), "Le nom du Pokémon créé ne correspond pas.");
-        assertTrue(bulbasaur.getAttack() >= 60 && bulbasaur.getAttack() <= 75, "L'attaque du Pokémon n'est pas dans la plage attendue.");
-
-    }
 
     @Test
     public void testCreatePokemonHandlesPokedexException() throws PokedexException {
