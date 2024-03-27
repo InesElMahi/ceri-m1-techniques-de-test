@@ -104,6 +104,51 @@ public class IPokemonFactoryTest {
         assertEquals(4, aquali.getCandy(), "Le nombre de candies de Vaporeon devrait être correct");
     }
 
+    @Test
+    void testCreatePokemonWithPokedexException() throws PokedexException {
+        when(pokemonFactory.createPokemon(anyInt(), anyInt(), anyInt(), anyInt(), anyInt())).thenThrow(PokedexException.class);
+
+        assertThrows(PokedexException.class, () -> pokemonFactory.createPokemon(1, 500, 50, 1000, 10),
+                "Devrait lancer PokedexException lorsque la récupération des métadonnées échoue");
+    }
+
+    @Test
+    void testCreatePokemonWithException() {
+        when(pokemonFactory.createPokemon(anyInt(), anyInt(), anyInt(), anyInt(), anyInt())).thenThrow(RuntimeException.class);
+
+        assertThrows(RuntimeException.class, () -> pokemonFactory.createPokemon(1, 500, 50, 1000, 10),
+                "Devrait lancer RuntimeException lorsqu'une exception inattendue se produit");
+    }
+
+    @Test
+    void testCreatePokemonWithNegativeIndex() {
+        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(-1, 500, 50, 1000, 10),
+                "Devrait lancer IllegalArgumentException lorsque l'index est négatif");
+    }
+
+    @Test
+    void testCreatePokemonWithNegativeCp() {
+        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(1, -500, 50, 1000, 10),
+                "Devrait lancer IllegalArgumentException lorsque les CP sont négatifs");
+    }
+
+    @Test
+    void testCreatePokemonWithNegativeHp() {
+        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(1, 500, -50, 1000, 10),
+                "Devrait lancer IllegalArgumentException lorsque les HP sont négatifs");
+    }
+
+    @Test
+    void testCreatePokemonWithNegativeDust() {
+        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(1, 500, 50, -1000, 10),
+                "Devrait lancer IllegalArgumentException lorsque la poussière est négative");
+    }
+
+    @Test
+    void testCreatePokemonWithNegativeCandy() {
+        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(1, 500, 50, 1000, -10),
+                "Devrait lancer IllegalArgumentException lorsque les bonbons sont négatifs");
+    }
 
     }
 
