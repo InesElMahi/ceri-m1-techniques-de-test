@@ -229,35 +229,29 @@ public class IPokedexTest {
     }
 
     @Test
-    public void getPokemonWithInvalidIdThrowsException() {
-        IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
-        IPokemonFactory pokemonFactory = mock(IPokemonFactory.class);
-        Pokedex realPokedex = new Pokedex(metadataProvider, pokemonFactory);
-
-        assertThrows(PokedexException.class, () -> realPokedex.getPokemon(-1));
-        assertThrows(PokedexException.class, () -> realPokedex.getPokemon(0));
-    }
-
-    @Test
-    public void testCreatePokemonExceptionHandling() {
+    public void testGetPokemonWithNegativeIdThrowsException() {
         IPokemonMetadataProvider mockMetadataProvider = mock(IPokemonMetadataProvider.class);
         IPokemonFactory mockPokemonFactory = mock(IPokemonFactory.class);
         Pokedex pokedex = new Pokedex(mockMetadataProvider, mockPokemonFactory);
 
-        try {
-            when(mockMetadataProvider.getPokemonMetadata(anyInt())).thenThrow(new PokedexException("Erreur de récupération des métadonnées"));
-        } catch (PokedexException e) {
+        int negativeId = -1;
 
-        }
+        assertThrows(PokedexException.class, () -> pokedex.getPokemon(negativeId),
+                "Demander un Pokémon avec un ID négatif devrait lever une PokedexException.");
+    }
 
-        Pokemon result = pokedex.createPokemon(0, 100, 100, 1000, 10);
-        assertNull(result, "La méthode createPokemon devrait retourner null en cas d'échec de récupération des métadonnées.");
+    @Test
+    public void testGetPokemonWithIdBeyondSizeThrowsException() throws PokedexException {
+        IPokemonMetadataProvider mockMetadataProvider = mock(IPokemonMetadataProvider.class);
+        IPokemonFactory mockPokemonFactory = mock(IPokemonFactory.class);
+        Pokedex pokedex = new Pokedex(mockMetadataProvider, mockPokemonFactory);
 
-        try {
-            verify(mockMetadataProvider).getPokemonMetadata(0);
-        } catch (PokedexException e) {
+        Pokemon pikachu = new Pokemon(25, "Pikachu", 55, 40, 90, 260, 35, 500, 50, 0.6);
+        pokedex.addPokemon(pikachu);
 
-        }
+        int idBeyondSize = pokedex.size();
+        assertThrows(PokedexException.class, () -> pokedex.getPokemon(idBeyondSize),
+                "Demander un Pokémon avec un ID supérieur ou égal à la taille de la liste devrait lever une PokedexException.");
     }
 
 

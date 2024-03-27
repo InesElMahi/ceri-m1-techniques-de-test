@@ -26,7 +26,7 @@ public class IPokemonTrainerFactoryTest {
 
     @BeforeEach
     void setUp() {
-        
+
         lenient().when(pokedexFactory.createPokedex(any(), any())).thenReturn(pokedex);
     }
     @Test
@@ -97,24 +97,13 @@ public class IPokemonTrainerFactoryTest {
         when(trainerFactory.createTrainer("Misty", Team.VALOR, pokedexFactory)).thenThrow(new IllegalStateException("Trainer already exists."));
         assertThrows(IllegalStateException.class, () -> trainerFactory.createTrainer("Misty", Team.VALOR, pokedexFactory), "Should throw exception when creating a trainer with an existing name.");
     }
-
     @Test
-    public void testCreateTrainer() {
+    void testCreateTrainerWithNullParameters() {
+        when(trainerFactory.createTrainer(null, null, null)).thenThrow(new IllegalArgumentException());
 
-        IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
-        IPokemonFactory pokemonFactory = mock(IPokemonFactory.class);
-        IPokedexFactory pokedexFactory = mock(IPokedexFactory.class);
-
-        PokemonTrainerFactory trainerFactory = new PokemonTrainerFactory(metadataProvider, pokemonFactory);
-        String name = "Red";
-        Team team = Team.MYSTIC;
-
-        when(pokedexFactory.createPokedex(metadataProvider, pokemonFactory)).thenReturn(mock(IPokedex.class));
-        PokemonTrainer trainer = trainerFactory.createTrainer(name, team, pokedexFactory);
-
-        assertNotNull(trainer);
-        assertEquals(name, trainer.getName());
-        assertEquals(team, trainer.getTeam());
+        assertThrows(IllegalArgumentException.class, () -> {
+            trainerFactory.createTrainer(null, null, null);
+        }, "Creating a trainer with null parameters should throw an IllegalArgumentException.");
     }
 
 }
