@@ -1,5 +1,6 @@
 package fr.univavignon.pokedex.api;
 
+
 public class PokemonTrainerFactory implements IPokemonTrainerFactory {
 
     private final IPokemonMetadataProvider metadataProvider;

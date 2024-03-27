@@ -25,6 +25,7 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
         return metadata;
     }
 
+
     public void addOrUpdateMetadata(int index, String name, int attack, int defense, int stamina) {
         if (index <= 0 || index > 150) {
             throw new IllegalArgumentException("Index invalide : " + index);
