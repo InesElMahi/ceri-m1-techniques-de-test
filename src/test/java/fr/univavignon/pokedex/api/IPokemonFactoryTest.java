@@ -98,7 +98,7 @@ public class IPokemonFactoryTest {
 
         Pokemon aqualiTest = pokemonFactory.createPokemon(133, 2500, 200, 5000, 5);
         assertNotNull(aqualiTest, "aqualiTest ne devrait pas être null");
-        assertEquals(aquali.getHp(), aqualiTest.getHp(), "Le HP doit correspondre à celui de Vaporeon");
+        assertEquals(aquali.getHp(), aqualiTest.getHp(), " HP doit correspondre à celui de Vaporeon");
     }
 
     @Test
