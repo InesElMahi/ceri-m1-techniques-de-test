@@ -2,15 +2,12 @@ package fr.univavignon.pokedex.api;
 
 import java.util.Random;
 
-/**
- * Implémentation concrète de l'interface IPokemonFactory.
- * @author Inès El Mahi
- */
 public class PokemonFactory implements IPokemonFactory {
 
     private final IPokemonMetadataProvider metadataProvider;
 
     public PokemonFactory(IPokemonMetadataProvider metadataProvider) {
+
         this.metadataProvider = metadataProvider;
     }
 
@@ -36,9 +33,6 @@ public class PokemonFactory implements IPokemonFactory {
         }
     }
 
-    /**
-     * Calcule le pourcentage des IVs basé sur les IVs d'attaque, de défense et d'endurance.
-     */
     private double calculerIV(int ivAttaque, int ivDefense, int ivEndurance) {
         return ((double) (ivAttaque + ivDefense + ivEndurance) / 45) * 100;
     }
