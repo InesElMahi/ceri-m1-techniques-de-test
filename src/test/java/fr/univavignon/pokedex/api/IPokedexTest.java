@@ -229,15 +229,15 @@ public class IPokedexTest {
     }
 
     @Test
-    public void testGetPokemonWithNegativeIdThrowsException() {
-        IPokemonMetadataProvider mockMetadataProvider = mock(IPokemonMetadataProvider.class);
-        IPokemonFactory mockPokemonFactory = mock(IPokemonFactory.class);
-        Pokedex pokedex = new Pokedex(mockMetadataProvider, mockPokemonFactory);
+    public void getPokemonWithInvalidIdThrowsException() {
+        IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = mock(IPokemonFactory.class);
+        Pokedex realPokedex = new Pokedex(metadataProvider, pokemonFactory);
 
-        int negativeId = -1;
-
-        assertThrows(PokedexException.class, () -> pokedex.getPokemon(negativeId),
-                "Demander un Pokémon avec un ID négatif devrait lever une PokedexException.");
+        assertThrows(PokedexException.class, () -> realPokedex.getPokemon(-1));
+        assertThrows(PokedexException.class, () -> realPokedex.getPokemon(0));
     }
+
+
 
 }
