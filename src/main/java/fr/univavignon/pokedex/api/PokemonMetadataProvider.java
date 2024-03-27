@@ -23,14 +23,13 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 
     @Override
     public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
-        // Check for invalid index
         if (index < 0 || index >= metadataList.size()) {
-            throw new PokedexException("Invalid index");
+            throw new PokedexException("index invalide");
         }
         PokemonMetadata metadata = metadataList.get(index);
-        // Check if metadata is found
+
         if (metadata == null) {
-            throw new PokedexException("Metadata not found");
+            throw new PokedexException("Metadata pas trouvé");
         }
         return metadata;
     }
