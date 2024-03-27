@@ -77,14 +77,6 @@ public class IPokedexFactoryTest {
         assertEquals(2, createdPokedex.size(), "Taille du Pokedex doit être 2 après ajout de deux Pokémons.");
     }
 
-    @Test
-    void testAddPokemonToPokedex() throws PokedexException {
-
-        IPokedex createdPokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
-        createdPokedex.addPokemon(pikachu);
-
-        assertEquals(1, createdPokedex.size(), "Le Pokedex devrait contenir 1 Pokémon après l'ajout.");
-    }
 
 
 
