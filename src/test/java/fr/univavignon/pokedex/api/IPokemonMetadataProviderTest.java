@@ -10,7 +10,7 @@ public class IPokemonMetadataProviderTest {
     @BeforeEach
     public void setUp() {
         metadataProvider = new PokemonMetadataProvider();
-
+        metadataProvider.addOrUpdateMetadata(133, "Aquali", 186, 168, 260);
     }
 
     @Test
@@ -45,6 +45,20 @@ public class IPokemonMetadataProviderTest {
     }
 
     @Test
+    public void testAddMetadata_validIndex() throws PokedexException {
+        metadataProvider.addOrUpdateMetadata(25, "Pikachu", 55, 40, 35);
+        PokemonMetadata metadata = metadataProvider.getPokemonMetadata(25);
+
+        assertNotNull(metadata, "Les métadonnées pour Pikachu ne devraient pas être nulles");
+        assertEquals("Pikachu", metadata.getName(), "Le nom devrait être Pikachu");
+    }
+
+    @Test
+    public void testAddMetadata_invalidIndex() {
+        assertThrows(IllegalArgumentException.class, () -> metadataProvider.addOrUpdateMetadata(151, "Test", 10, 10, 10),
+                "L'ajout de métadonnées avec un index invalide (151) devrait lancer une IllegalArgumentException");
+    }
+    @Test
     public void getPokemonMetadata_MetadataNotFound() {
         int nonExistentIndex = 2;
         assertThrows(PokedexException.class, () -> metadataProvider.getPokemonMetadata(nonExistentIndex),
@@ -62,6 +76,18 @@ public class IPokemonMetadataProviderTest {
                 "Accès à un index 151 devrait lancer une PokedexException.");
     }
 
+    @Test
+    public void addOrUpdateMetadata_IndexTooLow() {
+        assertThrows(IllegalArgumentException.class,
+                () -> metadataProvider.addOrUpdateMetadata(0, "TestLow", 10, 10, 10),
+                "L'ajout de métadonnées avec un index 0 devrait lancer une IllegalArgumentException.");
+    }
 
+    @Test
+    public void addOrUpdateMetadata_IndexTooHigh() {
+        assertThrows(IllegalArgumentException.class,
+                () -> metadataProvider.addOrUpdateMetadata(151, "TestHigh", 10, 10, 10),
+                "L'ajout de métadonnées avec un index 151 devrait lancer une IllegalArgumentException.");
+    }
 
 }
