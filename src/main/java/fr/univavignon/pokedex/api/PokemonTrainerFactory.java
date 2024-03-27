@@ -11,6 +11,7 @@ public class PokemonTrainerFactory implements IPokemonTrainerFactory {
         this.pokemonFactory = pokemonFactory;
     }
 
+
     @Override
     public PokemonTrainer createTrainer(String name, Team team, IPokedexFactory pokedexFactory) {
         return new PokemonTrainer(name, team, pokedexFactory.createPokedex(metadataProvider, pokemonFactory));
