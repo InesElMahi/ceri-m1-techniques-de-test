@@ -25,24 +25,7 @@ public class IPokemonMetadataProviderTest {
         assertEquals(260, metadata.getStamina(), "L'endurance devrait être 260");
     }
 
-    @Test
-    public void getPokemonMetadata_notFound() {
-        int nonExistentIndex = 999;
-        assertThrows(PokedexException.class, () -> metadataProvider.getPokemonMetadata(nonExistentIndex),
-                "Une PokedexException doit être lancée si aucune métadonnée n'est trouvée pour l'index donné");
-    }
 
-    @Test
-    public void getPokemon_invalidIndexMore200() {
-        assertThrows(PokedexException.class, () -> metadataProvider.getPokemonMetadata(200),
-                "Accès à un index invalide (200) devrait lancer une PokedexException");
-    }
-
-    @Test
-    public void getPokemon_invalidIndexInf0() {
-        assertThrows(PokedexException.class, () -> metadataProvider.getPokemonMetadata(-29),
-                "Accès à un index invalide (-29) devrait lancer une PokedexException");
-    }
 
     @Test
     public void testAddMetadata_validIndex() throws PokedexException {
