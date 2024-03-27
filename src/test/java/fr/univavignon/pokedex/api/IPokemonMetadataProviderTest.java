@@ -7,7 +7,11 @@ public class IPokemonMetadataProviderTest {
 
     private PokemonMetadataProvider metadataProvider;
 
-
+    @BeforeEach
+    public void setUp() {
+        metadataProvider = new PokemonMetadataProvider();
+        metadataProvider.addOrUpdateMetadata(133, "Aquali", 186, 168, 260);
+    }
 
     @Test
     public void getPokemonMetadata_validIndexAquali() throws PokedexException {
