@@ -26,7 +26,6 @@ public class IPokemonMetadataProviderTest {
     }
 
 
-
     @Test
     public void testAddMetadata_validIndex() throws PokedexException {
         metadataProvider.addOrUpdateMetadata(25, "Pikachu", 55, 40, 35);
