@@ -79,20 +79,13 @@ public class IPokedexFactoryTest {
 
     @Test
     void testAddPokemonToPokedex() throws PokedexException {
-        // Assuming metadata and factory are set up correctly.
-        when(metadataProvider.getPokemonMetadata(0)).thenReturn(new PokemonMetadata(0, "Pikachu", 55, 40, 90));
-        when(pokemonFactory.createPokemon(0, 42, 30, 50, 100)).thenReturn(pikachu); // Example arguments
+        // Stubbing removed from here.
 
         IPokedex createdPokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
+        createdPokedex.addPokemon(pikachu);
 
-        // This should trigger the createPokemon() call with the specified arguments.
-        createdPokedex.addPokemon(pokemonFactory.createPokemon(0, 42, 30, 50, 100));
-
-        // Verify that createPokemon was called with the correct arguments.
-        verify(pokemonFactory, times(1)).createPokemon(0, 42, 30, 50, 100);
         assertEquals(1, createdPokedex.size(), "Le Pokedex devrait contenir 1 Pokémon après l'ajout.");
     }
-
 
 
 
