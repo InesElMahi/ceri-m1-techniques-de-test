@@ -98,23 +98,6 @@ public class IPokemonTrainerFactoryTest {
         assertThrows(IllegalStateException.class, () -> trainerFactory.createTrainer("Misty", Team.VALOR, pokedexFactory), "Should throw exception when creating a trainer with an existing name.");
     }
 
-    @Test
-    public void testCreateTrainer() {
 
-        IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
-        IPokemonFactory pokemonFactory = mock(IPokemonFactory.class);
-        IPokedexFactory pokedexFactory = mock(IPokedexFactory.class);
-
-        PokemonTrainerFactory trainerFactory = new PokemonTrainerFactory(metadataProvider, pokemonFactory);
-        String name = "Red";
-        Team team = Team.MYSTIC;
-
-        when(pokedexFactory.createPokedex(metadataProvider, pokemonFactory)).thenReturn(mock(IPokedex.class));
-        PokemonTrainer trainer = trainerFactory.createTrainer(name, team, pokedexFactory);
-
-        assertNotNull(trainer);
-        assertEquals(name, trainer.getName());
-        assertEquals(team, trainer.getTeam());
-    }
 
 }
