@@ -31,9 +31,6 @@ public class IPokemonFactoryTest {
         PokemonMetadata bulbasaurMetadata = new PokemonMetadata(1, "Bulbasaur", 126, 100, 90);
         PokemonMetadata vaporeonMetadata = new PokemonMetadata(133, "Vaporeon", 186, 168, 260);
 
-        IPokemonMetadataProvider metadataProvider = new PokemonMetadataProvider();
-        PokemonFactory pokemonFactory = new PokemonFactory(metadataProvider);
-
 
         when(pokemonFactory.createPokemon(eq(1), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(bulbizarre);
         when(pokemonFactory.createPokemon(eq(133), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(aquali);
