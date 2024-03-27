@@ -6,7 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class IPokemonMetadataProviderTest {
 
     private PokemonMetadataProvider metadataProvider;
-
+    @BeforeEach
+    public void setUp() {
+        metadataProvider = new PokemonMetadataProvider();
+    }
 
     @Test
     public void getPokemonMetadata_validIndexAquali() throws PokedexException {
@@ -53,7 +56,11 @@ public class IPokemonMetadataProviderTest {
                 "Accès à un index 0 devrait lancer une PokedexException.");
     }
 
-
+    @Test
+    public void getPokemonMetadata_IndexTooHigh() {
+        assertThrows(PokedexException.class, () -> metadataProvider.getPokemonMetadata(151),
+                "Accès à un index 151 devrait lancer une PokedexException.");
+    }
 
 
 
