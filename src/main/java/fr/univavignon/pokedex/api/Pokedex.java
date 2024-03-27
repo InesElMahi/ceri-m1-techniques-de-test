@@ -24,7 +24,7 @@ public class Pokedex implements IPokedex {
     @Override
     public int addPokemon(Pokemon pokemon) {
         pokemons.add(pokemon);
-        return pokemons.size() - 1;
+        return pokemons.indexOf(pokemon);
     }
 
     @Override
@@ -50,13 +50,7 @@ public class Pokedex implements IPokedex {
 
     @Override
     public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
-        try {
-            PokemonMetadata metadata = metadataProvider.getPokemonMetadata(index);
-            return new Pokemon(index, metadata.getName(), metadata.getAttack(), metadata.getDefense(), metadata.getStamina(), cp, hp, dust, candy, 0); // IV is set to 0 for simplicity.
-        } catch (PokedexException e) {
-            System.err.println("N'a pas pu crée le pokemon: " + e.getMessage());
-            return null;
-        }
+        return pokemonFactory.createPokemon(index, cp, hp, dust, candy);
     }
 
     @Override

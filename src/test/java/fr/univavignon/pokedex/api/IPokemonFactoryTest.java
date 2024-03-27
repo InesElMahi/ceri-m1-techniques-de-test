@@ -17,7 +17,12 @@ public class IPokemonFactoryTest {
     private Pokemon bulbizarre;
     private Pokemon aquali;
 
+    @BeforeEach
+    void setUp() {
 
+        bulbizarre = new Pokemon(1, "Bulbasaur", 126, 100, 90, 600, 100, 4000, 4, 0.56);
+        aquali = new Pokemon(133, "Vaporeon", 186, 168, 260, 2729, 202, 5000, 4, 1.0);
+    }
 
 
     @Test
