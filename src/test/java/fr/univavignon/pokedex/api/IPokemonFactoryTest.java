@@ -150,5 +150,5 @@ public class IPokemonFactoryTest {
                 "Devrait lancer IllegalArgumentException lorsque les bonbons sont négatifs");
     }
 
-    }
+}
 
