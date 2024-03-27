@@ -98,6 +98,33 @@ public class IPokedexTest {
         assertEquals(bulbasaur.getIndex(), sortedPokemons.get(1).getIndex(), "Le deuxième Pokémon devrait être Bulbasaur lors du tri par index.");
     }
 
+    @Test
+    public void testPokemonCreationThroughPokedex() throws PokedexException {
+        IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = new PokemonFactory(metadataProvider);
+        IPokedex pokedex = new Pokedex(metadataProvider, pokemonFactory);
+
+        when(metadataProvider.getPokemonMetadata(1)).thenReturn(new PokemonMetadata(1, "Bulbasaur", 60, 62, 63));
+        Pokemon bulbasaur = pokedex.createPokemon(1, 600, 100, 5000, 4);
+
+        assertNotNull(bulbasaur, "La création de Pokémon à travers le Pokedex a échoué.");
+        assertEquals("Bulbasaur", bulbasaur.getName(), "Le nom du Pokémon créé ne correspond pas.");
+        assertTrue(bulbasaur.getAttack() >= 60 && bulbasaur.getAttack() <= 75, "L'attaque du Pokémon n'est pas dans la plage attendue.");
+
+    }
+
+    @Test
+    public void testCreatePokemonHandlesPokedexException() throws PokedexException {
+
+        IPokemonMetadataProvider metadataProviderMock = mock(IPokemonMetadataProvider.class);
+        when(metadataProviderMock.getPokemonMetadata(anyInt())).thenThrow(new PokedexException("Erreur de récupération des métadonnées"));
+        IPokemonFactory pokemonFactory = new PokemonFactory(metadataProviderMock);
+
+        Pokemon result = pokemonFactory.createPokemon(0, 100, 100, 1000, 10);
+        assertNull(result, "La méthode createPokemon devrait retourner null en cas d'échec de récupération des métadonnées.");
+
+        verify(metadataProviderMock).getPokemonMetadata(0);
+    }
 
 
     @Test
