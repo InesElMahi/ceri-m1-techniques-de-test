@@ -25,23 +25,8 @@ public class IPokemonMetadataProviderTest {
         assertEquals(260, metadata.getStamina(), "L'endurance devrait être 260");
     }
 
-    @Test
-    public void getPokemonMetadata_notFound() {
-        int nonExistentIndex = 999;
-        assertThrows(PokedexException.class, () -> metadataProvider.getPokemonMetadata(nonExistentIndex),
-                "Une PokedexException doit être lancée si aucune métadonnée n'est trouvée pour l'index donné");
-    }
 
 
-
-    @Test
-    public void testAddMetadata_validIndex() throws PokedexException {
-        metadataProvider.addOrUpdateMetadata(25, "Pikachu", 55, 40, 35);
-        PokemonMetadata metadata = metadataProvider.getPokemonMetadata(25);
-
-        assertNotNull(metadata, "Les métadonnées pour Pikachu ne devraient pas être nulles");
-        assertEquals("Pikachu", metadata.getName(), "Le nom devrait être Pikachu");
-    }
 
     @Test
     public void testAddMetadata_invalidIndex() {

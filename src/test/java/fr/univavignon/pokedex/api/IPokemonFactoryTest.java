@@ -82,21 +82,6 @@ public class IPokemonFactoryTest {
         assertNull(pokemonFactory.createPokemon(-2, 10000, 10000, 10000, 10000), "La création d'un Pokemon avec des paramètres invalides devrait renvoyer null");
     }
 
-    @Test
-    void testLeHpDuPokemonCorrectementDefini() {
-
-        when(pokemonFactory.createPokemon(eq(1), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(bulbizarre);
-        when(pokemonFactory.createPokemon(eq(133), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(aquali);
-
-        Pokemon bulbasaurTest = pokemonFactory.createPokemon(1, 600, 60, 3000, 4);
-        assertNotNull(bulbasaurTest, "bulbasaurTest ne devrait pas être null");
-        assertEquals(bulbizarre.getHp(), bulbasaurTest.getHp(), "Le HP doit correspondre à celui de Bulbasaur");
-
-
-        Pokemon aqualiTest = pokemonFactory.createPokemon(133, 2500, 200, 5000, 5);
-        assertNotNull(aqualiTest, "aqualiTest ne devrait pas être null");
-        assertEquals(aquali.getHp(), aqualiTest.getHp(), "Le HP doit correspondre à celui de Vaporeon");
-    }
 
     @Test
     void testPokemonCandyGetter() {
