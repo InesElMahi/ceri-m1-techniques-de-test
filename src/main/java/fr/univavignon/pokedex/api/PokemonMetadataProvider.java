@@ -15,7 +15,6 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
     }
 
     private void addPokemonMetadata(PokemonMetadata metadata) {
-
         while (metadataList.size() <= metadata.getIndex()) {
             metadataList.add(null);
         }
@@ -24,12 +23,15 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 
     @Override
     public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
-        if (index < 0 || index >= 151) {
-            throw new PokedexException("Index invalide : " + index);
+        // Check for invalid index
+        if (index < 0 || index >= metadataList.size()) {
+            throw new PokedexException("Invalid index");
         }
-        if (index >= metadataList.size() || metadataList.get(index) == null) {
-            throw new PokedexException("Métadonnées non trouvées pour l'index : " + index);
+        PokemonMetadata metadata = metadataList.get(index);
+        // Check if metadata is found
+        if (metadata == null) {
+            throw new PokedexException("Metadata not found");
         }
-        return metadataList.get(index);
+        return metadata;
     }
 }
