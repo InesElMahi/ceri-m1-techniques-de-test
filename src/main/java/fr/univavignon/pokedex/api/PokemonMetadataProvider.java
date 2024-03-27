@@ -1,36 +1,34 @@
 package fr.univavignon.pokedex.api;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 
-    private List<PokemonMetadata> metadataList;
+    private final Map<Integer, PokemonMetadata> metadataMap;
 
     public PokemonMetadataProvider() {
-        this.metadataList = new ArrayList<>();
-
-        addPokemonMetadata(new PokemonMetadata(0, "Bulbizarre", 126, 126, 90));
-        addPokemonMetadata(new PokemonMetadata(133, "Aquali", 186, 168, 260));
-    }
-
-    private void addPokemonMetadata(PokemonMetadata metadata) {
-        while (metadataList.size() <= metadata.getIndex()) {
-            metadataList.add(null);
-        }
-        metadataList.set(metadata.getIndex(), metadata);
+        this.metadataMap = new HashMap<>();
     }
 
     @Override
     public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
-        if (index < 0 || index >= metadataList.size()) {
-            throw new PokedexException("index invalide");
+        if (index <= 0 || index > 150) {
+            throw new PokedexException("Index invalide : " + index);
         }
-        PokemonMetadata metadata = metadataList.get(index);
 
+        PokemonMetadata metadata = metadataMap.get(index);
         if (metadata == null) {
-            throw new PokedexException("Metadata pas trouvé");
+            throw new PokedexException("Métadonnées non trouvées pour l'index : " + index);
         }
         return metadata;
+    }
+
+    public void addOrUpdateMetadata(int index, String name, int attack, int defense, int stamina) {
+        if (index <= 0 || index > 150) {
+            throw new IllegalArgumentException("Index invalide : " + index);
+        }
+        metadataMap.put(index, new PokemonMetadata(index, name, attack, defense, stamina));
     }
 }

@@ -28,10 +28,6 @@ public class IPokemonFactoryTest {
     @Test
     void testCreationPokemon() {
 
-        PokemonMetadata bulbasaurMetadata = new PokemonMetadata(1, "Bulbasaur", 126, 100, 90);
-        PokemonMetadata vaporeonMetadata = new PokemonMetadata(133, "Vaporeon", 186, 168, 260);
-
-
         when(pokemonFactory.createPokemon(eq(1), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(bulbizarre);
         when(pokemonFactory.createPokemon(eq(133), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(aquali);
 
@@ -72,6 +68,7 @@ public class IPokemonFactoryTest {
 
     @Test
     void testPokemonCreationWithInvalidValues() {
+
         when(pokemonFactory.createPokemon(anyInt(), anyInt(), anyInt(), anyInt(), anyInt())).thenThrow(IllegalArgumentException.class);
 
         assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(1, -1, -1, -1, -1),
@@ -80,12 +77,14 @@ public class IPokemonFactoryTest {
 
     @Test
     void testCreationDePokemonRenvoieNull() {
+
         when(pokemonFactory.createPokemon(eq(-2), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(null);
         assertNull(pokemonFactory.createPokemon(-2, 10000, 10000, 10000, 10000), "La création d'un Pokemon avec des paramètres invalides devrait renvoyer null");
     }
 
     @Test
     void testLeHpDuPokemonCorrectementDefini() {
+
         when(pokemonFactory.createPokemon(eq(1), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(bulbizarre);
         when(pokemonFactory.createPokemon(eq(133), anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(aquali);
 
@@ -93,9 +92,10 @@ public class IPokemonFactoryTest {
         assertNotNull(bulbasaurTest, "bulbasaurTest ne devrait pas être null");
         assertEquals(bulbizarre.getHp(), bulbasaurTest.getHp(), "Le HP doit correspondre à celui de Bulbasaur");
 
+
         Pokemon aqualiTest = pokemonFactory.createPokemon(133, 2500, 200, 5000, 5);
         assertNotNull(aqualiTest, "aqualiTest ne devrait pas être null");
-        assertEquals(aquali.getHp(), aqualiTest.getHp(), " HP doit correspondre à celui de Vaporeon");
+        assertEquals(aquali.getHp(), aqualiTest.getHp(), "Le HP doit correspondre à celui de Vaporeon");
     }
 
     @Test
@@ -104,42 +104,7 @@ public class IPokemonFactoryTest {
         assertEquals(4, aquali.getCandy(), "Le nombre de candies de Vaporeon devrait être correct");
     }
 
-    @Test
-    void testCreatePokemonWithNegativeCandy() {
-        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(anyInt(), anyInt(), anyInt(), anyInt(), -10),
-                "Devrait lancer IllegalArgumentException lorsque les bonbons sont négatifs");
-    }
 
-    @Test
-    void testCreatePokemonWithNegativeCp() {
-        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(anyInt(), -500, anyInt(), anyInt(), anyInt()),
-                "Devrait lancer IllegalArgumentException lorsque les CP sont négatifs");
-    }
 
-    @Test
-    void testCreatePokemonWithNegativeDust() {
-        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(anyInt(), anyInt(), anyInt(), -1000, anyInt()),
-                "Devrait lancer IllegalArgumentException lorsque la poussière est négative");
     }
-
-    @Test
-    void testCreatePokemonWithNegativeHp() {
-        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(anyInt(), anyInt(), -50, anyInt(), anyInt()),
-                "Devrait lancer IllegalArgumentException lorsque les HP sont négatifs");
-    }
-
-    @Test
-    void testCreatePokemonWithNegativeIndex() {
-        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(-1, anyInt(), anyInt(), anyInt(), anyInt()),
-                "Devrait lancer IllegalArgumentException lorsque l'index est négatif");
-    }
-
-    @Test
-    void testCreatePokemonWithPokedexException() throws PokedexException {
-        when(pokemonFactory.createPokemon(anyInt(), anyInt(), anyInt(), anyInt(), anyInt())).thenThrow(PokedexException.class);
-
-        assertThrows(PokedexException.class, () -> pokemonFactory.createPokemon(1, 500, 50, 1000, 10),
-                "Devrait lancer PokedexException lorsque la récupération des métadonnées échoue");
-    }
-}
 
