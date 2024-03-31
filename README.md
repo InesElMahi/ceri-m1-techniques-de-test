@@ -11,7 +11,7 @@ M1 ia classique
 [![codecov](https://codecov.io/gh/InesElMahi/ceri-m1-techniques-de-test/graph/badge.svg?token=EPOYW3G6KB)](https://codecov.io/gh/InesElMahi/ceri-m1-techniques-de-test)
 
 
-## Choix Techniques d’Implémentation
+## Outils et Technologies Utilisés
 
 - **Langage de Programmation** : Java
 - **Gestion de Projet** : Maven, pour la gestion des dépendances et la standardisation du build.
