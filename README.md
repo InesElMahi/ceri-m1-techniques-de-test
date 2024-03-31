@@ -35,3 +35,15 @@ Le fichier `circle.yml` a été configuré pour répondre aux exigences suivante
 - Utilisation de Java pour l'environnement d'exécution.
 - Exécution des tests unitaires via Maven.
 
+## Choix Techniques d’Implémentation
+
+- **Pokedex** : Fonctionne comme un espace de stockage en mémoire pour les Pokémon, nous l'avons conçu pour ajouter, retrouver, et organiser facilement les Pokémon. 
+
+- **PokedexFactory** : Utilise le modèle Factory pour créer des Pokedex,ce qui nous aide à mieux organiser le code et à faciliter les tests.
+
+- **PokemonFactory** : Crée des Pokémon avec des caractéristiques uniques en mélangeant des informations fixes et des calculs aléatoires ce qui rend chaque Pokémon unique.
+
+- **PokemonMetadataProvider** : Centralise les informations sur les Pokémon, rendant les mises à jour et la gestion des données plus simples et moins susceptible aux erreurs.
+
+- **PokemonTrainerFactory** : Permet aux joueurs de créer leurs propres entraîneurs Pokémon avec un Pokedex unique. 
+
