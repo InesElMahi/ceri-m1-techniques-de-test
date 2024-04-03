@@ -9,10 +9,12 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
-import java.util.Comparator;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @ExtendWith(MockitoExtension.class)
 public class IPokedexFactoryTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(IPokedexFactoryTest.class);
 
     @Mock
     private IPokemonMetadataProvider metadataProvider;
@@ -42,10 +44,11 @@ public class IPokedexFactoryTest {
             });
             when(pokedex.getPokemon(0)).thenReturn(pikachu);
             when(pokedex.getPokemons()).thenReturn(Arrays.asList(pikachu, bulbasaur));
-            when(pokedex.getPokemons(any(Comparator.class))).thenReturn(Arrays.asList(bulbasaur, pikachu));
+            when(pokedex.getPokemons(any())).thenReturn(Arrays.asList(bulbasaur, pikachu));
+
             doThrow(new PokedexException("Invalid index")).when(pokedex).getPokemon(-1);
         } catch (PokedexException e) {
-            e.printStackTrace();
+            logger.error("Une exception de Pokedex s'est produite", e);
         }
 
     }
@@ -66,7 +69,7 @@ public class IPokedexFactoryTest {
     }
 
     @Test
-    void testPokedexSizeAfterAddingPokemons() throws PokedexException {
+    void testPokedexSizeAfterAddingPokemons() {
         when(pokedex.addPokemon(any(Pokemon.class))).thenReturn(0).thenReturn(1);
         when(pokedex.size()).thenReturn(2);
         IPokedex createdPokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
