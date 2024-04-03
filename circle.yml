@@ -11,8 +11,13 @@ jobs:
       - checkout
 
       - run:
+          name: Checkstyle Code Analysis
+          command: mvn checkstyle:check
+
+      - run:
           name: Run Unit Tests
           command: mvn test
+
       - run:
           name: Generate JaCoCo Coverage Report
           command: mvn jacoco:report
