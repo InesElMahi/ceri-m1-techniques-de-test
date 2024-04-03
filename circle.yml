@@ -21,7 +21,6 @@ jobs:
       - run:
           name: Generate JaCoCo Coverage Report
           command: mvn jacoco:report
-
       - run:
           name: Upload Coverage to Codecov
           command: |
