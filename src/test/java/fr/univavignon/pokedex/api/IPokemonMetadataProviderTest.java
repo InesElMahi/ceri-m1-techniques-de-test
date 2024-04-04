@@ -1,6 +1,8 @@
 package fr.univavignon.pokedex.api;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class IPokemonMetadataProviderTest {
@@ -26,19 +28,19 @@ public class IPokemonMetadataProviderTest {
     }
 
 
-
-
     @Test
     public void testAddMetadata_invalidIndex() {
         assertThrows(IllegalArgumentException.class, () -> metadataProvider.addOrUpdateMetadata(151, "Test", 10, 10, 10),
                 "L'ajout de métadonnées avec un index invalide (151) devrait lancer une IllegalArgumentException");
     }
+
     @Test
     public void getPokemonMetadata_MetadataNotFound() {
         int nonExistentIndex = 2;
         assertThrows(PokedexException.class, () -> metadataProvider.getPokemonMetadata(nonExistentIndex),
                 "Une PokedexException doit être lancée si aucune métadonnée n'est trouvée pour l'index donné.");
     }
+
     @Test
     public void getPokemonMetadata_IndexTooLow() {
         assertThrows(PokedexException.class, () -> metadataProvider.getPokemonMetadata(0),

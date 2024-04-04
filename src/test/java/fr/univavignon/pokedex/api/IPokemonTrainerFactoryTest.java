@@ -6,8 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class IPokemonTrainerFactoryTest {
@@ -29,6 +29,7 @@ public class IPokemonTrainerFactoryTest {
 
         lenient().when(pokedexFactory.createPokedex(any(), any())).thenReturn(pokedex);
     }
+
     @Test
     public void testHandlingOfDuplicateTrainerCreation() {
         String trainerName = "Misty";
@@ -46,8 +47,6 @@ public class IPokemonTrainerFactoryTest {
             trainerFactory.createTrainer(trainerName, team, pokedexFactory);
         }, "ne pas recreer un trainer existant.");
     }
-
-
 
 
     @Test
@@ -75,6 +74,7 @@ public class IPokemonTrainerFactoryTest {
                 () -> assertSame(pokedex, createdTrainer.getPokedex(), "Trainer's Pokedex doivet matcher.")
         );
     }
+
     @Test
     public void testCreateTrainerReturnsExpectedTrainer() {
         when(trainerFactory.createTrainer(anyString(), any(Team.class), any(IPokedexFactory.class))).thenReturn(expectedTrainer);

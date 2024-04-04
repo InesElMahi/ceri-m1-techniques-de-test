@@ -1,11 +1,14 @@
 package fr.univavignon.pokedex.api;
-import static org.mockito.Mockito.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import java.util.List;
-import java.util.Comparator;
+
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class IPokedexTest {
 
@@ -192,6 +195,7 @@ public class IPokedexTest {
         assertEquals("Squirtle", sortedPokemons.get(2).getName());
         assertThrows(UnsupportedOperationException.class, () -> sortedPokemons.add(new Pokemon(3, "Pikachu", 55, 40, 90, 260, 35, 500, 50, 0.8)));
     }
+
     @Test
     public void testGetPokemonMetadata() throws PokedexException {
         IPokemonMetadataProvider mockMetadataProvider = mock(IPokemonMetadataProvider.class);
