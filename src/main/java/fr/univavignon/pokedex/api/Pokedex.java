@@ -7,8 +7,8 @@ import java.util.List;
 
 /**
  * Implementation of the IPokedex interface.
- *
- * This class represents a Pokedex.
+ * Represents a Pokedex.
+ * Provides methods to manage a collection of Pokemon.
  *
  * Author: Inès El Mahi
  */
@@ -21,12 +21,12 @@ public class Pokedex implements IPokedex {
     /**
      * Constructs a Pokedex with the given metadata provider and Pokemon factory.
      *
-     * @param metadataProvider The metadata provider to use.
-     * @param pokemonFactory   The Pokemon factory to use.
+     * @param metadataProv The metadata provider to use.
+     * @param pokemonFact The Pokemon factory to use.
      */
-    public Pokedex(final IPokemonMetadataProvider metadataProvider, final IPokemonFactory pokemonFactory) {
-        this.metadataProvider = metadataProvider;
-        this.pokemonFactory = pokemonFactory;
+    public Pokedex(final IPokemonMetadataProvider metadataProv, final IPokemonFactory pokemonFact) {
+        this.metadataProvider = metadataProv;
+        this.pokemonFactory = pokemonFact;
     }
 
     /**
@@ -93,15 +93,16 @@ public class Pokedex implements IPokedex {
      * Creates a new Pokemon instance with the specified attributes.
      *
      * @param index The index of the Pokemon.
-     * @param cp    The combat power of the Pokemon.
-     * @param hp    The hit points of the Pokemon.
-     * @param dust  The required dust for upgrading the Pokemon.
-     * @param candy The required candy for upgrading the Pokemon.
+     * @param combatPower The combat power of the Pokemon.
+     * @param hitPoints The hit points of the Pokemon.
+     * @param upgradeDust The required dust for upgrading the Pokemon.
+     * @param upgradeCandy The required candy for upgrading the Pokemon.
      * @return The newly created Pokemon instance.
      */
     @Override
-    public Pokemon createPokemon(final int index, final int cp, final int hp, final int dust, final int candy) {
-        return pokemonFactory.createPokemon(index, cp, hp, dust, candy);
+    public Pokemon createPokemon(final int index, final int combatPower, final int hitPoints,
+                                 final int upgradeDust, final int upgradeCandy) {
+        return pokemonFactory.createPokemon(index, combatPower, hitPoints, upgradeDust, upgradeCandy);
     }
 
     /**
