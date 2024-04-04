@@ -6,10 +6,9 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Pokedex implements IPokedex {
-
-    private List<Pokemon> pokemons = new ArrayList<>();
     private final IPokemonMetadataProvider metadataProvider;
     private final IPokemonFactory pokemonFactory;
+    private final List<Pokemon> pokemons = new ArrayList<>();
 
     public Pokedex(IPokemonMetadataProvider metadataProvider, IPokemonFactory pokemonFactory) {
         this.metadataProvider = metadataProvider;
