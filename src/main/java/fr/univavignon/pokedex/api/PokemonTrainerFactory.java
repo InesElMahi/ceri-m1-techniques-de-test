@@ -5,11 +5,12 @@ package fr.univavignon.pokedex.api;
  *
  * This class provides methods for creating Pokemon trainers.
  *
- * @author Inès El Mahi
+ * Author: Inès El Mahi
  */
 public class PokemonTrainerFactory implements IPokemonTrainerFactory {
 
     private final IPokemonMetadataProvider metadataProvider;
+
     private final IPokemonFactory pokemonFactory;
 
     /**
@@ -33,6 +34,7 @@ public class PokemonTrainerFactory implements IPokemonTrainerFactory {
      */
     @Override
     public PokemonTrainer createTrainer(final String name, final Team team, final IPokedexFactory pokedexFactory) {
+
         return new PokemonTrainer(name, team, pokedexFactory.createPokedex(metadataProvider, pokemonFactory));
     }
 }

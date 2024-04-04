@@ -4,46 +4,54 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Fournit des métadonnées pour les Pokémon.
- * Cette classe permet d'accéder aux métadonnées des Pokémon par leur index.
+ * Provides metadata for Pokémon.
+ * This class allows access to Pokémon metadata by their index.
  */
 public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 
     private final Map<Integer, PokemonMetadata> metadataMap;
 
-
     /**
-     * Constructeur de PokemonMetadataProvider.
-     * Initialise un nouveau conteneur pour les métadonnées des Pokémon.
+     * Constructor for PokemonMetadataProvider.
+     * Initializes a new container for Pokémon metadata.
      */
     public PokemonMetadataProvider() {
         this.metadataMap = new HashMap<>();
     }
 
     /**
-     * Retourne les métadonnées d'un Pokémon spécifié par son index.
+     * Returns the metadata of a Pokémon specified by its index.
      *
-     * @param index L'index du Pokémon dans le Pokedex.
-     * @return Les métadonnées du Pokémon correspondant à l'index donné.
-     * @throws PokedexException Si l'index est invalide ou si les métadonnées ne sont pas trouvées.
+     * @param index The index of the Pokémon in the Pokédex.
+     * @return The metadata of the Pokémon corresponding to the given index.
+     * @throws PokedexException If the index is invalid or if metadata is not found.
      */
     @Override
-    public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
+    public PokemonMetadata getPokemonMetadata(final int index) throws PokedexException {
         if (index <= 0 || index > 150) {
-            throw new PokedexException("Index invalide : " + index);
+            throw new PokedexException("Invalid index: " + index);
         }
 
         PokemonMetadata metadata = metadataMap.get(index);
         if (metadata == null) {
-            throw new PokedexException("Métadonnées non trouvées pour l'index : " + index);
+            throw new PokedexException("Metadata not found for index: " + index);
         }
         return metadata;
     }
 
-
-    public void addOrUpdateMetadata(int index, String name, int attack, int defense, int stamina) {
+    /**
+     * Adds or updates metadata for a Pokémon.
+     *
+     * @param index   The index of the Pokémon.
+     * @param name    The name of the Pokémon.
+     * @param attack  The attack value of the Pokémon.
+     * @param defense The defense value of the Pokémon.
+     * @param stamina The stamina value of the Pokémon.
+     */
+    public void addOrUpdateMetadata(final int index, final String name, final int attack,
+                                    final int defense, final int stamina) {
         if (index <= 0 || index > 150) {
-            throw new IllegalArgumentException("Index invalide : " + index);
+            throw new IllegalArgumentException("Invalid index: " + index);
         }
         metadataMap.put(index, new PokemonMetadata(index, name, attack, defense, stamina));
     }

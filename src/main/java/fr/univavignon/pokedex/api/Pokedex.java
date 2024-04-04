@@ -5,59 +5,118 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Implementation of the IPokedex interface.
+ *
+ * This class represents a Pokedex.
+ *
+ * Author: Inès El Mahi
+ */
 public class Pokedex implements IPokedex {
+
     private final IPokemonMetadataProvider metadataProvider;
     private final IPokemonFactory pokemonFactory;
     private final List<Pokemon> pokemons = new ArrayList<>();
 
-    public Pokedex(IPokemonMetadataProvider metadataProvider, IPokemonFactory pokemonFactory) {
+    /**
+     * Constructs a Pokedex with the given metadata provider and Pokemon factory.
+     *
+     * @param metadataProvider The metadata provider to use.
+     * @param pokemonFactory   The Pokemon factory to use.
+     */
+    public Pokedex(final IPokemonMetadataProvider metadataProvider, final IPokemonFactory pokemonFactory) {
         this.metadataProvider = metadataProvider;
         this.pokemonFactory = pokemonFactory;
     }
 
+    /**
+     * Returns the number of Pokemon in the Pokedex.
+     *
+     * @return The number of Pokemon in the Pokedex.
+     */
     @Override
     public int size() {
         return pokemons.size();
     }
 
+    /**
+     * Adds a Pokemon to the Pokedex.
+     *
+     * @param pokemon The Pokemon to add.
+     * @return The index of the added Pokemon in the Pokedex.
+     */
     @Override
-    public int addPokemon(Pokemon pokemon) {
+    public int addPokemon(final Pokemon pokemon) {
         pokemons.add(pokemon);
         return pokemons.indexOf(pokemon);
     }
 
+    /**
+     * Retrieves a Pokemon from the Pokedex based on its ID.
+     *
+     * @param id The ID of the Pokemon to retrieve.
+     * @return The Pokemon with the specified ID.
+     * @throws PokedexException If the specified ID is invalid.
+     */
     @Override
-    public Pokemon getPokemon(int id) throws PokedexException {
+    public Pokemon getPokemon(final int id) throws PokedexException {
         if (id < 0 || id >= pokemons.size()) {
-            throw new PokedexException("L'ID spécifié est invalide : " + id);
+            throw new PokedexException("Invalid ID specified: " + id);
         }
         return pokemons.get(id);
     }
 
+    /**
+     * Returns an unmodifiable list of all Pokemon in the Pokedex.
+     *
+     * @return An unmodifiable list of all Pokemon.
+     */
     @Override
     public List<Pokemon> getPokemons() {
-
         return Collections.unmodifiableList(pokemons);
     }
 
+    /**
+     * Returns an unmodifiable list of all Pokemon in the Pokedex, sorted using the specified comparator.
+     *
+     * @param order The comparator used for sorting the Pokemon list.
+     * @return An unmodifiable list of all Pokemon, sorted according to the specified comparator.
+     */
     @Override
-    public List<Pokemon> getPokemons(Comparator<Pokemon> order) {
+    public List<Pokemon> getPokemons(final Comparator<Pokemon> order) {
         List<Pokemon> sortedPokemons = new ArrayList<>(pokemons);
         sortedPokemons.sort(order);
         return Collections.unmodifiableList(sortedPokemons);
     }
 
+    /**
+     * Creates a new Pokemon instance with the specified attributes.
+     *
+     * @param index The index of the Pokemon.
+     * @param cp    The combat power of the Pokemon.
+     * @param hp    The hit points of the Pokemon.
+     * @param dust  The required dust for upgrading the Pokemon.
+     * @param candy The required candy for upgrading the Pokemon.
+     * @return The newly created Pokemon instance.
+     */
     @Override
-    public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
+    public Pokemon createPokemon(final int index, final int cp, final int hp, final int dust, final int candy) {
         return pokemonFactory.createPokemon(index, cp, hp, dust, candy);
     }
 
+    /**
+     * Retrieves the metadata for a Pokemon with the specified index.
+     *
+     * @param index The index of the Pokemon.
+     * @return The metadata for the Pokemon.
+     * @throws PokedexException If metadata retrieval fails.
+     */
     @Override
-    public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
+    public PokemonMetadata getPokemonMetadata(final int index) throws PokedexException {
         try {
             return metadataProvider.getPokemonMetadata(index);
         } catch (Exception e) {
-            throw new PokedexException("Impossible de récupérer les métadonnées pour le Pokémon d'index " + index + ".");
+            throw new PokedexException("Failed to retrieve metadata for Pokemon with index " + index + ".");
         }
     }
 }
