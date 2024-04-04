@@ -103,6 +103,27 @@
                 </executions>
             </plugin>
 
+            <!-- Plugin pour générer des badges -->
+            <plugin>
+                <groupId>com.github.bordertech.buildtools</groupId>
+                <artifactId>badger</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>badges</goal>
+                        </goals>
+                        <configuration>
+                            <outputDir>badges</outputDir>
+                            <inputFiles>
+                                <inputFile>target/checkstyle-result.xml</inputFile>
+                            </inputFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Maven Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -136,25 +157,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>bash</executable>
-                            <arguments>
-                                <argument>./generate-badge.sh</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+
 
             <!-- Maven Surefire  -->
             <plugin>
