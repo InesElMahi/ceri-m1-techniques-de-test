@@ -14,7 +14,7 @@ M1 ia classique
 ![CheckStyle](badges/checkstyle-result.svg)
 
 # Javadoc
-[Javadoc](https://ineselmahi.github.io/ceri-m1-techniques-de-test/)
+[![JavaDoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://ineselmahi.github.io/ceri-m1-techniques-de-test/)
 
 ## Outils et Technologies Utilisés
 
