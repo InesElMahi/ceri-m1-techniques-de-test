@@ -154,7 +154,6 @@
                 </executions>
             </plugin>
 
-
             <!-- Maven Surefire  -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
