@@ -13,6 +13,9 @@ M1 ia classique
 # CheckStyle
 ![CheckStyle](badges/checkstyle-result.svg)
 
+# Javadoc
+[![JavaDoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://ineselmahi.github.io/ceri-m1-techniques-de-test/)
+
 ## Outils et Technologies Utilisés
 
 - **Langage de Programmation** : Java
