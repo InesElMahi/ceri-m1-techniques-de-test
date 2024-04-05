@@ -17,7 +17,7 @@ public class PokemonTrainerFactory implements IPokemonTrainerFactory {
     private final IPokemonFactory pokemonFactory;
 
     /**
-     * Constructs factory with specified metadata provider & Pokemon factory.
+     * Constructs factory with specified metadata provider,Pokemon factory.
      *
      * @param metadataProv Metadata provider to use.
      * @param pokemonFact  Pokemon factory to use.
