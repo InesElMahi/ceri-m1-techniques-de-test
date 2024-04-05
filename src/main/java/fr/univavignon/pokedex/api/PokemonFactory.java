@@ -12,6 +12,9 @@ import java.util.Random;
  */
 public class PokemonFactory implements IPokemonFactory {
 
+    /**
+     * The metadata provider used for retrieving Pokemon metadata.
+     */
     private final IPokemonMetadataProvider metadataProvider;
 
     /**
@@ -39,9 +42,10 @@ public class PokemonFactory implements IPokemonFactory {
             PokemonMetadata metadata = metadataProvider.getPokemonMetadata(index);
             Random rand = new Random();
 
-            int ivAttaque = rand.nextInt(16);
-            int ivDefense = rand.nextInt(16);
-            int ivEndurance = rand.nextInt(16);
+            final int maxIV = 16; // Maximum IV value
+            int ivAttaque = rand.nextInt(maxIV);
+            int ivDefense = rand.nextInt(maxIV);
+            int ivEndurance = rand.nextInt(maxIV);
 
             double iv = calculerIV(ivAttaque, ivDefense, ivEndurance);
 
@@ -64,6 +68,7 @@ public class PokemonFactory implements IPokemonFactory {
      * @return The calculated IV value.
      */
     private double calculerIV(final int ivAttaque, final int ivDefense, final int ivEndurance) {
-        return ((double) (ivAttaque + ivDefense + ivEndurance) / 45) * 100;
+        final int maxIVValue = 45; // Maximum IV value sum
+        return ((double) (ivAttaque + ivDefense + ivEndurance) / maxIVValue) * 100;
     }
 }

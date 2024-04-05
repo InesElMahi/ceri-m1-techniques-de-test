@@ -29,7 +29,6 @@ public class Pokedex implements IPokedex {
      */
     private final List<Pokemon> pokemons = new ArrayList<>();
 
-
     /**
      * Constructs a Pokedex with the given metadata provider and Pokemon factory.
      *
@@ -81,6 +80,7 @@ public class Pokedex implements IPokedex {
         return pokemons.get(id);
     }
 
+
     /**
      * Returns an unmodifiable list of all Pokemon in the Pokedex.
      *
@@ -92,8 +92,6 @@ public class Pokedex implements IPokedex {
     }
 
     /**
-     * Returns an unmodifiable list of all Pokemon in the Pokedex, sorted using the specified comparator.
-     *
      * @param order The comparator used for sorting the Pokemon list.
      * @return An unmodifiable list of all Pokemon, sorted according to the specified comparator.
      */
@@ -122,7 +120,9 @@ public class Pokedex implements IPokedex {
             final int upgradeDust,
             final int upgradeCandy
     ) {
-        return pokemonFactory.createPokemon(index, combatPower, hitPoints, upgradeDust, upgradeCandy);
+        return pokemonFactory.createPokemon(
+                index, combatPower, hitPoints, upgradeDust, upgradeCandy
+        );
     }
 
 
@@ -141,7 +141,6 @@ public class Pokedex implements IPokedex {
             throw new PokedexException(
                     "Failed to retrieve metadata for Pokemon with index " + index + "."
             );
-
         }
     }
 }

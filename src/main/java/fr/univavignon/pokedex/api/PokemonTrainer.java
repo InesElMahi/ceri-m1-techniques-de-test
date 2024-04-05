@@ -11,13 +11,13 @@ package fr.univavignon.pokedex.api;
 public class PokemonTrainer {
 
     /** Trainer name. */
-    private final String name;
+    private final String trainerName;
 
     /** Trainer team. */
-    private final Team team;
+    private final Team trainerTeam;
 
     /** Trainer Pokedex. */
-    private final IPokedex pokedex;
+    private final IPokedex trainerPokedex;
 
     /**
      * Default constructor.
@@ -31,9 +31,9 @@ public class PokemonTrainer {
             final Team team,
             final IPokedex pokedex
     ) {
-        this.name = name;
-        this.team = team;
-        this.pokedex = pokedex;
+        this.trainerName = name;
+        this.trainerTeam = team;
+        this.trainerPokedex = pokedex;
     }
 
     /**
@@ -41,7 +41,7 @@ public class PokemonTrainer {
      * @return the name of the trainer.
      */
     public String getName() {
-        return name;
+        return trainerName;
     }
 
     /**
@@ -49,7 +49,7 @@ public class PokemonTrainer {
      * @return the team of the trainer.
      */
     public Team getTeam() {
-        return team;
+        return trainerTeam;
     }
 
     /**
@@ -57,7 +57,7 @@ public class PokemonTrainer {
      * @return the Pokedex of the trainer.
      */
     public IPokedex getPokedex() {
-        return pokedex;
+        return trainerPokedex;
     }
 
 }

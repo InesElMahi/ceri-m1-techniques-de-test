@@ -9,7 +9,12 @@ import java.util.Map;
  */
 public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 
+    /**
+     * Map storing Pokemon metadata with their index as the key.
+     */
     private final Map<Integer, PokemonMetadata> metadataMap;
+
+    private static final int MAX_POKEMON_INDEX = 150;
 
     /**
      * Constructor for PokemonMetadataProvider.
@@ -28,7 +33,7 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
      */
     @Override
     public PokemonMetadata getPokemonMetadata(final int index) throws PokedexException {
-        if (index <= 0 || index > 150) {
+        if (index <= 0 || index > MAX_POKEMON_INDEX) {
             throw new PokedexException("Invalid index: " + index);
         }
 
@@ -50,7 +55,7 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
      */
     public void addOrUpdateMetadata(final int index, final String name, final int attack,
                                     final int defense, final int stamina) {
-        if (index <= 0 || index > 150) {
+        if (index <= 0 || index > MAX_POKEMON_INDEX) {
             throw new IllegalArgumentException("Invalid index: " + index);
         }
         metadataMap.put(index, new PokemonMetadata(index, name, attack, defense, stamina));
