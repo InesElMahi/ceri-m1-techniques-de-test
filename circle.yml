@@ -16,7 +16,7 @@ jobs:
 
       - run:
           name: Run Unit Tests
-          command: mvn test
+          command: mvn clean test
 
       - run:
           name: Generate JaCoCo Coverage Report
