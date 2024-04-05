@@ -14,6 +14,9 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
      */
     private final Map<Integer, PokemonMetadata> metadataMap;
 
+    /**.
+     * Maximum index for Pokemon
+     */
     private static final int MAX_POKEMON_INDEX = 150;
 
     /**
@@ -29,17 +32,19 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
      *
      * @param index The index of the Pokémon in the Pokédex.
      * @return The metadata of the Pokémon corresponding to the given index.
-     * @throws PokedexException If the index is invalid or if metadata is not found.
+     * @throws PokedexException If index invalid or metadata not found.
      */
     @Override
-    public PokemonMetadata getPokemonMetadata(final int index) throws PokedexException {
+    public PokemonMetadata getPokemonMetadata(final int index)
+            throws PokedexException {
         if (index <= 0 || index > MAX_POKEMON_INDEX) {
             throw new PokedexException("Invalid index: " + index);
         }
 
         PokemonMetadata metadata = metadataMap.get(index);
         if (metadata == null) {
-            throw new PokedexException("Metadata not found for index: " + index);
+            throw new PokedexException("Metadata not found for index: "
+                    + index);
         }
         return metadata;
     }
@@ -53,11 +58,14 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
      * @param defense The defense value of the Pokémon.
      * @param stamina The stamina value of the Pokémon.
      */
-    public void addOrUpdateMetadata(final int index, final String name, final int attack,
+    public void addOrUpdateMetadata(final int index, final String name,
+                                    final int attack,
                                     final int defense, final int stamina) {
         if (index <= 0 || index > MAX_POKEMON_INDEX) {
-            throw new IllegalArgumentException("Invalid index: " + index);
+            throw new IllegalArgumentException("Invalid index: "
+                    + index);
         }
-        metadataMap.put(index, new PokemonMetadata(index, name, attack, defense, stamina));
+        metadataMap.put(index, new PokemonMetadata(index, name, attack,
+                defense, stamina));
     }
 }

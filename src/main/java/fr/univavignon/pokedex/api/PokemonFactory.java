@@ -20,14 +20,13 @@ public class PokemonFactory implements IPokemonFactory {
     /**
      * Constructs a PokemonFactory with the given metadata provider.
      *
-     * @param metadataProvider The metadata provider to use.
+     * @param provider The metadata provider to use.
      */
-    public PokemonFactory(final IPokemonMetadataProvider metadataProvider) {
-        this.metadataProvider = metadataProvider;
+    public PokemonFactory(final IPokemonMetadataProvider provider) {
+        this.metadataProvider = provider;
     }
 
     /**
-     * Creates a Pokemon instance with computed IVs based on the provided attributes.
      *
      * @param index The index of the Pokemon.
      * @param cp The combat power of the Pokemon.
@@ -37,38 +36,48 @@ public class PokemonFactory implements IPokemonFactory {
      * @return The created Pokemon instance.
      */
     @Override
-    public Pokemon createPokemon(final int index, final int cp, final int hp, final int dust, final int candy) {
+    public Pokemon createPokemon(final int index, final int cp, final int hp,
+                                 final int dust, final int candy) {
         try {
-            PokemonMetadata metadata = metadataProvider.getPokemonMetadata(index);
+            PokemonMetadata pokemonMetadata = metadataProvider
+                    .getPokemonMetadata(index);
+
             Random rand = new Random();
 
-            final int maxIV = 16; // Maximum IV value
-            int ivAttaque = rand.nextInt(maxIV);
-            int ivDefense = rand.nextInt(maxIV);
-            int ivEndurance = rand.nextInt(maxIV);
+            final int MAX_IV = 16; // Maximum IV value
+            int ivAttack = rand.nextInt(MAX_IV);
+            int ivDefense = rand.nextInt(MAX_IV);
+            int ivStamina = rand.nextInt(MAX_IV);
 
-            double iv = calculerIV(ivAttaque, ivDefense, ivEndurance);
+            double iv = calculateIV(ivAttack, ivDefense, ivStamina);
 
-            return new Pokemon(index, metadata.getName(), metadata.getAttack() + ivAttaque,
-                    metadata.getDefense() + ivDefense, metadata.getStamina() + ivEndurance,
+            return new Pokemon(index, pokemonMetadata.getName(),
+                    pokemonMetadata.getAttack() + ivAttack,
+                    pokemonMetadata.getDefense() + ivDefense,
+                    pokemonMetadata.getStamina() + ivStamina,
                     cp, hp, dust, candy, iv);
 
         } catch (PokedexException e) {
-            System.err.println("Error while retrieving Pokemon metadata: " + e.getMessage());
+            System.err.println("Error while retrieving Pokemon metadata: "
+                    + e.getMessage());
             return null;
         }
     }
 
     /**
-     * Calculates the IV (Individual Values) of a Pokemon based on its attack, defense, and endurance IVs.
+     * Calculates the IV of a Pokemon based on its attack
+     * defense, and stamina IVs.
      *
-     * @param ivAttaque The attack IV.
+     * @param ivAttack The attack IV.
      * @param ivDefense The defense IV.
-     * @param ivEndurance The endurance IV.
+     * @param ivStamina The stamina IV.
      * @return The calculated IV value.
      */
-    private double calculerIV(final int ivAttaque, final int ivDefense, final int ivEndurance) {
-        final int maxIVValue = 45; // Maximum IV value sum
-        return ((double) (ivAttaque + ivDefense + ivEndurance) / maxIVValue) * 100;
+    private double calculateIV(final int ivAttack,
+                               final int ivDefense, final int ivStamina) {
+        final int MAX_IV_VALUE = 45;
+        final int MAX_IV = 100;
+        return ((double) (ivAttack + ivDefense + ivStamina)
+                / MAX_IV_VALUE) * MAX_IV;
     }
 }

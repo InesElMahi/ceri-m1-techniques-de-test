@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class Pokedex implements IPokedex {
 
-    /**
-     * The IPokemonMetadataProvider instance used for retrieving Pokemon metadata.
+    /**.
+     * Provider for Pokemon Metadata
      */
     private final IPokemonMetadataProvider metadataProvider;
 
@@ -30,7 +30,7 @@ public class Pokedex implements IPokedex {
     private final List<Pokemon> pokemons = new ArrayList<>();
 
     /**
-     * Constructs a Pokedex with the given metadata provider and Pokemon factory.
+     *Constructs a Pokedex with given providers.
      *
      * @param metadataProv The metadata provider to use.
      * @param pokemonFact The Pokemon factory to use.
@@ -93,7 +93,7 @@ public class Pokedex implements IPokedex {
 
     /**
      * @param order The comparator used for sorting the Pokemon list.
-     * @return An unmodifiable list of all Pokemon, sorted according to the specified comparator.
+     * @return all Pokemon sorted by the specified comparator.
      */
     @Override
     public List<Pokemon> getPokemons(final Comparator<Pokemon> order) {
@@ -134,12 +134,14 @@ public class Pokedex implements IPokedex {
      * @throws PokedexException If metadata retrieval fails.
      */
     @Override
-    public PokemonMetadata getPokemonMetadata(final int index) throws PokedexException {
+    public PokemonMetadata getPokemonMetadata(final int index) throws
+            PokedexException {
         try {
             return metadataProvider.getPokemonMetadata(index);
         } catch (Exception e) {
             throw new PokedexException(
-                    "Failed to retrieve metadata for Pokemon with index " + index + "."
+                    "Failed to retrieve metadata for Pokemon with index "
+                            + index + "."
             );
         }
     }
