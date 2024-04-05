@@ -44,10 +44,10 @@ public class PokemonFactory implements IPokemonFactory {
 
             Random rand = new Random();
 
-            final int MAX_IV = 16; // Maximum IV value
-            int ivAttack = rand.nextInt(MAX_IV);
-            int ivDefense = rand.nextInt(MAX_IV);
-            int ivStamina = rand.nextInt(MAX_IV);
+            final int maxiv = 16;
+            int ivAttack = rand.nextInt(maxiv);
+            int ivDefense = rand.nextInt(maxiv);
+            int ivStamina = rand.nextInt(maxiv);
 
             double iv = calculateIV(ivAttack, ivDefense, ivStamina);
 
@@ -75,9 +75,9 @@ public class PokemonFactory implements IPokemonFactory {
      */
     private double calculateIV(final int ivAttack,
                                final int ivDefense, final int ivStamina) {
-        final int MAX_IV_VALUE = 45;
-        final int MAX_IV = 100;
+        final int maxivvalue = 45;
+        final int maxiv = 100;
         return ((double) (ivAttack + ivDefense + ivStamina)
-                / MAX_IV_VALUE) * MAX_IV;
+                / maxivvalue) * maxiv;
     }
 }

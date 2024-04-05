@@ -25,16 +25,16 @@ public final class Pokemon extends PokemonMetadata {
     /**
      * Default constructor.
      *
-     * @param index   Pokemon index.
-     * @param name    Pokemon name.
-     * @param attack  Attack level.
-     * @param defense Defense level.
-     * @param stamina Stamina level.
-     * @param cp      Pokemon cp.
-     * @param hp      Pokemon hp.
-     * @param dust    Required dust for upgrading this pokemon.
-     * @param candy   Required candy for upgrading this pokemon.
-     * @param iv      IV perfection percentage.
+     * @param index      Pokemon index.
+     * @param name       Pokemon name.
+     * @param attack     Attack level.
+     * @param defense    Defense level.
+     * @param stamina    Stamina level.
+     * @param cpValue    Pokemon cp.
+     * @param hpValue    Pokemon hp.
+     * @param dustValue  Required dust for upgrading this pokemon.
+     * @param candyValue Required candy for upgrading this pokemon.
+     * @param ivValue    IV perfection percentage.
      */
     public Pokemon(
             final int index,
@@ -42,17 +42,17 @@ public final class Pokemon extends PokemonMetadata {
             final int attack,
             final int defense,
             final int stamina,
-            final int cp,
-            final int hp,
-            final int dust,
-            final int candy,
-            final double iv) {
+            final int cpValue,
+            final int hpValue,
+            final int dustValue,
+            final int candyValue,
+            final double ivValue) {
         super(index, name, attack, defense, stamina);
-        this.cp = cp;
-        this.hp = hp;
-        this.dust = dust;
-        this.candy = candy;
-        this.iv = iv;
+        this.cp = cpValue;
+        this.hp = hpValue;
+        this.dust = dustValue;
+        this.candy = candyValue;
+        this.iv = ivValue;
     }
 
     /**
