@@ -19,7 +19,7 @@ public interface IPokedex extends IPokemonMetadataProvider, IPokemonFactory {
     int size();
 
     /**
-     * Adds the given <tt>pokemon</tt> to this pokedex and returns
+     * Adds the given <code>pokemon</code> to this pokedex and returns
      * it unique index.
      *
      * @param pokemon Pokemon to add to this pokedex.
@@ -28,7 +28,7 @@ public interface IPokedex extends IPokemonMetadataProvider, IPokemonFactory {
     int addPokemon(Pokemon pokemon);
 
     /**
-     * Locates the pokemon identified by the given <tt>id</tt>.
+     * Locates the pokemon identified by the given <code>id</code>.
      *
      * @param id Unique pokedex relative identifier.
      * @return Pokemon denoted by the given identifier.
