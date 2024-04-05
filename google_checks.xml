@@ -19,6 +19,10 @@
 <module name="Checker">
     <module name="SuppressWarningsFilter"/>
 
+    <module name="HiddenFieldCheck">
+        <property name="ignoreConstructorParameter" value="true"/>
+    </module>
+
     <property name="charset" value="UTF-8"/>
 
     <property name="severity" value="warning"/>
@@ -76,7 +80,8 @@
         <module name="NeedBraces">
             <property name="tokens"
                       value="LITERAL_DO, LITERAL_ELSE, LITERAL_FOR, LITERAL_IF, LITERAL_WHILE"/>
-        </module>
+
+    </module>
         <module name="LeftCurly">
             <property name="tokens"
                       value="ANNOTATION_DEF, CLASS_DEF, CTOR_DEF, ENUM_CONSTANT_DEF, ENUM_DEF,
