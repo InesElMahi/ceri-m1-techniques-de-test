@@ -2,38 +2,47 @@ package fr.univavignon.pokedex.api;
 
 /**
  * Factory class for creating Pokemon trainers.
- *
- * This class provides methods for creating Pokemon trainers.
- *
- * Author: Inès El Mahi
+ * Offers functionality to create trainers with specific teams and Pokedexes.
  */
 public class PokemonTrainerFactory implements IPokemonTrainerFactory {
 
+    /**
+     * Metadata provider used by the factory.
+     */
     private final IPokemonMetadataProvider metadataProvider;
 
+    /**
+     * Pokemon factory used by the factory.
+     */
     private final IPokemonFactory pokemonFactory;
 
     /**
-     * Constructs a PokemonTrainerFactory with the given metadata provider and Pokemon factory.
+     * Constructs a factory with a specified metadata provider and Pokemon factory.
      *
-     * @param metadataProvider The metadata provider to use.
-     * @param pokemonFactory   The Pokemon factory to use.
+     * @param metadataProv Metadata provider to use.
+     * @param pokemonFact  Pokemon factory to use.
      */
-    public PokemonTrainerFactory(final IPokemonMetadataProvider metadataProvider, final IPokemonFactory pokemonFactory) {
-        this.metadataProvider = metadataProvider;
-        this.pokemonFactory = pokemonFactory;
+    public PokemonTrainerFactory(final IPokemonMetadataProvider metadataProv,
+                                 final IPokemonFactory pokemonFact) {
+        this.metadataProvider = metadataProv;
+        this.pokemonFactory = pokemonFact;
     }
 
     /**
-     * Creates a Pokemon trainer with the specified name, team, and Pokedex factory.
+     * Creates a Pokemon trainer with a specified name, team, and Pokedex factory.
      *
-     * @param name           The name of the trainer.
-     * @param team           The team of the trainer.
-     * @param pokedexFactory The Pokedex factory to use for creating the trainer's Pokedex.
-     * @return The created Pokemon trainer.
+     * @param name            Trainer's name.
+     * @param team            Trainer's team.
+     * @param pokedexFactory  Factory for the trainer's Pokedex.
+     * @return Newly created Pokemon trainer.
      */
     @Override
-    public PokemonTrainer createTrainer(final String name, final Team team, final IPokedexFactory pokedexFactory) {
-        return new PokemonTrainer(name, team, pokedexFactory.createPokedex(metadataProvider, pokemonFactory));
+    public PokemonTrainer createTrainer(final String name, final Team team,
+                                        final IPokedexFactory pokedexFactory) {
+        IPokedex pokedex = pokedexFactory.createPokedex(
+                metadataProvider,
+                pokemonFactory
+        );
+        return new PokemonTrainer(name, team, pokedex);
     }
 }
