@@ -6,7 +6,7 @@
     <copyLibs>true</copyLibs>
     <option name="thirdPartyClasspath" />
     <option name="activeLocationIds">
-      <option value="c22d49a7-9c60-4453-b6be-dbfa7495dbff" />
+      <option value="dafed903-260d-4894-a125-ed0fc1d7b58d" />
     </option>
     <option name="locations">
       <list>
@@ -14,6 +14,15 @@
         <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
         <ConfigurationLocation id="c22d49a7-9c60-4453-b6be-dbfa7495dbff" type="LOCAL_FILE" scope="All" description="google_checks">
           $USER_HOME$/Downloads/google_checks.xml
+          <option name="properties">
+            <map>
+              <entry key="org.checkstyle.google.suppressionfilter.config" value="" />
+              <entry key="org.checkstyle.google.suppressionxpathfilter.config" value="" />
+            </map>
+          </option>
+        </ConfigurationLocation>
+        <ConfigurationLocation id="dafed903-260d-4894-a125-ed0fc1d7b58d" type="LOCAL_FILE" scope="All" description="google_checks">
+          $PROJECT_DIR$/google_checks.xml
           <option name="properties">
             <map>
               <entry key="org.checkstyle.google.suppressionfilter.config" value="" />

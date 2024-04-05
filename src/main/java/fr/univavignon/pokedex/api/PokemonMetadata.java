@@ -25,41 +25,64 @@ public class PokemonMetadata {
     /**
      * Default constructor.
      *
-     * @param index Pokemon index.
-     * @param name Pokemon name.
-     * @param attack Attack level.
-     * @param defense Defense level.
-     * @param stamina Stamina level.
+     * @param aIndex Pokemon index.
+     * @param aName Pokemon name.
+     * @param aAttack Attack level.
+     * @param aDefense Defense level.
+     * @param aStamina Stamina level.
      */
-    public PokemonMetadata(final int index, final String name, final int attack, final int defense, final int stamina) {
-        this.index = index;
-        this.name = name;
-        this.attack = attack;
-        this.defense = defense;
-        this.stamina = stamina;
+    public PokemonMetadata(
+            final int aIndex,
+            final String aName,
+            final int aAttack,
+            final int aDefense,
+            final int aStamina
+    ) {
+        this.index = aIndex;
+        this.name = aName;
+        this.attack = aAttack;
+        this.defense = aDefense;
+        this.stamina = aStamina;
     }
 
-    /** Index getter. */
+
+
+    /**
+     * Index getter.
+     * @return The index of the Pokemon.
+     */
     public int getIndex() {
         return index;
     }
 
-    /** Name getter. */
+    /**
+     * Name getter.
+     * @return The name of the Pokemon.
+     */
     public String getName() {
         return name;
     }
 
-    /** Attack level getter. */
+    /**
+     * Attack level getter.
+     * @return The attack level of the Pokemon.
+     */
     public int getAttack() {
         return attack;
     }
 
-    /** Defense level getter. */
+    /**
+     * Defense level getter.
+     * @return The defense level of the Pokemon.
+     */
     public int getDefense() {
         return defense;
     }
 
-    /** Stamina level getter. */
+    /**
+     * Stamina level getter.
+     * @return The stamina level of the Pokemon.
+     */
     public int getStamina() {
         return stamina;
     }

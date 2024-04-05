@@ -14,9 +14,21 @@ import java.util.List;
  */
 public class Pokedex implements IPokedex {
 
+    /**
+     * The IPokemonMetadataProvider instance used for retrieving Pokemon metadata.
+     */
     private final IPokemonMetadataProvider metadataProvider;
+
+    /**
+     * The IPokemonFactory instance used for creating Pokemon instances.
+     */
     private final IPokemonFactory pokemonFactory;
+
+    /**
+     * The list of Pokemons in the Pokedex.
+     */
     private final List<Pokemon> pokemons = new ArrayList<>();
+
 
     /**
      * Constructs a Pokedex with the given metadata provider and Pokemon factory.
@@ -24,7 +36,10 @@ public class Pokedex implements IPokedex {
      * @param metadataProv The metadata provider to use.
      * @param pokemonFact The Pokemon factory to use.
      */
-    public Pokedex(final IPokemonMetadataProvider metadataProv, final IPokemonFactory pokemonFact) {
+    public Pokedex(
+            final IPokemonMetadataProvider metadataProv,
+            final IPokemonFactory pokemonFact
+    ) {
         this.metadataProvider = metadataProv;
         this.pokemonFactory = pokemonFact;
     }
@@ -100,10 +115,16 @@ public class Pokedex implements IPokedex {
      * @return The newly created Pokemon instance.
      */
     @Override
-    public Pokemon createPokemon(final int index, final int combatPower, final int hitPoints,
-                                 final int upgradeDust, final int upgradeCandy) {
+    public Pokemon createPokemon(
+            final int index,
+            final int combatPower,
+            final int hitPoints,
+            final int upgradeDust,
+            final int upgradeCandy
+    ) {
         return pokemonFactory.createPokemon(index, combatPower, hitPoints, upgradeDust, upgradeCandy);
     }
+
 
     /**
      * Retrieves the metadata for a Pokemon with the specified index.
@@ -117,7 +138,10 @@ public class Pokedex implements IPokedex {
         try {
             return metadataProvider.getPokemonMetadata(index);
         } catch (Exception e) {
-            throw new PokedexException("Failed to retrieve metadata for Pokemon with index " + index + ".");
+            throw new PokedexException(
+                    "Failed to retrieve metadata for Pokemon with index " + index + "."
+            );
+
         }
     }
 }

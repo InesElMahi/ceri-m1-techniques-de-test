@@ -26,23 +26,36 @@ public class PokemonTrainer {
      * @param team Trainer team.
      * @param pokedex Trainer Pokedex.
      */
-    public PokemonTrainer(final String name, final Team team, final IPokedex pokedex) {
+    public PokemonTrainer(
+            final String name,
+            final Team team,
+            final IPokedex pokedex
+    ) {
         this.name = name;
         this.team = team;
         this.pokedex = pokedex;
     }
 
-    /** Name getter. */
+    /**
+     * Name getter.
+     * @return the name of the trainer.
+     */
     public String getName() {
         return name;
     }
 
-    /** Team getter. */
+    /**
+     * Team getter.
+     * @return the team of the trainer.
+     */
     public Team getTeam() {
         return team;
     }
 
-    /** Pokedex getter. */
+    /**
+     * Pokedex getter.
+     * @return the Pokedex of the trainer.
+     */
     public IPokedex getPokedex() {
         return pokedex;
     }
