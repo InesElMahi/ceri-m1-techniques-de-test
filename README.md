@@ -15,6 +15,8 @@ l'utilisation de **Codecov** a joué un rôle crucial en identifiant les zones d
 # CodeCov
 [![codecov](https://codecov.io/gh/InesElMahi/ceri-m1-techniques-de-test/graph/badge.svg?token=EPOYW3G6KB)](https://codecov.io/gh/InesElMahi/ceri-m1-techniques-de-test)<br><br>
 
+
+**Checkstyle** vérifie que le code suit bien des règles précises, le rendant plus propre et facile à comprendre,il crée un rapport qui montre où le code doit être amélioré et tout cela pour s'assurer que le code reste de bonne qualité et facile à travailler pour tout le monde.
 # CheckStyle
 ![CheckStyle](badges/checkstyle-result.svg)
 
