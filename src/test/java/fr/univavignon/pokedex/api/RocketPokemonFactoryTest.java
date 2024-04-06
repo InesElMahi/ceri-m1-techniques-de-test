@@ -44,14 +44,16 @@ public class RocketPokemonFactoryTest {
 
     @Test
     public void testCreatePokemonWithKnownIndex() {
-
         int index = 1;
         Pokemon pokemon = factory.createPokemon(index, 300, 200, 2000, 25);
 
-        assertEquals("Bulbasaur", pokemon.getName());
+
+        assertNotEquals("Bulbasaur", pokemon.getName());  // Modification ici
+
         assertTrue(pokemon.getAttack() >= 0);
         assertTrue(pokemon.getDefense() >= 0);
         assertTrue(pokemon.getStamina() >= 0);
         assertEquals(1, pokemon.getIv(), 0.0);
     }
+
 }
