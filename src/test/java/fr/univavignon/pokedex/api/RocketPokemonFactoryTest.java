@@ -41,8 +41,8 @@ public class RocketPokemonFactoryTest{
 
     @Test
     void testConsistencyOfPokemonMetadata() {
-        PokemonMetadata expectedMetadata = new PokemonMetadata(1, "Bulbasaur", 50, 50, 50);
-        Pokemon createdPokemon = pokemonFactory.createPokemon(1, 500, 50, 1000, 10);
+        PokemonMetadata expectedMetadata = new PokemonMetadata(1, "Bulbasaur", 126, 100, 90);
+        Pokemon createdPokemon = pokemonFactory.createPokemon(1, 2729, 202, 5000, 4);
         assertEquals(expectedMetadata.getIndex(), createdPokemon.getIndex(), "L'index des métadonnées devrait correspondre");
         assertEquals(expectedMetadata.getName(), createdPokemon.getName(), "Le nom devrait correspondre");
         assertEquals(expectedMetadata.getAttack(), createdPokemon.getAttack(), "L'attaque devrait correspondre");
