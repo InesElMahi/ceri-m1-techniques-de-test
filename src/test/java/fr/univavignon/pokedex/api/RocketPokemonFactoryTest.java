@@ -49,16 +49,19 @@ public class RocketPokemonFactoryTest{
         assertEquals(expectedMetadata.getStamina(), createdPokemon.getStamina(), "L'endurance devrait correspondre");
     }
 
+
     @Test
     void testPokemonCreationWithInvalidValues() {
         assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(1, -1, -1, -1, -1),
                 "Devrait lancer IllegalArgumentException pour des valeurs invalides");
     }
 
+
     @Test
     void testCreationDePokemonRenvoieNull() {
         assertNull(pokemonFactory.createPokemon(-2, 10000, 10000, 10000, 10000), "La création d'un Pokemon avec des paramètres invalides devrait renvoyer null");
     }
+
 
     @Test
     void testPokemonCandyGetter() {
