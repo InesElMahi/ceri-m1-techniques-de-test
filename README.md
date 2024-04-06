@@ -10,7 +10,7 @@ M1 ia classique  <br><br>
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/InesElMahi/ceri-m1-techniques-de-test/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/InesElMahi/ceri-m1-techniques-de-test/tree/master)  <br><br>
 
 
-l'utilisation de **Codecov** a joué un rôle crucial en identifiant les zones de code non couvertes par les tests ce qui a encouragé une amélioration continue de la qualité du code grâce, soutenant ainsi des pratiques de développement plus robustes.  
+l'utilisation de **Codecov** a joué un rôle crucial en identifiant les zones de code non couvertes par les tests ce qui a encouragé une amélioration continue de la qualité du code, soutenant ainsi des pratiques de développement plus robustes.  
 
 # CodeCov
 [![codecov](https://codecov.io/gh/InesElMahi/ceri-m1-techniques-de-test/graph/badge.svg?token=EPOYW3G6KB)](https://codecov.io/gh/InesElMahi/ceri-m1-techniques-de-test)<br><br>
@@ -18,8 +18,10 @@ l'utilisation de **Codecov** a joué un rôle crucial en identifiant les zones d
 
 **Checkstyle** vérifie que le code suit bien des règles précises, le rendant plus propre et facile à comprendre,il crée un rapport qui montre où le code doit être amélioré et tout cela pour s'assurer que le code reste de bonne qualité et facile à travailler pour tout le monde.
 # CheckStyle
-![CheckStyle](badges/checkstyle-result.svg)
+![CheckStyle](badges/checkstyle-result.svg)<br><br>
 
+
+**Javadoc** est générée automatiquement, assurant que toute modification ou ajout de code soit accompagné de sa documentation. Cette documentation est ensuite déployée sur la branche gh-pages,garantissant ainsi une documentation toujours actuelle et facilement accessible.
 # Javadoc
 [![JavaDoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://ineselmahi.github.io/ceri-m1-techniques-de-test/)
 
