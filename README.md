@@ -2,18 +2,18 @@
 
 
 Inès El Mahi
-M1 ia classique  
+M1 ia classique  <br><br>
 
 **CircleCI** automatise les tests et le déploiement, fournissant des retours rapides sur les modifications apportées au code.
 
 # CircleCI
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/InesElMahi/ceri-m1-techniques-de-test/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/InesElMahi/ceri-m1-techniques-de-test/tree/master)  
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/InesElMahi/ceri-m1-techniques-de-test/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/InesElMahi/ceri-m1-techniques-de-test/tree/master)  <br><br>
 
 
 l'utilisation de **Codecov** a joué un rôle crucial en identifiant les zones de code non couvertes par les tests ce qui a encouragé une amélioration continue de la qualité du code grâce, soutenant ainsi des pratiques de développement plus robustes.  
 
 # CodeCov
-[![codecov](https://codecov.io/gh/InesElMahi/ceri-m1-techniques-de-test/graph/badge.svg?token=EPOYW3G6KB)](https://codecov.io/gh/InesElMahi/ceri-m1-techniques-de-test)
+[![codecov](https://codecov.io/gh/InesElMahi/ceri-m1-techniques-de-test/graph/badge.svg?token=EPOYW3G6KB)](https://codecov.io/gh/InesElMahi/ceri-m1-techniques-de-test)<br><br>
 
 # CheckStyle
 ![CheckStyle](badges/checkstyle-result.svg)
