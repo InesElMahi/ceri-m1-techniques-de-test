@@ -36,3 +36,4 @@ workflows:
             branches:
               only:
                 - master
+                - /^((?!gh-pages).)*$/
