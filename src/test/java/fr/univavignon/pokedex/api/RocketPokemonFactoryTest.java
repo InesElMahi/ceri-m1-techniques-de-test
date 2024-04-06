@@ -61,3 +61,4 @@ public class RocketPokemonFactoryTest{
         assertEquals(4, aquali.getCandy(), "Le nombre de candies de Vaporeon devrait être correct");
     }
 }
+
