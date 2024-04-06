@@ -9,7 +9,7 @@ import org.apache.commons.collections4.map.UnmodifiableMap;
 /**
  * Factory for creating Pokemon instances with potentially randomized stats.
  */
-public class RocketPokemonFactory implements IPokemonFactory {
+public final class RocketPokemonFactory implements IPokemonFactory {
 
     /**
      * Default value for Pokemon stats.
@@ -45,7 +45,7 @@ public class RocketPokemonFactory implements IPokemonFactory {
     }
 
     /**
-     * Creates a Pokemon instance.
+     * Creates a Pokemon.
      * @param index The index of the Pokemon.
      * @param cp The combat power of the Pokemon.
      * @param hp The hit points of the Pokemon.
