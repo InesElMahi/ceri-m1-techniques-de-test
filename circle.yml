@@ -23,14 +23,16 @@ jobs:
           command: mvn jacoco:report
 
       - run:
-          name: List JaCoCo Report
-          command: ls -la target/site/jacoco/ || true
+          name: List JaCoCo Report Before Upload
+          command: |
+            echo "Listing JaCoCo report directory:"
+            ls -la target/site/jacoco/ || echo "JaCoCo report directory does not exist."
 
       - run:
-           name: Upload Coverage to Codecov
-           command: |
-                  bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN -f target/site/jacoco/jacoco.xml || echo "Codecov did not find the report"
-
+          name: Upload Coverage to Codecov
+          command: |
+            echo "Uploading JaCoCo report to Codecov"
+            bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN -f target/site/jacoco/jacoco.xml || echo "Codecov did not find the report"
 
 workflows:
   version: 2
