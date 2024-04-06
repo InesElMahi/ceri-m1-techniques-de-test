@@ -45,9 +45,11 @@ public class RocketPokemonFactoryTest{
         Pokemon createdPokemon = pokemonFactory.createPokemon(1, 600, 100, 4000, 4);
         assertEquals(expectedMetadata.getIndex(), createdPokemon.getIndex(), "L'index des métadonnées devrait correspondre");
         assertEquals(expectedMetadata.getName(), createdPokemon.getName(), "Le nom devrait correspondre");
+        assertEquals(expectedMetadata.getAttack(), createdPokemon.getAttack(), "L'attaque devrait correspondre");
         assertEquals(expectedMetadata.getDefense(), createdPokemon.getDefense(), "La défense devrait correspondre");
         assertEquals(expectedMetadata.getStamina(), createdPokemon.getStamina(), "L'endurance devrait correspondre");
     }
+
 
 
     @Test
