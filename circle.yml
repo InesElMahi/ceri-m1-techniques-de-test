@@ -23,9 +23,14 @@ jobs:
           command: mvn jacoco:report
 
       - run:
-          name: Upload Coverage to Codecov
-          command: |
-            bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
+          name: List JaCoCo Report
+          command: ls -la target/site/jacoco/ || true
+
+      - run:
+           name: Upload Coverage to Codecov
+           command: |
+                  bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN -f target/site/jacoco/jacoco.xml || echo "Codecov did not find the report"
+
 
 workflows:
   version: 2
