@@ -26,6 +26,7 @@ public class RocketPokemonFactoryTest{
         assertEquals("Bulbasaur", bulbasaur.getName(), "Le nom de Bulbasaur devrait correspondre");
         assertEquals(600, bulbasaur.getCp(), "Les CP de Bulbasaur devraient correspondre");
         assertEquals(100, bulbasaur.getHp(), "Les HP de Bulbasaur devraient correspondre");
+        assertEquals(0.56, bulbasaur.getIv(), "L'IV de Bulbasaur devrait correspondre");
         assertEquals(4000, bulbasaur.getDust(), "La poussière du Pokémon devrait être de 4000");
 
         Pokemon vaporeon = pokemonFactory.createPokemon(133, 2729, 202, 5000, 4);
@@ -34,18 +35,25 @@ public class RocketPokemonFactoryTest{
         assertEquals("Vaporeon", vaporeon.getName(), "Le nom de Vaporeon devrait correspondre");
         assertEquals(2729, vaporeon.getCp(), "Les CP de Vaporeon devraient correspondre");
         assertEquals(202, vaporeon.getHp(), "Les HP de Vaporeon devraient correspondre");
+        assertEquals(1.0, vaporeon.getIv(), "L'IV de Vaporeon devrait être parfait");
         assertEquals(5000, vaporeon.getDust(), "La poussière du Pokémon devrait être de 5000");
     }
 
     @Test
     void testConsistencyOfPokemonMetadata() {
-        PokemonMetadata expectedMetadata = new PokemonMetadata(1, "Bulbasaur", 50, 50, 50); // Le nom est "Bulbasaur"
+        PokemonMetadata expectedMetadata = new PokemonMetadata(1, "ExpectedName", 50, 50, 50);
         Pokemon createdPokemon = pokemonFactory.createPokemon(1, 500, 50, 1000, 10);
         assertEquals(expectedMetadata.getIndex(), createdPokemon.getIndex(), "L'index des métadonnées devrait correspondre");
         assertEquals(expectedMetadata.getName(), createdPokemon.getName(), "Le nom devrait correspondre");
         assertEquals(expectedMetadata.getAttack(), createdPokemon.getAttack(), "L'attaque devrait correspondre");
         assertEquals(expectedMetadata.getDefense(), createdPokemon.getDefense(), "La défense devrait correspondre");
         assertEquals(expectedMetadata.getStamina(), createdPokemon.getStamina(), "L'endurance devrait correspondre");
+    }
+
+    @Test
+    void testPokemonCreationWithInvalidValues() {
+        assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(1, -1, -1, -1, -1),
+                "Devrait lancer IllegalArgumentException pour des valeurs invalides");
     }
 
     @Test
