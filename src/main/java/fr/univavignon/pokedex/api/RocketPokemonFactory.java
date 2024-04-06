@@ -45,7 +45,7 @@ public final class RocketPokemonFactory implements IPokemonFactory {
     }
 
     /**
-     * Creates a Pokemon instance with the specified parameters.
+     * Creates a Pokemon instance.
      * @param index The index of the Pokemon.
      * @param cp The combat power of the Pokemon.
      * @param hp The hit points of the Pokemon.
