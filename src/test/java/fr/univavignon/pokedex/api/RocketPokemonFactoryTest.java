@@ -14,7 +14,7 @@ public class RocketPokemonFactoryTest{
     void setUp() {
         pokemonFactory = new RocketPokemonFactory();
 
-        bulbizarre = new Pokemon(1, "Bulbasaur", 126, 100, 90, 600, 100, 4000, 4, 0.56);
+        bulbizarre = new Pokemon(1, "Bulbasaur", 126, 100, 90, 600, 100, 4000, 4, 1.0);
         aquali = new Pokemon(133, "Vaporeon", 186, 168, 260, 2729, 202, 5000, 4, 1.0);
     }
 
@@ -26,7 +26,7 @@ public class RocketPokemonFactoryTest{
         assertEquals("Bulbasaur", bulbasaur.getName(), "Le nom de Bulbasaur devrait correspondre");
         assertEquals(600, bulbasaur.getCp(), "Les CP de Bulbasaur devraient correspondre");
         assertEquals(100, bulbasaur.getHp(), "Les HP de Bulbasaur devraient correspondre");
-        assertEquals(0.56, bulbasaur.getIv(), "L'IV de Bulbasaur devrait correspondre");
+        assertEquals(1.0, bulbasaur.getIv(), "L'IV de Bulbasaur devrait correspondre");
         assertEquals(4000, bulbasaur.getDust(), "La poussière du Pokémon devrait être de 4000");
 
         Pokemon vaporeon = pokemonFactory.createPokemon(133, 2729, 202, 5000, 4);
@@ -41,7 +41,7 @@ public class RocketPokemonFactoryTest{
 
     @Test
     void testConsistencyOfPokemonMetadata() {
-        PokemonMetadata expectedMetadata = new PokemonMetadata(1, "ExpectedName", 50, 50, 50);
+        PokemonMetadata expectedMetadata = new PokemonMetadata(1, "Bulbasaur", 50, 50, 50);
         Pokemon createdPokemon = pokemonFactory.createPokemon(1, 500, 50, 1000, 10);
         assertEquals(expectedMetadata.getIndex(), createdPokemon.getIndex(), "L'index des métadonnées devrait correspondre");
         assertEquals(expectedMetadata.getName(), createdPokemon.getName(), "Le nom devrait correspondre");
