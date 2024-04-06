@@ -51,7 +51,6 @@ public class RocketPokemonFactoryTest{
     }
 
 
-
     @Test
     void testPokemonCreationWithInvalidValues() {
         assertThrows(IllegalArgumentException.class, () -> pokemonFactory.createPokemon(1, -1, -1, -1, -1),
