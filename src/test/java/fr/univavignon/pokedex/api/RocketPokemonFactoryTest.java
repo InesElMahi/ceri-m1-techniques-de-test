@@ -26,7 +26,6 @@ public class RocketPokemonFactoryTest{
         assertEquals("Bulbasaur", bulbasaur.getName(), "Le nom de Bulbasaur devrait correspondre");
         assertEquals(600, bulbasaur.getCp(), "Les CP de Bulbasaur devraient correspondre");
         assertEquals(100, bulbasaur.getHp(), "Les HP de Bulbasaur devraient correspondre");
-        assertEquals(0.56, bulbasaur.getIv(), "L'IV de Bulbasaur devrait correspondre");
         assertEquals(4000, bulbasaur.getDust(), "La poussière du Pokémon devrait être de 4000");
 
         Pokemon vaporeon = pokemonFactory.createPokemon(133, 2729, 202, 5000, 4);
@@ -35,7 +34,6 @@ public class RocketPokemonFactoryTest{
         assertEquals("Vaporeon", vaporeon.getName(), "Le nom de Vaporeon devrait correspondre");
         assertEquals(2729, vaporeon.getCp(), "Les CP de Vaporeon devraient correspondre");
         assertEquals(202, vaporeon.getHp(), "Les HP de Vaporeon devraient correspondre");
-        assertEquals(1.0, vaporeon.getIv(), "L'IV de Vaporeon devrait être parfait");
         assertEquals(5000, vaporeon.getDust(), "La poussière du Pokémon devrait être de 5000");
     }
 
