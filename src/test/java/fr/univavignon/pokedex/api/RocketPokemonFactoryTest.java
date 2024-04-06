@@ -20,7 +20,7 @@ public class RocketPokemonFactoryTest{
 
     @Test
     void testCreationPokemon() {
-        Pokemon bulbasaur = pokemonFactory.createPokemon(1, 600, 100, 5000, 50);
+        Pokemon bulbasaur = pokemonFactory.createPokemon(1, 600, 100, 4000, 4);
         assertNotNull(bulbasaur, "Bulbasaur ne devrait pas être null");
         assertEquals(1, bulbasaur.getIndex(), "L'index de Bulbasaur devrait correspondre");
         assertEquals("Bulbasaur", bulbasaur.getName(), "Le nom de Bulbasaur devrait correspondre");
