@@ -1,4 +1,4 @@
-package fr.univavignon.pokedex.api;
+/* package fr.univavignon.pokedex.api;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,17 +9,17 @@ import org.apache.commons.collections4.map.UnmodifiableMap;
 /**
  * Factory for creating Pokemon instances with potentially randomized stats.
  */
-public final class RocketPokemonFactory implements IPokemonFactory {
+/* public final class RocketPokemonFactory implements IPokemonFactory {
 
     /**
      * Default value for Pokemon stats.
      */
-     private static final int DEFAULT_STAT_VALUE = 1000;
+    /* private static final int DEFAULT_STAT_VALUE = 1000;
 
     /**
      * Map associating Pokemon index to their names.
      */
-    private static final Map<Integer, String> INDEX_TO_NAME;
+    /* private static final Map<Integer, String> INDEX_TO_NAME;
 
     static {
         Map<Integer, String> aMap = new HashMap<>();
@@ -34,7 +34,7 @@ public final class RocketPokemonFactory implements IPokemonFactory {
      * Generates a random stat for a Pokémon.
      * @return the generated random stat.
      */
-    private static int generateRandomStat() {
+   /* private static int generateRandomStat() {
         int total = 0;
         for (int i = 0; i < DEFAULT_STAT_VALUE; i++) {
             Random rn = new Random();
@@ -53,7 +53,7 @@ public final class RocketPokemonFactory implements IPokemonFactory {
      * @param candy The candy cost of the Pokemon.
      * @return The created Pokemon.
      */
-   @Override
+  /*  @Override
     public Pokemon createPokemon(final int index, final int cp,
                                        final int hp,
                                        final int dust, final int candy) {
@@ -82,4 +82,4 @@ public final class RocketPokemonFactory implements IPokemonFactory {
                 cp, hp, dust, candy, iv);
     }
 }
-
+*/
