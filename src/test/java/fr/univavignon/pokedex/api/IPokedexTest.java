@@ -2,7 +2,7 @@ package fr.univavignon.pokedex.api;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -237,11 +237,20 @@ public class IPokedexTest {
                 "Demander un Pokémon avec un ID supérieur ou égal à la taille de la liste devrait lever une PokedexException.");
     }
 
-    public void testPokemonComparatorGetDelegate() {
+    @Test
+    public void testSortPokemonUsingComparators() {
+        List<Pokemon> pokemons = Arrays.asList(
+                new Pokemon(0, "Pikachu", 55, 40, 90, 260, 35, 500, 50, 0.6),
+                new Pokemon(1, "Bulbasaur", 45, 49, 45, 230, 30, 500, 50, 0.5)
+        );
 
-        assertNotNull(PokemonComparators.NAME.getDelegate(), "Le délégué pour le comparateur NAME ne devrait pas être null.");
-        assertNotNull(PokemonComparators.INDEX.getDelegate(), "Le délégué pour le comparateur INDEX ne devrait pas être null.");
-        assertNotNull(PokemonComparators.CP.getDelegate(), "Le délégué pour le comparateur CP ne devrait pas être null.");
+        List<Pokemon> sortedByName = new ArrayList<>(pokemons);
+        sortedByName.sort(PokemonComparators.NAME.getDelegate());
+
+        assertEquals("Bulbasaur", sortedByName.get(0).getName(), "Bulbasaur should be first when sorted by NAME.");
+        assertEquals("Pikachu", sortedByName.get(1).getName(), "Pikachu should be second when sorted by NAME.");
+
+
     }
 
 
