@@ -237,5 +237,12 @@ public class IPokedexTest {
                 "Demander un Pokémon avec un ID supérieur ou égal à la taille de la liste devrait lever une PokedexException.");
     }
 
+    public void testPokemonComparatorGetDelegate() {
 
-}
+        assertNotNull(PokemonComparators.NAME.getDelegate(), "Le délégué pour le comparateur NAME ne devrait pas être null.");
+        assertNotNull(PokemonComparators.INDEX.getDelegate(), "Le délégué pour le comparateur INDEX ne devrait pas être null.");
+        assertNotNull(PokemonComparators.CP.getDelegate(), "Le délégué pour le comparateur CP ne devrait pas être null.");
+    }
+
+
+    }
