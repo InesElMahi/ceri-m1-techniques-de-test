@@ -1,4 +1,4 @@
-/** package fr.univavignon.pokedex.api;
+ package fr.univavignon.pokedex.api;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -70,4 +70,3 @@ public class RocketPokemonFactoryTest{
         assertEquals(4, aquali.getCandy(), "Le nombre de candies de Vaporeon devrait être correct");
     }
 }
-*/
