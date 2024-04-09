@@ -16,6 +16,8 @@ public class IPokedexTest {
     private Pokemon pikachu;
     private Pokemon bulbasaur;
 
+
+    // Mocks initiaux
     @BeforeEach
     public void setup() {
         pokedex = mock(IPokedex.class);
@@ -40,6 +42,7 @@ public class IPokedexTest {
         }
     }
 
+    // Mocks initiaux
     @Test
     public void testAddPokemon() {
 
@@ -48,12 +51,14 @@ public class IPokedexTest {
         assertNotEquals(indexPikachu, indexBulbasaur, "chaque Pokemon doit avoir un unique index.");
     }
 
+    // Mocks initiaux
     @Test
     public void testGetSize() {
         // On test la taille du Pokedex
         assertEquals(2, pokedex.size());
     }
 
+    // Mocks initiaux
     @Test
     public void testGetPokemonValidIndex() {
 
@@ -68,6 +73,7 @@ public class IPokedexTest {
     }
 
 
+    // Mocks initiaux
     @Test
     public void testGetPokemons() {
         List<Pokemon> pokemons = pokedex.getPokemons();
@@ -75,12 +81,14 @@ public class IPokedexTest {
         assertEquals(2, pokemons.size());
     }
 
+    // Mocks initiaux
     @Test
     public void testGetPokemonThrowsException() {
         // Test pour vérifier le comportement lorsqu'un index invalide est utilisé
         assertThrows(PokedexException.class, () -> pokedex.getPokemon(-1));
     }
 
+// Mocks initiaux
 
     @Test
     public void testGetPokemonsSortedByName() {
@@ -92,6 +100,7 @@ public class IPokedexTest {
         assertTrue(comparisonResultName < 0, "Bulbasaur devrait venir avant Pikachu lors du tri par nom.");
     }
 
+    // Mocks initiaux
     @Test
     public void testGetPokemonsSortedByIndex() {
         when(pokedex.getPokemons(PokemonComparators.INDEX)).thenReturn(Arrays.asList(pikachu, bulbasaur));
@@ -116,6 +125,7 @@ public class IPokedexTest {
 
     }
 
+    // Nouveau mock utilisé dans cette méthode
     @Test
     public void testCreatePokemonHandlesPokedexException() throws PokedexException {
 
@@ -130,6 +140,7 @@ public class IPokedexTest {
     }
 
 
+    // Nouveau mock utilisé dans cette méthode
     @Test
     public void testGetPokemonMetadataFailure() throws PokedexException {
         IPokemonMetadataProvider mockMetadataProvider = mock(IPokemonMetadataProvider.class);
@@ -142,6 +153,7 @@ public class IPokedexTest {
         assertThrows(PokedexException.class, () -> pokedex.getPokemonMetadata(invalidIndex), "Devrait lancer une PokedexException en cas d'échec de récupération des métadonnées");
     }
 
+    // Nouveau mock utilisé dans cette méthode
     @Test
     public void testGetPokemonByIdWithRealInstance() throws PokedexException {
         IPokemonMetadataProvider metadataProvider = mock(IPokemonMetadataProvider.class);
@@ -158,6 +170,7 @@ public class IPokedexTest {
         assertEquals(bulbasaur, pokedex.getPokemon(bulbasaurId), "Le Pokémon récupéré avec l'ID devrait être Bulbasaur.");
     }
 
+    // Nouveau mock utilisé dans cette méthode
     @Test
     public void testGetPokemonsReturnsUnmodifiableList() throws PokedexException {
 
@@ -177,6 +190,7 @@ public class IPokedexTest {
         assertNotNull(exception, "Une exception devrait être levée lors de la tentative de modification de la liste.");
     }
 
+    // Nouveau mock utilisé dans cette méthode
     @Test
     public void testGetPokemonsSortedAndUnmodifiable() throws PokedexException {
 
@@ -196,6 +210,8 @@ public class IPokedexTest {
         assertThrows(UnsupportedOperationException.class, () -> sortedPokemons.add(new Pokemon(3, "Pikachu", 55, 40, 90, 260, 35, 500, 50, 0.8)));
     }
 
+
+    // Nouveau mock utilisé dans cette méthode
     @Test
     public void testGetPokemonMetadata() throws PokedexException {
         IPokemonMetadataProvider mockMetadataProvider = mock(IPokemonMetadataProvider.class);
@@ -211,6 +227,8 @@ public class IPokedexTest {
         verify(mockMetadataProvider).getPokemonMetadata(testIndex);
     }
 
+
+    // Nouveau mock utilisé dans cette méthode
     @Test
     public void testGetPokemonWithNegativeIdThrowsException() {
         IPokemonMetadataProvider mockMetadataProvider = mock(IPokemonMetadataProvider.class);
@@ -223,6 +241,8 @@ public class IPokedexTest {
                 "Demander un Pokémon avec un ID négatif devrait lever une PokedexException.");
     }
 
+
+    // Nouveau mock utilisé dans cette méthode
     @Test
     public void testGetPokemonWithIdBeyondSizeThrowsException() throws PokedexException {
         IPokemonMetadataProvider mockMetadataProvider = mock(IPokemonMetadataProvider.class);
@@ -237,6 +257,8 @@ public class IPokedexTest {
                 "Demander un Pokémon avec un ID supérieur ou égal à la taille de la liste devrait lever une PokedexException.");
     }
 
+
+    // Nouveau mock utilisé dans cette méthode
     @Test
     public void testSortPokemonUsingComparators() {
         List<Pokemon> pokemons = Arrays.asList(

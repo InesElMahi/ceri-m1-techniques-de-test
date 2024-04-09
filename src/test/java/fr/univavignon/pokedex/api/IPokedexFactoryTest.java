@@ -11,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+// Mocks initiaux
 @ExtendWith(MockitoExtension.class)
 public class IPokedexFactoryTest {
 
@@ -29,6 +31,8 @@ public class IPokedexFactoryTest {
     private Pokemon pikachu;
     private Pokemon bulbasaur;
 
+
+    // Nouveau mock
     @BeforeEach
     void setUp() {
         pokedexFactory = new PokedexFactory();
@@ -53,6 +57,7 @@ public class IPokedexFactoryTest {
 
     }
 
+    // Nouveau mock utilisé dans cette méthode
     @Test
     void testCreatePokedex() {
         IPokedex createdPokedex = pokedexFactory.createPokedex(metadataProvider, pokemonFactory);
@@ -60,6 +65,7 @@ public class IPokedexFactoryTest {
 
     }
 
+    // Nouveau mock utilisé dans cette méthode
     @Test
     void testGetPokemonInvalidIndexException() throws PokedexException {
         doThrow(new PokedexException("Invalid index")).when(pokedex).getPokemon(-1);
@@ -68,6 +74,8 @@ public class IPokedexFactoryTest {
                 "Accès à un index invalide doit lever une PokedexException.");
     }
 
+
+    // Nouveau mock utilisé dans cette méthode
     @Test
     void testPokedexSizeAfterAddingPokemons() {
         when(pokedex.addPokemon(any(Pokemon.class))).thenReturn(0).thenReturn(1);
